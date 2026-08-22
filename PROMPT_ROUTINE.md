@@ -46,9 +46,15 @@ Regles :
 - `signaux_negatifs` se soustrait, sans plancher.
 - N'invente pas d'information absente de l'offre. Une donnee non mentionnee
   vaut 0 sur son critere, jamais le benefice du doute.
-- Si la description est trop pauvre pour scorer (moins de 400 caracteres) :
-  marque l'offre **A VERIFIER**, donne l'URL, ne lui attribue pas de score
-  fictif.
+- Le champ `description` d'une offre APEC est un extrait limite a environ
+  283 caracteres (limite structurelle de la source, pas une anomalie) :
+  score quand meme sur ce texte court des lors qu'il permet de juger le
+  role, le secteur et si possible la remuneration. Marque **A VERIFIER**
+  uniquement si l'extrait est vide ou trop court pour distinguer le role
+  (moins de 100 caracteres).
+- Le champ `description` d'une offre France Travail est en general complet.
+  Marque **A VERIFIER** si moins de 400 caracteres, seuil plus exigeant que
+  pour APEC car la source fournit normalement le texte integral.
 
 **4. Synthese**
 
@@ -59,7 +65,9 @@ ainsi :
   rejetees, etat de chaque source (OK ou PANNE).
 - **A traiter aujourd'hui** : offres a 70 et plus. Titre, entreprise, lieu,
   score, URL, detail des points par axe en une ligne, puis deux a quatre
-  lignes sur l'angle de candidature. Seule section developpee.
+  lignes sur l'angle de candidature. Pour une offre APEC, ajoute une mention
+  courte "score base sur extrait, verifier la fiche complete avant de
+  candidater". Seule section developpee.
 - **A regarder** : offres entre 50 et 69. Une ligne chacune : titre,
   entreprise, score, URL, motif principal de la decote.
 - **A verifier** : offres non scorables. Titre, entreprise, URL.
