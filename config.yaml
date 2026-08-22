@@ -8,12 +8,12 @@ requete:
   # Mots-cles envoyes aux deux sources. Volontairement larges :
   # le tri fin est fait par le scoring, pas par la requete.
   mots_cles:
-  - "product owner"
-  - "business analyst"
-  - "proxy product owner"
-  - "chef de produit digital"
-  - "chef de projet agile"
-  - "chef de projet fonctionnel web"
+    - "product owner"
+    - "business analyst"
+    - "proxy product owner"
+    - "chef de produit digital"
+    - "chef de projet agile"
+    - "chef de projet fonctionnel web"
 
   departement: "44"
   # Rayon en km autour de Nantes, utilise par France Travail
