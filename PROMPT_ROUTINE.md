@@ -1,68 +1,94 @@
 # Prompt de la routine quotidienne
 
-Coller ce texte dans le champ prompt de la routine Claude Code Desktop.
-Frequence : jours ouvres, 7h00. Dossier de travail : celui de ce projet.
+Coller ce texte dans le champ Instructions de la routine Cloud.
+Frequence : jours ouvres, 7h00. Environnement : Veille Offres d'Emploi
+(dépôt veille-emploi, connecteur Google Drive actif).
+
+Dossier Drive de reference : Mon Drive/CLAUDE/OFFRES EMPLOI
 
 ---
 
-Execute la veille d'offres d'emploi.
+Execute la veille d'offres d'emploi. Ne committe et ne pousse rien sur git
+a aucun moment de cette routine : toute la persistance passe par Drive.
 
-**1. Collecte**
+**1. Recuperation de l'etat**
 
-Lance `python veille.py` depuis le dossier du projet. Le script ecrit
-`data/candidats_AAAA-MM-JJ.json` et affiche ses statistiques.
+Lis le fichier `state/vues.json` sur Drive, dans
+`Mon Drive/CLAUDE/OFFRES EMPLOI/state/vues.json`.
 
-Si le script sort en erreur ou si le champ `erreurs` du JSON n'est pas vide :
-ecris quand meme la synthese avec ce qui a ete collecte, et place en tete un
-bloc **PANNE** nommant la source tombee et le message d'erreur. Ne masque
-jamais une source en echec : une synthese vide parce que l'APEC a change son
-endpoint ne doit pas ressembler a une journee sans offre.
+S'il existe : ecris son contenu tel quel dans `state/vues.json` en local,
+a la racine du depot clone (cree le dossier `state/` s'il n'existe pas).
+S'il n'existe pas encore (premier lancement) : ne cree rien en local, le
+script partira d'un historique vide.
 
-**2. Scoring**
+**2. Collecte**
 
-Lis `config.yaml`, sections `scoring` et `profil`. Pour chaque offre du
-tableau `offres`, attribue un score sur 100 selon les cinq axes de la grille.
-La description complete de l'offre est dans le champ `description` : lis-la,
-ne te contente pas du titre.
+Lance `python veille.py --source ft`, puis `python veille.py --source apec`.
+Chaque appel ecrit son propre `data/candidats_AAAA-MM-JJ.json` et met a jour
+`state/vues.json` en local. Note les statistiques affichees par chaque appel.
+
+Si une des deux commandes sort en erreur, ou si le champ `erreurs` de son
+JSON n'est pas vide : continue quand meme avec l'autre source, et place en
+tete de la synthese un bloc **PANNE** nommant la source en echec et le
+message d'erreur. Ne masque jamais une source en panne.
+
+**3. Scoring**
+
+Lis `config.yaml` du depot, sections `scoring` et `profil`. Pour chaque
+offre presente dans les deux fichiers `data/candidats_*.json` de cette
+execution, attribue un score sur 100 selon les cinq axes de la grille.
+Lis la description complete de l'offre, pas seulement le titre.
 
 Regles :
-- Les paliers `adequation_role`, `proximite_metier` et `socle_technique` sont
-  exclusifs : un seul palier par axe, celui qui correspond le mieux.
+- `adequation_role`, `proximite_metier` et `socle_technique` sont exclusifs,
+  un seul palier par axe.
 - `conditions` est cumulatif, plafonne a 20.
 - `signaux_negatifs` se soustrait, sans plancher.
 - N'invente pas d'information absente de l'offre. Une donnee non mentionnee
-  vaut 0 sur son critere, jamais le benefice du doute. Si le salaire n'est pas
-  annonce, ce n'est pas un signal positif ni negatif : c'est une inconnue a
-  signaler.
-- Si la description est trop pauvre pour scorer (moins de 400 caracteres,
-  cas frequent sur les annonces d'ESN), marque l'offre **A VERIFIER** au lieu
-  de lui attribuer un score fictif, et donne l'URL.
+  vaut 0 sur son critere, jamais le benefice du doute.
+- Si la description est trop pauvre pour scorer (moins de 400 caracteres) :
+  marque l'offre **A VERIFIER**, donne l'URL, ne lui attribue pas de score
+  fictif.
 
-**3. Synthese**
+**4. Synthese**
 
-Ecris `out/synthese_AAAA-MM-JJ.md`, structure ainsi :
+Ecris un fichier markdown local `out/synthese_AAAA-MM-JJ.md`, structure
+ainsi :
 
-- Ligne d'entete : date, nombre d'offres collectees, retenues, rejetees,
-  et l'etat de chaque source (OK ou en panne).
-- **A traiter aujourd'hui** : offres a 70 et plus. Pour chacune : titre,
-  entreprise, lieu, score, URL, le detail des points par axe en une ligne,
-  puis deux a quatre lignes sur l'angle de candidature (ce qui accroche dans
-  mon profil, ce qui manque, quel materiau adapter). C'est la seule section
-  ou tu developpes.
+- Ligne d'entete : date, nombre d'offres collectees par source, retenues,
+  rejetees, etat de chaque source (OK ou PANNE).
+- **A traiter aujourd'hui** : offres a 70 et plus. Titre, entreprise, lieu,
+  score, URL, detail des points par axe en une ligne, puis deux a quatre
+  lignes sur l'angle de candidature. Seule section developpee.
 - **A regarder** : offres entre 50 et 69. Une ligne chacune : titre,
-  entreprise, score, URL, et le motif principal de la decote.
+  entreprise, score, URL, motif principal de la decote.
 - **A verifier** : offres non scorables. Titre, entreprise, URL.
-- **Ecartees** : uniquement le decompte par motif, pas la liste. Sauf si une
-  offre a ete rejetee par le filtre titre alors qu'elle semblait pertinente,
-  auquel cas signale-la pour que j'ajuste `config.yaml`.
+- **Ecartees** : uniquement le decompte par motif de rejet des filtres durs.
+  Si une offre semblait pertinente et a ete rejetee par un filtre titre,
+  signale-la a part pour ajustement de `config.yaml`.
 
 Contraintes de redaction : direct, factuel, pas d'introduction ni de
-conclusion, tirets simples uniquement. Ne me vends pas les offres, evalue-les.
-Si aucune offre n'atteint 50, dis-le en une ligne, ne remplis pas la synthese
-avec les offres a 30.
+conclusion, tirets simples uniquement. Si aucune offre n'atteint 50, dis-le
+en une ligne courte plutot que de remplir la synthese avec du bruit.
 
-**4. Notification**
+**5. Depot sur Drive**
 
-Termine par un message court : nombre d'offres a traiter aujourd'hui et le
-chemin du fichier. Si zero offre au-dessus de 50, dis-le et n'ecris pas de
-fichier.
+Envoie ce fichier sur Drive a l'emplacement
+`Mon Drive/CLAUDE/OFFRES EMPLOI/out/synthese_AAAA-MM-JJ.md`.
+
+Le fichier `state/vues.json` local a ete mis a jour une premiere fois par
+l'appel FT puis une seconde fois par l'appel APEC (qui relit l'etat laisse
+par FT avant d'ecrire le sien) : le contenu local apres les deux appels est
+donc deja complet, pas besoin de le fusionner avec quoi que ce soit. Ecrase
+directement avec ce fichier local le fichier
+`Mon Drive/CLAUDE/OFFRES EMPLOI/state/vues.json` sur Drive.
+
+Ne cree et ne conserve aucune copie des fichiers `data/candidats_*.json` sur
+Drive : ce sont des fichiers de travail de cette seule execution, a ignorer
+une fois la synthese ecrite.
+
+**6. Notification**
+
+Termine par un message court : nombre d'offres a traiter aujourd'hui, etat
+des deux sources, lien ou nom du fichier synthese sur Drive. Si zero offre
+au-dessus de 50, dis-le et ne cree pas de fichier synthese.
