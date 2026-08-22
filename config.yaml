@@ -1,0 +1,128 @@
+# =============================================================
+# Veille offres BA / PO - Nantes
+# Ce fichier est lu par veille.py (sections requete / filtres_durs)
+# et par la routine Claude (section scoring).
+# =============================================================
+
+requete:
+  # Mots-cles envoyes aux deux sources. Volontairement larges :
+  # le tri fin est fait par le scoring, pas par la requete.
+  mots_cles:
+    - "product owner"
+    - "business analyst"
+    - "proxy product owner"
+    - "consultant AMOA"
+    - "chef de projet fonctionnel"
+    - "analyste fonctionnel"
+
+  departement: "44"
+  # Rayon en km autour de Nantes, utilise par France Travail
+  commune_insee: "44109"   # Nantes
+  rayon_km: 30
+
+  # Codes ROME France Travail. M1806 = conseil et MOA en SI.
+  # Laisser vide pour ne pas filtrer par ROME (recommande au demarrage :
+  # beaucoup d'offres BA/PO sont mal codees par les recruteurs).
+  codes_rome: []
+
+  types_contrat:
+    - "CDI"
+  # Ajouter "CDD" ou "MIS" si tu veux elargir.
+
+  # Nombre de jours d'anciennete max d'une offre
+  anciennete_jours: 3
+
+filtres_durs:
+  # Une offre qui matche un seul de ces motifs dans son titre est ecartee
+  # sans arriver jusqu'au scoring. Insensible a la casse.
+  titre_exclu:
+    - "alternan"
+    - "apprenti"
+    - "stage"
+    - "stagiaire"
+    - "\\bjunior\\b"
+    - "d[ée]veloppeur"
+    - "developpeur"
+    - "ing[ée]nieur d[ée]veloppement"
+    - "data engineer"
+    - "data scientist"
+    - "devops"
+    - "administrateur syst"
+    - "technicien"
+    - "commercial"
+    - "\\bSIRH\\b"
+    - "\\bSAP\\b"
+    - "scrum master"
+
+  # Rejette si le salaire max annonce est sous ce seuil (en euros annuels).
+  # Les offres sans salaire annonce passent le filtre.
+  salaire_min_annuel: 40000
+
+  # Rejette si le libelle d'experience exige depasse ce seuil (en annees).
+  experience_max_exigee: 12
+
+# =============================================================
+# Grille de scoring - lue par Claude, pas par le script.
+# Score sur 100. Seuil de retenue : 50.
+# =============================================================
+scoring:
+  seuil_retenue: 50
+
+  # Exclusif : retenir le premier palier qui correspond.
+  adequation_role:            # 0 a 35
+    - [35, "PO ou BA sur produit web / e-commerce, chez le client final"]
+    - [28, "PO ou BA generaliste SI, chez le client final"]
+    - [22, "PO / BA en ESN ou cabinet de conseil, mission identifiee"]
+    - [15, "AMOA, analyste fonctionnel, chef de projet fonctionnel"]
+    - [8,  "Role hybride ou mal defini (PO/Scrum Master, PO/dev)"]
+    - [0,  "Le role n'est pas un role de BA/PO"]
+
+  proximite_metier:           # 0 a 25
+    - [25, "E-commerce, retail, distribution, marketplace, B2B"]
+    - [18, "Industrie, logistique, transport, tourisme"]
+    - [12, "Editeur logiciel, service public, sante"]
+    - [6,  "Banque, assurance, data pure"]
+    - [0,  "Secteur incompatible ou non identifiable"]
+
+  socle_technique:            # 0 a 20
+    - [20, "PHP/Symfony, SQL, Elasticsearch, AWS explicitement cites"]
+    - [14, "Environnement web technique sans stack precise"]
+    - [8,  "Stack differente mais culture technique attendue"]
+    - [0,  "Profil purement fonctionnel sans dimension technique"]
+
+  # Cumulatif, plafonne a 20.
+  conditions:
+    - [8, "Statut cadre explicite"]
+    - [6, "Fourchette annoncee compatible 45-55k"]
+    - [4, "Poste dans Nantes Metropole (pas seulement 44)"]
+    - [2, "Teletravail partiel mentionne"]
+
+  # Penalites cumulatives, non plafonnees.
+  signaux_negatifs:
+    - [-10, "Deplacements frequents ou mobilite nationale exigee"]
+    - [-8,  "Anglais courant requis a l'ecrit ET a l'oral en usage quotidien"]
+    - [-5,  "Annonce d'ESN sans nom de client ni mission decrite"]
+    - [-5,  "Offre republiee a l'identique depuis plus de 30 jours"]
+
+  # Contexte a rappeler dans la synthese quand il s'applique
+  notes_contexte:
+    banque_assurance: >
+      Secteur dominant sur le bassin nantais mais eloigne du profil
+      retail / e-commerce B2B. Ne pas ecarter : signaler que la
+      candidature demande un travail de transposition explicite.
+    esn: >
+      Verifier si la mission est identifiee. Une annonce ESN sans
+      client nomme a une valeur d'information faible.
+
+profil:
+  # Rappel factuel utilise par Claude pour le scoring.
+  # A ne pas embellir : ce bloc sert a juger, pas a vendre.
+  intitule_cible: "Business Analyst / Product Owner, statut cadre"
+  localisation: "Couëron (44), Nantes Metropole, rayon 30 km"
+  disponibilite: "septembre 2026"
+  remuneration_affichee: "45-55k euros"
+  experience: "20 ans web, dont 6 ans BA/PO sur refonte e-commerce B2B"
+  domaine_fort: "e-commerce B2B, distribution, retail"
+  stack: "PHP/Symfony, SQL, Python/Selenium, Elasticsearch, AWS, Jira"
+  methodes: "cycle en V, Scrum, Kanban, MoSCoW, MOA/AMOA"
+  certification: "PSPO I (Scrum.org) en preparation"
