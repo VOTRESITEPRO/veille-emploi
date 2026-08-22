@@ -30,7 +30,7 @@ requete:
   # Ajouter "CDD" ou "MIS" si tu veux elargir.
 
   # Nombre de jours d'anciennete max d'une offre
-  anciennete_jours: 15
+  anciennete_jours: 3
 
 filtres_durs:
   # Une offre qui matche un seul de ces motifs dans son titre est ecartee
