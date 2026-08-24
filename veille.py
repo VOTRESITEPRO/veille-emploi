@@ -76,7 +76,13 @@ def cle_dedoublon(offre):
     stop = {"h", "f", "hf", "cdi", "nantes", "44", "poste", "de", "du", "la",
             "le", "les", "un", "une", "en", "sur", "et", "pour"}
     mots = [m for m in slug(offre.get("titre")).split() if m not in stop]
-    return f"{' '.join(sorted(mots))}|{slug(offre.get('entreprise'))}"
+    entreprise = slug(offre.get("entreprise"))
+    if not entreprise:
+        # L'APEC ne renvoie pas le nom de l'entreprise dans les resultats de
+        # recherche : sans repli, deux offres distinctes partageant un
+        # intitule generique ("Product Owner F/H") fusionneraient a tort.
+        entreprise = f"{offre.get('source')}:{offre.get('id_source')}"
+    return f"{' '.join(sorted(mots))}|{entreprise}"
 
 
 def charger_state(actif=True):
