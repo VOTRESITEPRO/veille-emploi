@@ -246,7 +246,6 @@ def collecte_apec(cfg):
             "fonctions": [],
             "motsCles": mot,
             "typesContrat": ["101888"],   # CDI
-            "typesConvention": ["143684", "143685", "143686", "143687"],
             "sorts": [{"type": "SCORE", "direction": "DESCENDING"}],
             "pagination": {"range": 50, "startIndex": 0},
             "activeFiltre": True,
