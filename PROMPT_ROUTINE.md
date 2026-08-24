@@ -79,7 +79,53 @@ Contraintes de redaction : direct, factuel, pas d'introduction ni de
 conclusion, tirets simples uniquement. Si aucune offre n'atteint 50, dis-le
 en une ligne courte plutot que de remplir la synthese avec du bruit.
 
-**5. Depot sur Drive**
+**5. Mise a jour du suivi de candidatures**
+
+Le Google Sheet `Suivi candidatures` dans `Mon Drive/CLAUDE/OFFRES EMPLOI/`
+est la liste cumulative de toutes les offres retenues depuis le debut. Il
+n'est jamais remis a zero : c'est lui qui permet de retrouver une offre
+reperee un jour precedent et de suivre l'avancement d'une candidature.
+
+Retrouve-le **par son nom** (`title = 'Suivi candidatures'`), jamais par un
+identifiant fixe : son identifiant Drive change a chaque mise a jour, pour
+la raison expliquee plus bas.
+
+Telecharge son contenu au format CSV (`exportMimeType: text/csv`). Colonnes,
+dans cet ordre :
+
+```
+Date détectée, Titre, Entreprise, Lieu, Score, Source, URL, Favori, Statut, Notes
+```
+
+Ajoute en fin de tableau une ligne par offre de cette execution ayant un
+score de 50 ou plus :
+- `Date détectée` : date du jour, AAAA-MM-JJ
+- `Statut` : `À traiter`
+- `Favori` et `Notes` : vides
+- les autres colonnes depuis l'offre ; `Entreprise` vide si la source ne la
+  fournit pas
+
+Trois regles strictes :
+- Ne modifie, ne reordonne et ne supprime **jamais** une ligne existante.
+  Les colonnes `Favori`, `Statut` et `Notes` sont saisies a la main : elles
+  doivent etre reportees a l'identique, sans exception.
+- Si une offre est deja presente dans le tableau (meme URL), ne l'ajoute pas
+  une seconde fois.
+- Entoure de guillemets tout champ contenant une virgule, un guillemet ou un
+  retour a la ligne.
+
+Valeurs possibles en `Statut`, saisies par l'utilisateur : `À traiter`,
+`Exclue`, `Postulée`, `Contacts en cours`, `Candidature rejetée`.
+
+Pour ecrire le resultat : le connecteur Drive ne sait pas remplacer le
+contenu d'un fichier existant. Mets donc l'ancien fichier a la corbeille
+(`trash_file`), puis cree le nouveau avec le **meme titre** `Suivi
+candidatures`, le meme dossier parent, `contentMimeType: text/csv` et sans
+desactiver la conversion (pour qu'il redevienne un Google Sheet). Fais-le
+dans cet ordre, et seulement une fois le contenu fusionne pret : le tableau
+ne doit jamais se retrouver absent de Drive plus d'un instant.
+
+**6. Depot sur Drive**
 
 Envoie ce fichier sur Drive a l'emplacement
 `Mon Drive/CLAUDE/OFFRES EMPLOI/out/synthese_AAAA-MM-JJ.md`.
@@ -95,8 +141,10 @@ Ne cree et ne conserve aucune copie des fichiers `data/candidats_*.json` sur
 Drive : ce sont des fichiers de travail de cette seule execution, a ignorer
 une fois la synthese ecrite.
 
-**6. Notification**
+**7. Notification**
 
-Termine par un message court : nombre d'offres a traiter aujourd'hui, etat
-des deux sources, lien ou nom du fichier synthese sur Drive. Si zero offre
-au-dessus de 50, dis-le et ne cree pas de fichier synthese.
+Termine par un message court : nombre d'offres a traiter aujourd'hui, nombre
+de lignes ajoutees au suivi, etat des deux sources, lien ou nom du fichier
+synthese sur Drive. Si zero offre au-dessus de 50, dis-le, ne cree pas de
+fichier synthese et n'ajoute aucune ligne au suivi (mais laisse le tableau
+existant intact).

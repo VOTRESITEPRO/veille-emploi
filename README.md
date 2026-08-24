@@ -19,6 +19,43 @@ veille-emploi/
   out/                 syntheses markdown
 ```
 
+Cote Drive, dans `Mon Drive/CLAUDE/OFFRES EMPLOI/` :
+
+```
+out/synthese_AAAA-MM-JJ.md   la photo du jour, une par execution
+state/vues.json              historique de dedoublonnage
+Suivi candidatures           Google Sheet cumulatif (voir plus bas)
+```
+
+## Suivi des candidatures
+
+La synthese quotidienne est une photo : elle ne montre que les offres
+parues ce jour-la. Le Google Sheet `Suivi candidatures` est la memoire du
+systeme — chaque offre a 50 ou plus y est ajoutee une fois, et n'en sort
+jamais. C'est la qu'on retrouve une offre reperee la semaine derniere.
+
+Colonnes saisies a la main, jamais ecrasees par la routine :
+
+- `Favori` : marquer une offre a garder sous la main
+- `Statut` : `À traiter` (valeur posee a l'ajout), `Exclue`, `Postulée`,
+  `Contacts en cours`, `Candidature rejetée`
+- `Notes` : texte libre
+
+**Limite du connecteur Drive.** Il ne sait pas remplacer le contenu d'un
+fichier : la routine met l'ancien tableau a la corbeille et en recree un
+avec le meme nom. Les donnees saisies sont bien reportees, mais deux
+consequences :
+
+- l'identifiant Drive du fichier change a chaque execution, donc une URL
+  mise en favori dans le navigateur casse le lendemain. Ouvrir le fichier
+  en passant par le dossier Drive, pas par un lien memorise.
+- toute mise en forme ajoutee a la main (couleurs, listes deroulantes,
+  ligne d'en-tete figee) est perdue au passage suivant.
+
+Ne pas laisser le tableau ouvert dans un onglet a l'heure ou la routine
+tourne : les modifications faites dans cet onglet iraient dans le fichier
+mis a la corbeille.
+
 ## Installation
 
 ```bash
