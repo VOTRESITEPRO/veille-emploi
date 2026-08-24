@@ -62,9 +62,17 @@ POST https://www.apec.fr/cms/webservices/rechercheOffre
 ```
 
 Je n'ai pas pu verifier ni la structure exacte du payload, ni les
-identifiants de filtres (`typesContrat`, `typesConvention`), ni le nom des
-champs de reponse. Ce que contient `collecte_apec()` est une hypothese
-construite sur la forme habituelle de cet endpoint.
+identifiants de filtres (`typesContrat`), ni le nom des champs de reponse.
+Ce que contient `collecte_apec()` est une hypothese construite sur la
+forme habituelle de cet endpoint.
+
+**Verifie le 22/08/2026 :** le payload envoyait aussi un filtre
+`typesConvention` (codes de convention collective devines, non
+documentes). Il excluait silencieusement des offres CDI legitimes —
+confirme en comparant les resultats avec et sans ce filtre sur une
+recherche "product owner" (22 offres avec le filtre, 31 sans, dont des
+offres Product Owner reelles absentes a tort). Le filtre a ete retire ;
+seul `typesContrat` (CDI) reste applique.
 
 Premiere execution : lance `python veille.py --source apec --verbose`.
 
