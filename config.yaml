@@ -20,6 +20,39 @@ requete:
   commune_insee: "44109"   # Nantes
   rayon_km: 30
 
+  # Communes acceptees pour le filtre geographique dur (voir filtres_durs
+  # ci-dessous). L'APEC ne fournit ni code postal ni coordonnees dans ses
+  # resultats de recherche : impossible de calculer un vrai rayon de 30 km.
+  # Approximation retenue : les 24 communes de Nantes Metropole. Rejette a
+  # tort quelques communes qui seraient en realite a moins de 30 km de
+  # Coueron (ex. Vallet, Clisson) ; accepte a tort aucune commune trop
+  # eloignee, ce qui est le sens dans lequel se tromper ici.
+  communes_proches:
+    - "Basse-Goulaine"
+    - "Bouaye"
+    - "Bouguenais"
+    - "Brains"
+    - "Carquefou"
+    - "Coueron"
+    - "Indre"
+    - "La Chapelle-sur-Erdre"
+    - "La Montagne"
+    - "Le Pellerin"
+    - "Les Sorinieres"
+    - "Mauves-sur-Loire"
+    - "Nantes"
+    - "Orvault"
+    - "Reze"
+    - "Saint-Aignan-de-Grand-Lieu"
+    - "Saint-Herblain"
+    - "Saint-Jean-de-Boiseau"
+    - "Saint-Leger-les-Vignes"
+    - "Saint-Sebastien-sur-Loire"
+    - "Sainte-Luce-sur-Loire"
+    - "Sautron"
+    - "Thouare-sur-Loire"
+    - "Vertou"
+
   # Codes ROME France Travail. M1806 = conseil et MOA en SI.
   # Laisser vide pour ne pas filtrer par ROME (recommande au demarrage :
   # beaucoup d'offres BA/PO sont mal codees par les recruteurs).
@@ -68,14 +101,20 @@ filtres_durs:
 scoring:
   seuil_retenue: 50
 
-  # Exclusif : retenir le premier palier qui correspond.
+  # Exclusif : retenir le premier palier qui correspond. Les paliers 35/28/22
+  # exigent que le titre de l'offre dise litteralement "Product Owner" ou
+  # "Business Analyst" : un intitule "Chef de projet informatique/ERP/SI" ou
+  # "Consultant fonctionnel" ne s'y qualifie jamais, meme chez un client
+  # final ou avec un secteur pertinent, sauf si la description decrit
+  # explicitement des missions de backlog / user stories / recueil et
+  # analyse de besoins fonctionnels (alors palier 15).
   adequation_role:            # 0 a 35
-    - [35, "PO ou BA sur produit web / e-commerce, chez le client final"]
-    - [28, "PO ou BA generaliste SI, chez le client final"]
-    - [22, "PO / BA en ESN ou cabinet de conseil, mission identifiee"]
-    - [15, "AMOA, analyste fonctionnel, chef de projet fonctionnel"]
-    - [8,  "Role hybride ou mal defini (PO/Scrum Master, PO/dev)"]
-    - [0,  "Le role n'est pas un role de BA/PO"]
+    - [35, "Titre litteral 'Product Owner' ou 'Business Analyst', sur produit web / e-commerce, chez le client final"]
+    - [28, "Titre litteral 'Product Owner' ou 'Business Analyst', generaliste SI, chez le client final"]
+    - [22, "Titre litteral 'Product Owner' ou 'Business Analyst', en ESN ou cabinet de conseil, mission identifiee"]
+    - [15, "AMOA, analyste fonctionnel, ou role sans le titre PO/BA dont la description mentionne explicitement backlog, user stories, ou recueil/analyse de besoins fonctionnels"]
+    - [8,  "Chef de projet IT/ERP/informatique generique sans aucune de ces mentions ; role hybride ou mal defini (PO/Scrum Master, PO/dev)"]
+    - [0,  "Le role n'est pas un role de BA/PO : developpement, infrastructure, ou poste de direction/executif (CPO, Head of Product, directeur, VP)"]
 
   proximite_metier:           # 0 a 25
     - [25, "E-commerce, retail, distribution, marketplace, B2B"]

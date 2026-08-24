@@ -310,6 +310,19 @@ def annees_experience(libelle):
     return int(m.group(1)) if m else None
 
 
+def commune_proche(lieu, communes_slug):
+    """
+    Vrai si le champ lieu (ex. 'Ancenis-Saint-Gereon   - 44', '44000 - NANTES')
+    contient une des communes acceptees. Sans lieu exploitable, on ne rejette
+    pas : l'absence de donnee ne doit pas valoir rejet (meme principe que le
+    filtre salaire).
+    """
+    if not lieu:
+        return True
+    texte = slug(re.sub(r"\d+", " ", str(lieu)))
+    return any(c in texte for c in communes_slug)
+
+
 def filtrer(offres, cfg):
     """Retourne (retenues, rejetees) ; chaque rejet porte son motif."""
     f = cfg["filtres_durs"]
@@ -317,6 +330,7 @@ def filtrer(offres, cfg):
     plancher = f.get("salaire_min_annuel")
     exp_max = f.get("experience_max_exigee")
     dept = str(cfg["requete"].get("departement", "44"))
+    communes_slug = [slug(c) for c in cfg["requete"].get("communes_proches", [])]
 
     retenues, rejetees = [], []
     for o in offres:
@@ -331,6 +345,9 @@ def filtrer(offres, cfg):
         if not motif and o.get("code_postal"):
             if not str(o["code_postal"]).startswith(dept):
                 motif = f"hors departement {dept} ({o['code_postal']})"
+
+        if not motif and communes_slug and not commune_proche(o.get("lieu"), communes_slug):
+            motif = f"hors zone geographique ({o.get('lieu')})"
 
         if not motif and plancher and o.get("salaire_max"):
             if o["salaire_max"] < plancher:
