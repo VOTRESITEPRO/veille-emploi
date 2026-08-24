@@ -79,51 +79,51 @@ Contraintes de redaction : direct, factuel, pas d'introduction ni de
 conclusion, tirets simples uniquement. Si aucune offre n'atteint 50, dis-le
 en une ligne courte plutot que de remplir la synthese avec du bruit.
 
-**5. Mise a jour du suivi de candidatures**
+**5. Mise a jour du pipeline de candidatures**
 
-Le Google Sheet `Suivi candidatures` dans `Mon Drive/CLAUDE/OFFRES EMPLOI/`
-est la liste cumulative de toutes les offres retenues depuis le debut. Il
-n'est jamais remis a zero : c'est lui qui permet de retrouver une offre
-reperee un jour precedent et de suivre l'avancement d'une candidature.
-
-Retrouve-le **par son nom** (`title = 'Suivi candidatures'`), jamais par un
-identifiant fixe : son identifiant Drive change a chaque mise a jour, pour
-la raison expliquee plus bas.
-
-Telecharge son contenu au format CSV (`exportMimeType: text/csv`). Colonnes,
-dans cet ordre :
+Le pipeline est un Artifact a URL fixe, qui ne change jamais :
 
 ```
-Date détectée, Titre, Entreprise, Lieu, Score, Source, URL, Favori, Statut, Notes
+https://claude.ai/code/artifact/f10d0942-3cf4-4501-a313-f0589d326fd5
 ```
 
-Ajoute en fin de tableau une ligne par offre de cette execution ayant un
-score de 50 ou plus :
-- `Date détectée` : date du jour, AAAA-MM-JJ
-- `Statut` : `À traiter`
-- `Favori` et `Notes` : vides
-- les autres colonnes depuis l'offre ; `Entreprise` vide si la source ne la
-  fournit pas
+C'est la liste cumulative de toutes les offres retenues depuis le debut, et
+la memoire du systeme : une offre y entre une fois et n'en sort jamais.
+L'utilisateur y modifie a la main le statut, le favori et les notes,
+directement dans la page — ces saisies sont la valeur du fichier, ne les
+perds sous aucun pretexte.
 
-Trois regles strictes :
-- Ne modifie, ne reordonne et ne supprime **jamais** une ligne existante.
-  Les colonnes `Favori`, `Statut` et `Notes` sont saisies a la main : elles
-  doivent etre reportees a l'identique, sans exception.
-- Si une offre est deja presente dans le tableau (meme URL), ne l'ajoute pas
-  une seconde fois.
-- Entoure de guillemets tout champ contenant une virgule, un guillemet ou un
-  retour a la ligne.
+Marche a suivre, dans cet ordre :
 
-Valeurs possibles en `Statut`, saisies par l'utilisateur : `À traiter`,
-`Exclue`, `Postulée`, `Contacts en cours`, `Candidature rejetée`.
+1. Lis l'artifact avec l'outil Artifact, `action: "read"` et ce `url`. Tu
+   recois le HTML complet de la version en ligne.
+2. Dans ce HTML, reperes le **premier** bloc
+   `<script type="application/json" id="state">` et son contenu jusqu'au
+   premier `</script>` qui suit. C'est l'etat. Attention : la chaine
+   `id="state"` apparait une seconde fois plus bas, dans le code de la page
+   — ne prends jamais celle-la, seulement la premiere.
+3. Parse ce JSON. Forme : `{"maj": "AAAA-MM-JJ", "offres": [...]}`, chaque
+   offre ayant les cles `url`, `date`, `titre`, `entreprise`, `lieu`,
+   `score`, `source`, `favori`, `statut`, `notes`.
+4. Ajoute a la fin du tableau `offres` une entree par offre de cette
+   execution atteignant 50 points, avec `date` = date du jour, `favori`:
+   `false`, `statut`: `"À traiter"`, `notes`: `""`, `entreprise`: `""` si la
+   source ne la fournit pas. Mets `maj` a la date du jour.
+5. **N'altere aucune entree existante** : ni son ordre, ni ses champs, et
+   surtout pas `favori`, `statut` et `notes`. Si une offre est deja presente
+   (meme `url`), ne l'ajoute pas une seconde fois.
+6. Ecris dans un fichier local le HTML lu a l'etape 1, en ayant remplace le
+   seul contenu de cet ilot JSON par le nouvel etat serialise, avec les `</`
+   echappes en `<\/`. Tout le reste du document doit rester identique au
+   caractere pres.
+7. Republie ce fichier avec l'outil Artifact en passant le meme `url`.
+   Ne passe ni `capabilities` ni `contract` : les omettre conserve la
+   declaration existante de la page, la reecrire risquerait de la casser.
 
-Pour ecrire le resultat : le connecteur Drive ne sait pas remplacer le
-contenu d'un fichier existant. Mets donc l'ancien fichier a la corbeille
-(`trash_file`), puis cree le nouveau avec le **meme titre** `Suivi
-candidatures`, le meme dossier parent, `contentMimeType: text/csv` et sans
-desactiver la conversion (pour qu'il redevienne un Google Sheet). Fais-le
-dans cet ordre, et seulement une fois le contenu fusionne pret : le tableau
-ne doit jamais se retrouver absent de Drive plus d'un instant.
+Si la lecture ou la republication echoue, ne recree **jamais** un artifact
+neuf : signale l'echec dans la notification finale et laisse l'existant en
+place. Un artifact recree aurait une nouvelle URL et perdrait tout
+l'historique de suivi.
 
 **6. Depot sur Drive**
 

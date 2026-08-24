@@ -14,6 +14,7 @@ veille-emploi/
   veille.py            collecte + dedoublonnage + filtres durs
   config.yaml          requete, filtres, grille de scoring, profil
   PROMPT_ROUTINE.md    prompt a coller dans la routine
+  artifact/pipeline.html  source de la page de suivi (voir plus bas)
   state/vues.json      historique 90 jours (dedoublonnage inter-jours)
   data/                JSON de collecte, un par jour
   out/                 syntheses markdown
@@ -24,37 +25,51 @@ Cote Drive, dans `Mon Drive/CLAUDE/OFFRES EMPLOI/` :
 ```
 out/synthese_AAAA-MM-JJ.md   la photo du jour, une par execution
 state/vues.json              historique de dedoublonnage
-Suivi candidatures           Google Sheet cumulatif (voir plus bas)
 ```
 
-## Suivi des candidatures
+Le suivi, lui, ne vit pas sur Drive : c'est un Artifact (voir plus bas).
+
+## Pipeline de candidatures
 
 La synthese quotidienne est une photo : elle ne montre que les offres
-parues ce jour-la. Le Google Sheet `Suivi candidatures` est la memoire du
-systeme — chaque offre a 50 ou plus y est ajoutee une fois, et n'en sort
-jamais. C'est la qu'on retrouve une offre reperee la semaine derniere.
+parues ce jour-la. Le pipeline est la memoire du systeme — chaque offre a
+50 ou plus y est ajoutee une fois, et n'en sort jamais. C'est la qu'on
+retrouve une offre reperee la semaine derniere.
 
-Colonnes saisies a la main, jamais ecrasees par la routine :
+URL fixe, qui ne change jamais :
+<https://claude.ai/code/artifact/f10d0942-3cf4-4501-a313-f0589d326fd5>
 
-- `Favori` : marquer une offre a garder sous la main
-- `Statut` : `À traiter` (valeur posee a l'ajout), `Exclue`, `Postulée`,
-  `Contacts en cours`, `Candidature rejetée`
-- `Notes` : texte libre
+Source de la page : `artifact/pipeline.html`.
 
-**Limite du connecteur Drive.** Il ne sait pas remplacer le contenu d'un
-fichier : la routine met l'ancien tableau a la corbeille et en recree un
-avec le meme nom. Les donnees saisies sont bien reportees, mais deux
-consequences :
+Trois champs se modifient a la main, directement dans la page :
 
-- l'identifiant Drive du fichier change a chaque execution, donc une URL
-  mise en favori dans le navigateur casse le lendemain. Ouvrir le fichier
-  en passant par le dossier Drive, pas par un lien memorise.
-- toute mise en forme ajoutee a la main (couleurs, listes deroulantes,
-  ligne d'en-tete figee) est perdue au passage suivant.
+- **Favori** : l'etoile, independante du statut
+- **Statut** : `À traiter` (pose a l'ajout), `Postulée`, `Contacts en
+  cours`, `Candidature rejetée`, `Exclue`
+- **Notes** : texte libre
 
-Ne pas laisser le tableau ouvert dans un onglet a l'heure ou la routine
-tourne : les modifications faites dans cet onglet iraient dans le fichier
-mis a la corbeille.
+### Comment la persistance fonctionne
+
+La page declare la capacite `artifact` : son etat vit dans un ilot JSON
+(`<script type="application/json" id="state">`) a l'interieur du document,
+et chaque modification republie le document entier a la **meme URL**. La
+recherche et les filtres, eux, ne sont pas persistes — ils restent propres
+a la session de lecture.
+
+La routine ne reecrit jamais la page : elle lit la version en ligne,
+remplace le seul contenu de l'ilot JSON par l'etat fusionne, et republie
+sur la meme URL. C'est ce qui garantit que les statuts saisis a la main
+survivent a chaque execution.
+
+Deux consequences a connaitre :
+
+- **Ne jamais recreer l'artifact.** Un artifact recree a une URL neuve et
+  perd tout l'historique. En cas d'echec de lecture ou de republication, la
+  routine doit signaler l'erreur et ne rien faire d'autre.
+- Si la page est ouverte pendant que la routine republie, la vue se
+  recharge sur la version de la routine. Une modification en cours de
+  saisie a cet instant precis peut etre perdue : la routine tournant a 7h,
+  le risque est theorique.
 
 ## Installation
 
