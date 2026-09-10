@@ -8,27 +8,26 @@ Repartition assumee : Python collecte et filtre sur des criteres binaires.
 Claude juge le contenu. Aucun scoring par mots-cles dans le script, il
 produirait du bruit.
 
+Persistance : via git. La routine committe et pousse elle-meme
+`out/synthese_AAAA-MM-JJ.md` et `state/vues.json` a chaque execution.
+Pas de service externe (pas de Google Drive, pas de compte de service).
+
 ## Arborescence
 
 ```
 veille-emploi/
   veille.py            collecte + dedoublonnage + filtres durs
-  drive_sync.py         transfert Drive hors contexte agent (compte de service)
   config.yaml           requete, filtres, grille de scoring, profil
   PROMPT_ROUTINE.md      prompt a coller dans la routine
-  state/vues.json        historique 30 jours (dedoublonnage inter-jours)
-  data/                  JSON de collecte, un par jour
-  out/                   syntheses markdown
+  state/vues.json        historique 30 jours (dedoublonnage inter-jours),
+                          commite par la routine
+  data/                  JSON de collecte, un par jour, jamais commite
+                          (fichiers de travail, purges par execution)
+  out/                   syntheses markdown, commitees par la routine
 ```
 
-Cote Drive, dans `Mon Drive/CLAUDE/OFFRES EMPLOI/` :
-
-```
-out/synthese_AAAA-MM-JJ.md   la photo du jour, une par execution
-state/vues.json              historique de dedoublonnage
-```
-
-Le suivi, lui, ne vit pas sur Drive : c'est un Artifact (voir plus bas).
+Le suivi des candidatures, lui, ne vit pas dans le depot : c'est un
+Artifact (voir plus bas).
 
 ## Pipeline de candidatures
 
@@ -80,7 +79,7 @@ Deux consequences a connaitre :
 ## Installation
 
 ```bash
-pip install requests pyyaml beautifulsoup4 google-api-python-client google-auth
+pip install requests pyyaml beautifulsoup4
 ```
 
 ## 1. Credentials France Travail
@@ -192,17 +191,24 @@ ce qui a change, et donne-le moi.
 ## 4. Routine
 
 Claude Code Desktop, sidebar **Routines**, **New routine**, type **Local**.
-Dossier : celui de ce projet, a approuver. Frequence : jours ouvres, 7h00.
+Dossier : `C:\Users\letra\dev\OFFRES EMPLOI` (deplace hors de tout dossier
+synchronise par Google Drive, pour eviter tout conflit entre git et un
+client de synchronisation cloud). Frequence : jours ouvres, 7h00.
 Prompt : le contenu de `PROMPT_ROUTINE.md`.
 
-Le toggle worktree n'est pas utile ici : la routine ne modifie pas de code,
-elle ecrit dans `data/` et `out/`.
+Le toggle worktree n'est pas utile ici : la routine ne modifie pas de code
+source, elle ecrit dans `out/` et `state/`, puis committe.
+
+**A verifier avant de faire confiance a la routine :** qu'elle dispose bien
+des droits de push sur le depot, pas seulement de lecture/clone. Un echec
+de `git push` est gere sans planter (voir `PROMPT_ROUTINE.md`, etape 6),
+mais autant le confirmer par un test avant de compter dessus.
 
 **Limite connue de ce type (Local) :** contrairement a une routine Cloud,
 une tache planifiee locale respecte les regles de permission du projet et
 peut redemander une autorisation manuelle a chaque execution (commandes
-bash, ecritures de fichiers). Migration vers une routine Cloud envisagee
-pour supprimer ce besoin — non encore faite.
+bash, ecritures de fichiers, git push). Migration vers une routine Cloud
+envisagee pour supprimer ce besoin — non encore faite.
 
 ## 5. Reglage
 
@@ -224,36 +230,22 @@ Methode de calibrage : pendant une semaine, lance aussi
 `rejetees` du JSON. Chaque rejet que tu juges injustifie est un motif a
 retirer de `titre_exclu`.
 
-## 6. Compte de service Google (drive_sync.py)
+## Mise a jour des fichiers locaux
 
-Le transfert avec Drive (etat de dedoublonnage, synthese du jour) passe
-par `drive_sync.py`, pas par un connecteur MCP dans la routine — objectif :
-eviter que ces fichiers transitent par le contexte du modele (couteux en
-tokens, et ca grossit avec l'historique).
-
-Mise en place, une seule fois :
-
-1. Sur https://console.cloud.google.com, creer un compte de service, activer
-   l'API Google Drive, generer et telecharger sa cle JSON.
-2. Partager le dossier `Mon Drive/CLAUDE/OFFRES EMPLOI` avec l'adresse email
-   du compte de service (role Editeur) — sans ce partage, tous les appels
-   echouent en 404.
-3. Recuperer les ID Drive de `state/vues.json` et du dossier `out/` (visibles
-   dans l'URL quand le fichier/dossier est ouvert dans le navigateur).
-4. Exposer dans l'environnement qui lance la routine :
+Le depot git est clone dans un dossier separe, non synchronise par
+Google Drive : `C:\Users\letra\dev\OFFRES EMPLOI`.
 
 ```bash
-export GOOGLE_SERVICE_ACCOUNT_FILE="/chemin/vers/cle.json"
-export DRIVE_STATE_FILE_ID="..."
-export DRIVE_OUT_FOLDER_ID="..."
+cd "C:\Users\letra\dev\OFFRES EMPLOI"
+git add .
+git commit -m "description de ce que vous avez change"
+git push
 ```
 
-5. `pip install google-api-python-client google-auth` (deja dans la section
-   Installation ci-dessus).
-
-Test manuel avant de faire confiance a la routine :
-`python drive_sync.py pull-state` doit recreer `state/vues.json` en local
-avec le contenu actuel de Drive.
+Attention : depuis que la routine committe elle-meme `out/` et
+`state/vues.json` (voir plus haut), fais un `git pull` avant toute
+modification manuelle pour eviter un conflit avec ce que la routine a
+pousse ce matin-la.
 
 ## Limites connues
 
@@ -271,15 +263,7 @@ avec le contenu actuel de Drive.
 - **Consommation.** Chaque execution de la routine consomme des tokens comme
   une session normale. Lire une trentaine de descriptions completes chaque
   matin n'est pas gratuit.
-
-
-### Gihub
-
-Pour la prochaine mise à jour de vos fichiers locaux, ce sera simplement :
-
-```bash
-cd "C:\Users\letra\dev\OFFRES EMPLOI"
-git add .
-git commit -m "description de ce que vous avez changé"
-git push
-```
+- **Historique git.** Un commit par jour ouvre, contenant la synthese et
+  l'etat de dedoublonnage. Sur plusieurs mois, ca alourdit l'historique du
+  depot sans beneficier au code lui-meme — a surveiller, un squash
+  periodique des commits de routine reste possible si ca devient genant.
