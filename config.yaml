@@ -24,6 +24,10 @@ requete:
   # Rayon en km autour de Nantes, utilise par France Travail
   commune_insee: "44109"   # Nantes
   rayon_km: 30
+  # Libelle affiche pour la commune ci-dessus, utilise par HelloWork (le
+  # parametre l_autocomplete de sa recherche encode deja commune_insee ;
+  # ce libelle doit rester coherent si tu changes commune_insee).
+  hellowork_lieu_label: "Nantes 44000"
 
   # Communes acceptees pour le filtre geographique dur (voir filtres_durs
   # ci-dessous). Critere : accessibilite sans traversee de la Loire
