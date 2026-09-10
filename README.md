@@ -1,4 +1,4 @@
-# Veille offres BA / PO - Nantes
+# Veille offres PO / Chef de projet - Nantes
 
 Collecte quotidienne des offres sur deux sources (France Travail, APEC),
 dedoublonnage, filtrage objectif, puis scoring et synthese par Claude.
@@ -160,7 +160,7 @@ Deux arbitrages a surveiller :
 sans interet. Si tu constates des rejets injustifies, retire ce motif et
 laisse la penalite de scoring faire le tri.
 
-**Le plancher `salaire_min_annuel: 40000`** ne s'applique qu'aux offres
+**Le plancher `salaire_min_annuel: 45000`** ne s'applique qu'aux offres
 avec salaire annonce, soit une minorite. Il ne filtrera pas grand-chose.
 
 Methode de calibrage : pendant une semaine, lance aussi
