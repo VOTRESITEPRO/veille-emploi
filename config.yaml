@@ -27,12 +27,16 @@ requete:
   rayon_km: 30
 
   # Communes acceptees pour le filtre geographique dur (voir filtres_durs
-  # ci-dessous). L'APEC ne fournit ni code postal ni coordonnees dans ses
-  # resultats de recherche : impossible de calculer un vrai rayon de 30 km.
-  # Approximation retenue : les 24 communes de Nantes Metropole. Rejette a
-  # tort quelques communes qui seraient en realite a moins de 30 km de
-  # Coueron (ex. Vallet, Clisson) ; accepte a tort aucune commune trop
-  # eloignee, ce qui est le sens dans lequel se tromper ici.
+  # ci-dessous). Critere : accessibilite sans traversee de la Loire
+  # (trafic routier degrade sur les franchissements) - l'appartenance a
+  # Nantes Metropole n'entre pas en compte. Une commune rive sud est
+  # exclue meme si elle est dans la Metropole ou a moins de 30 km de
+  # Coueron.
+  # L'APEC ne fournit ni code postal ni coordonnees dans ses resultats de
+  # recherche : impossible de calculer un vrai rayon de 30 km. Rejette a
+  # tort quelques communes rive nord qui seraient en realite a moins de
+  # 30 km de Coueron (ex. Vallet, Clisson) ; accepte a tort aucune commune
+  # trop eloignee, ce qui est le sens dans lequel se tromper ici.
   communes_proches:
     - "Carquefou"
     - "Coueron"
@@ -116,7 +120,7 @@ scoring:
     - [0,  "Secteur incompatible ou non identifiable"]
 
   socle_technique:            # 0 a 20
-    - [20, "PHP/Symfony, SQL, Elasticsearch, AWS explicitement cites"]
+    - [20, "PHP, JavaScript, HTML, CSS, SQL, Python/Selenium, Jira, Google Workspace, Microsoft 365, Claude AI explicitement cites"]
     - [14, "Environnement web technique sans stack precise"]
     - [8,  "Stack differente mais culture technique attendue"]
     - [0,  "Profil purement fonctionnel sans dimension technique"]
@@ -154,6 +158,6 @@ profil:
   remuneration_affichee: "45-55k euros"
   experience: "20 ans web, dont 6 ans Product Owner / Chef de projet / Responsable d'applications sur refonte e-commerce B2B"
   domaine_fort: "e-commerce B2B, distribution, retail"
-  stack: "PHP, HTML, CSS, SQL, Python/Selenium, Jira, Claude AI"
+  stack: "PHP, JavaScript, HTML, CSS, SQL, Python/Selenium, Jira, Google Workspace, Microsoft 365, Claude AI"
   methodes: "cycle en V, Scrum, Kanban, MoSCoW, MOA/AMOA"
   certification: "Certificat Professionnel Gestion de projet Google en preparation"
