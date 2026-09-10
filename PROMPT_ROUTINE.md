@@ -63,13 +63,14 @@ ainsi :
 
 - Ligne d'entete : date, nombre d'offres collectees par source, retenues,
   rejetees, etat de chaque source (OK ou PANNE).
-- **A traiter aujourd'hui** : offres a 70 et plus. Titre, entreprise, lieu,
-  score, URL, detail des points par axe en une ligne, puis deux a quatre
-  lignes sur l'angle de candidature. Pour une offre APEC, ajoute une mention
-  courte "score base sur extrait, verifier la fiche complete avant de
-  candidater". Seule section developpee.
-- **A regarder** : offres entre 50 et 69. Une ligne chacune : titre,
-  entreprise, score, URL, motif principal de la decote.
+- **A traiter aujourd'hui** : offres a 70 et plus, triees par score
+  decroissant. Titre, entreprise, lieu, score, URL, detail des points par
+  axe en une ligne, puis deux a quatre lignes sur l'angle de candidature.
+  Pour une offre APEC, ajoute une mention courte "score base sur extrait,
+  verifier la fiche complete avant de candidater". Seule section developpee.
+- **A regarder** : offres entre 50 et 69, triees par score decroissant.
+  Une ligne chacune : titre, entreprise, score, URL, motif principal de la
+  decote.
 - **A verifier** : offres non scorables. Titre, entreprise, URL.
 - **Ecartees** : uniquement le decompte par motif de rejet des filtres durs.
   Si une offre semblait pertinente et a ete rejetee par un filtre titre,
