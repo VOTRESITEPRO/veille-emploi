@@ -96,8 +96,8 @@ def charger_state(actif=True):
 
 
 def ecrire_state(state):
-    """Purge les entrees de plus de 90 jours pour eviter la croissance infinie."""
-    limite = (datetime.now(timezone.utc) - timedelta(days=90)).isoformat()
+    """Purge les entrees de plus de 30 jours pour eviter la croissance infinie."""
+    limite = (datetime.now(timezone.utc) - timedelta(days=30)).isoformat()
     state = {k: v for k, v in state.items() if v.get("vu_le", "") >= limite}
     STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
     STATE_PATH.write_text(json.dumps(state, ensure_ascii=False, indent=1),
