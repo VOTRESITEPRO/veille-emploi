@@ -223,3 +223,15 @@ avec le contenu actuel de Drive.
 - **Consommation.** Chaque execution de la routine consomme des tokens comme
   une session normale. Lire une trentaine de descriptions completes chaque
   matin n'est pas gratuit.
+
+
+### Gihub
+
+Pour la prochaine mise à jour de vos fichiers locaux, ce sera simplement :
+
+```bash
+cd "C:\Users\letra\Mon Drive\CLAUDE\OFFRES EMPLOI"
+git add .
+git commit -m "description de ce que vous avez changé"
+git push
+```
