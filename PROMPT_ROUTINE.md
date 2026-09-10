@@ -1,7 +1,7 @@
 # Prompt de la routine quotidienne
 
 Coller ce texte dans le champ Instructions de la routine Cloud.
-Fréquence : jours ouvrés, 7h00. Environnement : Veille Offres d'Emploi
+Fréquence : jours ouvrés, 4h00. Environnement : Veille Offres d'Emploi
 (dépôt veille-emploi). Persistance via git : `out/` et `state/vues.json`
 sont commités et poussés par la routine elle-même à chaque exécution —
 aucun service externe (pas de Drive, pas de compte de service).
