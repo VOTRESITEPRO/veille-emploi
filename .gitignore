@@ -1,3 +1,5 @@
 data/
-out/
-state/
+out/*
+!out/synthese_*.md
+state/*
+!state/vues.json
