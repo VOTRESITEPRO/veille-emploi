@@ -1,5 +1,5 @@
 # =============================================================
-# Veille offres BA / PO - Nantes
+# Veille offres PO / Chef de projet - Nantes
 # Ce fichier est lu par veille.py (sections requete / filtres_durs)
 # et par la routine Claude (section scoring).
 # =============================================================
@@ -9,11 +9,17 @@ requete:
   # le tri fin est fait par le scoring, pas par la requete.
   mots_cles:
     - "product owner"
-    - "business analyst"
     - "proxy product owner"
-    - "chef de produit digital"
+    - "chef de produit IT"
+    - "chef de projet IT"
+    - "chef de projet informatique"
     - "chef de projet agile"
     - "chef de projet fonctionnel web"
+    - "chef de projet internet"
+    - "chef de projet digital"
+    - "gestionnaire de projet"
+    - "responsable d'application"
+	
 
   departement: "44"
   # Rayon en km autour de Nantes, utilise par France Travail
@@ -28,30 +34,15 @@ requete:
   # Coueron (ex. Vallet, Clisson) ; accepte a tort aucune commune trop
   # eloignee, ce qui est le sens dans lequel se tromper ici.
   communes_proches:
-    - "Basse-Goulaine"
-    - "Bouaye"
-    - "Bouguenais"
-    - "Brains"
     - "Carquefou"
     - "Coueron"
     - "Indre"
     - "La Chapelle-sur-Erdre"
-    - "La Montagne"
-    - "Le Pellerin"
-    - "Les Sorinieres"
-    - "Mauves-sur-Loire"
     - "Nantes"
     - "Orvault"
-    - "Reze"
-    - "Saint-Aignan-de-Grand-Lieu"
     - "Saint-Herblain"
-    - "Saint-Jean-de-Boiseau"
-    - "Saint-Leger-les-Vignes"
-    - "Saint-Sebastien-sur-Loire"
-    - "Sainte-Luce-sur-Loire"
+    - "Saint-Etienne-de-Monluc"
     - "Sautron"
-    - "Thouare-sur-Loire"
-    - "Vertou"
 
   # Codes ROME France Travail. M1806 = conseil et MOA en SI.
   # Laisser vide pour ne pas filtrer par ROME (recommande au demarrage :
@@ -83,13 +74,14 @@ filtres_durs:
     - "administrateur syst"
     - "technicien"
     - "commercial"
+    - "lead"
     - "\\bSIRH\\b"
     - "\\bSAP\\b"
     - "scrum master"
 
   # Rejette si le salaire max annonce est sous ce seuil (en euros annuels).
   # Les offres sans salaire annonce passent le filtre.
-  salaire_min_annuel: 40000
+  salaire_min_annuel: 45000
 
   # Rejette si le libelle d'experience exige depasse ce seuil (en annees).
   experience_max_exigee: 12
@@ -103,18 +95,18 @@ scoring:
 
   # Exclusif : retenir le premier palier qui correspond. Les paliers 35/28/22
   # exigent que le titre de l'offre dise litteralement "Product Owner" ou
-  # "Business Analyst" : un intitule "Chef de projet informatique/ERP/SI" ou
-  # "Consultant fonctionnel" ne s'y qualifie jamais, meme chez un client
-  # final ou avec un secteur pertinent, sauf si la description decrit
-  # explicitement des missions de backlog / user stories / recueil et
-  # analyse de besoins fonctionnels (alors palier 15).
+  # "Chef de projet" (digital/IT/web/agile/fonctionnel) : un intitule
+  # "Consultant fonctionnel" ou "Analyste fonctionnel" ne s'y qualifie
+  # jamais, meme chez un client final ou avec un secteur pertinent, sauf
+  # si la description decrit explicitement des missions de backlog /
+  # user stories / pilotage de projets digitaux (alors palier 15).
   adequation_role:            # 0 a 35
-    - [35, "Titre litteral 'Product Owner' ou 'Business Analyst', sur produit web / e-commerce, chez le client final"]
-    - [28, "Titre litteral 'Product Owner' ou 'Business Analyst', generaliste SI, chez le client final"]
-    - [22, "Titre litteral 'Product Owner' ou 'Business Analyst', en ESN ou cabinet de conseil, mission identifiee"]
-    - [15, "AMOA, analyste fonctionnel, ou role sans le titre PO/BA dont la description mentionne explicitement backlog, user stories, ou recueil/analyse de besoins fonctionnels"]
-    - [8,  "Chef de projet IT/ERP/informatique generique sans aucune de ces mentions ; role hybride ou mal defini (PO/Scrum Master, PO/dev)"]
-    - [0,  "Le role n'est pas un role de BA/PO : developpement, infrastructure, ou poste de direction/executif (CPO, Head of Product, directeur, VP)"]
+    - [35, "Titre litteral 'Product Owner' ou 'Chef de projet' (digital/IT/web/agile/fonctionnel), sur produit web / e-commerce, chez le client final"]
+    - [28, "Titre litteral 'Product Owner' ou 'Chef de projet' (digital/IT/web/agile/fonctionnel), generaliste SI, chez le client final"]
+    - [22, "Titre litteral 'Product Owner' ou 'Chef de projet' (digital/IT/web/agile/fonctionnel), en ESN ou cabinet de conseil, mission identifiee"]
+    - [15, "AMOA, analyste fonctionnel, ou role sans titre PO/Chef de projet dont la description mentionne explicitement backlog, user stories, ou pilotage de projets digitaux"]
+    - [8,  "Chef de projet ERP/informatique generique sans autre indice (secteur, stack ou mission non precises) ; role hybride ou mal defini"]
+    - [0,  "Le role n'est pas un role de PO/Chef de projet : developpement, infrastructure, ou poste de direction/executif (CPO, Head of Product, directeur, VP)"]
 
   proximite_metier:           # 0 a 25
     - [25, "E-commerce, retail, distribution, marketplace, B2B"]
@@ -156,12 +148,12 @@ scoring:
 profil:
   # Rappel factuel utilise par Claude pour le scoring.
   # A ne pas embellir : ce bloc sert a juger, pas a vendre.
-  intitule_cible: "Business Analyst / Product Owner, statut cadre"
+  intitule_cible: "Chef de projet digital / Product Owner, statut cadre"
   localisation: "Couëron (44), Nantes Metropole, rayon 30 km"
   disponibilite: "septembre 2026"
   remuneration_affichee: "45-55k euros"
-  experience: "20 ans web, dont 6 ans BA/PO sur refonte e-commerce B2B"
+  experience: "20 ans web, dont 6 ans Product Owner / Chef de projet / Responsable d'applications sur refonte e-commerce B2B"
   domaine_fort: "e-commerce B2B, distribution, retail"
-  stack: "PHP/Symfony, SQL, Python/Selenium, Elasticsearch, AWS, Jira"
+  stack: "PHP, HTML, CSS, SQL, Python/Selenium, Jira, Claude AI"
   methodes: "cycle en V, Scrum, Kanban, MoSCoW, MOA/AMOA"
-  certification: "PSPO I (Scrum.org) en preparation"
+  certification: "Certificat Professionnel Gestion de projet Google en preparation"
