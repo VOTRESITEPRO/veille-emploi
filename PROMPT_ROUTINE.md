@@ -2,21 +2,19 @@
 
 Coller ce texte dans le champ Instructions de la routine Cloud.
 Fréquence : jours ouvrés, 7h00. Environnement : Veille Offres d'Emploi
-(dépôt veille-emploi). Le transfert Drive passe par `drive_sync.py`
-(compte de service Google), pas par le connecteur Drive de la routine —
-le connecteur Drive n'est pas nécessaire pour cette routine.
+(dépôt veille-emploi). Persistance via git : `out/` et `state/vues.json`
+sont commités et poussés par la routine elle-même à chaque exécution —
+aucun service externe (pas de Drive, pas de compte de service).
 
 ---
 
-Exécute la veille d'offres d'emploi. Ne committe et ne pousse rien sur git
-à aucun moment de cette routine : toute la persistance passe par Drive.
+Exécute la veille d'offres d'emploi.
 
-**1. Récupération de l'état**
+**1. État de départ**
 
-Lance `python drive_sync.py pull-state`. Ce script télécharge
-`state/vues.json` depuis Drive directement via l'API, sans passer par ton
-contexte : ne lis jamais ce fichier toi-même, ne l'affiche pas, ne le
-résume pas.
+Le dépôt cloné au démarrage de l'exécution contient déjà `state/vues.json`
+tel que laissé par la dernière exécution committée — pas de récupération
+séparée à faire.
 
 **2. Collecte**
 
@@ -123,21 +121,27 @@ neuf : signale l'échec dans la notification finale et laisse l'existant en
 place. Un artifact recréé aurait une nouvelle URL et perdrait tout
 l'historique de suivi.
 
-**6. Dépôt sur Drive**
+**6. Commit et push**
 
-Lance `python drive_sync.py push-synthese AAAA-MM-JJ` (date du jour), puis
-`python drive_sync.py push-state`. Les deux commandes font le transfert
-via l'API Drive directement depuis le script : ne lis pas le contenu de
-ces fichiers toi-même avant de lancer les commandes, ne les affiche pas.
+Committe uniquement `out/synthese_AAAA-MM-JJ.md` et `state/vues.json` —
+jamais `data/candidats_*.json`, qui sont des fichiers de travail de cette
+seule exécution, à ignorer une fois la synthèse écrite.
 
-Ne crée et ne conserve aucune copie des fichiers `data/candidats_*.json` sur
-Drive : ce sont des fichiers de travail de cette seule exécution, à ignorer
-une fois la synthèse écrite.
+```bash
+git add out/synthese_AAAA-MM-JJ.md state/vues.json
+git commit -m "Veille AAAA-MM-JJ : <N> offres retenues"
+git push
+```
+
+Si le push échoue (conflit, réseau, permissions) : ne force rien, signale
+l'échec dans la notification finale. La synthèse et l'état restent alors
+disponibles uniquement dans la copie locale de cette exécution — à
+reconstituer manuellement au besoin.
 
 **7. Notification**
 
 Termine par un message court : nombre d'offres à traiter aujourd'hui, nombre
-de lignes ajoutées au suivi, état des deux sources, lien ou nom du fichier
-synthèse sur Drive. Si zéro offre au-dessus de 50, dis-le, ne crée pas de
-fichier synthèse et n'ajoute aucune ligne au suivi (mais laisse le tableau
-existant intact).
+de lignes ajoutées au suivi, état des deux sources, confirmation du commit/
+push (ou motif d'échec). Si zéro offre au-dessus de 50, dis-le, ne crée pas
+de fichier synthèse, ne committe rien, et n'ajoute aucune ligne au suivi
+(mais laisse le tableau existant intact).
