@@ -81,6 +81,7 @@ filtres_durs:
     - "\\bSIRH\\b"
     - "\\bSAP\\b"
     - "scrum master"
+    - "business analyst"
 
   # Rejette si le salaire max annonce est sous ce seuil (en euros annuels).
   # Les offres sans salaire annonce passent le filtre.

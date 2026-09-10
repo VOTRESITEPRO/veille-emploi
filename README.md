@@ -15,7 +15,6 @@ veille-emploi/
   drive_sync.py         transfert Drive hors contexte agent (compte de service)
   config.yaml           requete, filtres, grille de scoring, profil
   PROMPT_ROUTINE.md      prompt a coller dans la routine
-  artifact/pipeline.html source de la page de suivi (voir plus bas)
   state/vues.json        historique 30 jours (dedoublonnage inter-jours)
   data/                  JSON de collecte, un par jour
   out/                   syntheses markdown
@@ -40,7 +39,12 @@ retrouve une offre reperee la semaine derniere.
 URL fixe, qui ne change jamais :
 <https://claude.ai/code/artifact/f10d0942-3cf4-4501-a313-f0589d326fd5>
 
-Source de la page : `artifact/pipeline.html`.
+Le code de la page (HTML/CSS/JS) ne vit que dans cet Artifact en ligne,
+pas dans le depot : la routine ne recree jamais l'artifact et ne le
+reecrit jamais depuis un fichier local (voir "Comment la persistance
+fonctionne" ci-dessous), donc garder une copie versionnee du fichier
+n'apportait rien de fiable — elle divergeait silencieusement du contenu
+reel a chaque execution.
 
 Trois champs se modifient a la main, directement dans la page :
 
