@@ -442,7 +442,10 @@ def main():
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     jour = datetime.now().strftime("%Y-%m-%d")
-    chemin = DATA_DIR / f"candidats_{jour}.json"
+    # Suffixe par source : sinon un appel --source ft suivi d'un appel
+    # --source apec le meme jour ecrase le premier fichier (meme nom).
+    suffixe = f"_{args.source}" if args.source != "all" else ""
+    chemin = DATA_DIR / f"candidats_{jour}{suffixe}.json"
     chemin.write_text(json.dumps(sortie, ensure_ascii=False, indent=2),
                       encoding="utf-8")
 
