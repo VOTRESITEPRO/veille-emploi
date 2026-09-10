@@ -230,7 +230,7 @@ avec le contenu actuel de Drive.
 Pour la prochaine mise à jour de vos fichiers locaux, ce sera simplement :
 
 ```bash
-cd "C:\Users\letra\Mon Drive\CLAUDE\OFFRES EMPLOI"
+cd "C:\Users\letra\dev\OFFRES EMPLOI"
 git add .
 git commit -m "description de ce que vous avez changé"
 git push
