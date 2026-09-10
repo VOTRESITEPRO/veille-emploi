@@ -20,19 +20,20 @@ résume pas.
 
 **2. Collecte**
 
-Lance `python veille.py --source ft`, puis `python veille.py --source apec`.
-Chaque appel écrit son propre `data/candidats_AAAA-MM-JJ.json` et met à jour
-`state/vues.json` en local. Note les statistiques affichées par chaque appel.
+Lance `python veille.py --source ft`, puis `python veille.py --source apec`,
+puis `python veille.py --source hellowork`. Chaque appel écrit son propre
+`data/candidats_AAAA-MM-JJ_<source>.json` et met à jour `state/vues.json`
+en local. Note les statistiques affichées par chaque appel.
 
-Si une des deux commandes sort en erreur, ou si le champ `erreurs` de son
-JSON n'est pas vide : continue quand même avec l'autre source, et place en
-tête de la synthèse un bloc **PANNE** nommant la source en échec et le
+Si une des trois commandes sort en erreur, ou si le champ `erreurs` de son
+JSON n'est pas vide : continue quand même avec les autres sources, et place
+en tête de la synthèse un bloc **PANNE** nommant la source en échec et le
 message d'erreur. Ne masque jamais une source en panne.
 
 **3. Scoring**
 
 Lis `config.yaml` du dépôt, sections `scoring` et `profil`. Pour chaque
-offre présente dans les deux fichiers `data/candidats_*.json` de cette
+offre présente dans les fichiers `data/candidats_*.json` de cette
 exécution, attribue un score sur 100 selon les cinq axes de la grille.
 Lis la description complète de l'offre, pas seulement le titre.
 
@@ -137,7 +138,7 @@ une fois la synthèse écrite.
 **7. Notification**
 
 Termine par un message court : nombre d'offres à traiter aujourd'hui, nombre
-de lignes ajoutées au suivi, état des deux sources, lien ou nom du fichier
+de lignes ajoutées au suivi, état des trois sources, lien ou nom du fichier
 synthèse sur Drive. Si zéro offre au-dessus de 50, dis-le, ne crée pas de
 fichier synthèse et n'ajoute aucune ligne au suivi (mais laisse le tableau
 existant intact).

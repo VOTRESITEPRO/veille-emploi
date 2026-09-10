@@ -1,7 +1,8 @@
 # Veille offres PO / Chef de projet - Nantes
 
-Collecte quotidienne des offres sur deux sources (France Travail, APEC),
-dedoublonnage, filtrage objectif, puis scoring et synthese par Claude.
+Collecte quotidienne des offres sur trois sources (France Travail, APEC,
+HelloWork), dedoublonnage, filtrage objectif, puis scoring et synthese par
+Claude.
 
 Repartition assumee : Python collecte et filtre sur des criteres binaires.
 Claude juge le contenu. Aucun scoring par mots-cles dans le script, il
@@ -15,7 +16,6 @@ veille-emploi/
   drive_sync.py         transfert Drive hors contexte agent (compte de service)
   config.yaml           requete, filtres, grille de scoring, profil
   PROMPT_ROUTINE.md      prompt a coller dans la routine
-  artifact/pipeline.html source de la page de suivi (voir plus bas)
   state/vues.json        historique 30 jours (dedoublonnage inter-jours)
   data/                  JSON de collecte, un par jour
   out/                   syntheses markdown
@@ -40,7 +40,12 @@ retrouve une offre reperee la semaine derniere.
 URL fixe, qui ne change jamais :
 <https://claude.ai/code/artifact/f10d0942-3cf4-4501-a313-f0589d326fd5>
 
-Source de la page : `artifact/pipeline.html`.
+Le code de la page (HTML/CSS/JS) ne vit que dans cet Artifact en ligne,
+pas dans le depot : la routine ne recree jamais l'artifact et ne le
+reecrit jamais depuis un fichier local (voir "Comment la persistance
+fonctionne" ci-dessous), donc garder une copie versionnee du fichier
+n'apportait rien de fiable — elle divergeait silencieusement du contenu
+reel a chaque execution.
 
 Trois champs se modifient a la main, directement dans la page :
 
@@ -75,7 +80,7 @@ Deux consequences a connaitre :
 ## Installation
 
 ```bash
-pip install requests pyyaml google-api-python-client google-auth
+pip install requests pyyaml beautifulsoup4 google-api-python-client google-auth
 ```
 
 ## 1. Credentials France Travail
@@ -140,7 +145,51 @@ routine doit afficher en tete de synthese.
 
 Prevoir que cet endpoint casse une a deux fois par an.
 
-## 3. Routine
+## 3. Adaptateur HelloWork
+
+HelloWork non plus n'expose pas d'API publique documentee, mais
+contrairement a l'APEC sa page de resultats est rendue cote serveur
+(Rails/Turbo) : les offres sont directement dans le HTML retourne par
+`GET https://www.hellowork.com/fr-fr/emploi/recherche.html?k=...`. Pas
+d'endpoint interne a reverse-engineer, mais un parsing HTML (BeautifulSoup)
+cible sur des attributs `data-cy` normalement stables (`offerTitle`,
+`localisationCard`, `contractCard`...).
+
+Deux points construits par hypothese, a verifier a la premiere execution
+reelle :
+
+- **`k_autocomplete` est omis.** Le champ `k` (texte libre) suffit a priori
+  a faire la recherche ; `k_autocomplete` semble n'etre qu'un raccourci
+  quand l'utilisateur clique une suggestion d'autocompletion. Si une
+  recherche remonte 0 resultat de facon suspecte, c'est le premier
+  parametre a re-verifier via DevTools.
+- **Le parametre `l` (libelle de commune) est cosmetique.** Le vrai filtre
+  geographique semble porte par `l_autocomplete` (URI referentiel construit
+  a partir de `commune_insee`). `hellowork_lieu_label` dans `config.yaml`
+  doit juste rester coherent avec `commune_insee` si tu changes de commune
+  cible.
+
+**La description complete n'est pas dans la page de resultats**, seulement
+sur la fiche de chaque offre (`hellowork.com/fr-fr/emplois/<id>.html`).
+Comme une recherche large peut lister plusieurs centaines d'offres (la
+plupart hors sujet), `veille.py` ne va chercher la description que pour
+les offres deja retenues par les filtres durs (titre/lieu/salaire, tous
+disponibles depuis la liste) — pour limiter le nombre de requetes
+supplementaires a ce qui compte vraiment.
+
+Contrairement a France Travail et l'APEC, HelloWork n'offre pas de vrai
+filtre par anciennete cote source (`d=all` est utilise systematiquement) :
+comme pour l'APEC, c'est `state/vues.json` qui evite de re-presenter une
+offre deja vue d'un jour sur l'autre. **La toute premiere execution va donc
+remonter un gros volume d'offres** (tout l'historique disponible sans
+filtre de date), qui se tarira des le lendemain.
+
+Premiere execution : lance `python veille.py --source hellowork --verbose`.
+Meme methode qu'avec l'APEC en cas d'echec : ouvre une recherche HelloWork
+reelle dans un navigateur, verifie via DevTools ou Affichage du code source
+ce qui a change, et donne-le moi.
+
+## 4. Routine
 
 Claude Code Desktop, sidebar **Routines**, **New routine**, type **Local**.
 Dossier : celui de ce projet, a approuver. Frequence : jours ouvres, 7h00.
@@ -155,7 +204,7 @@ peut redemander une autorisation manuelle a chaque execution (commandes
 bash, ecritures de fichiers). Migration vers une routine Cloud envisagee
 pour supprimer ce besoin — non encore faite.
 
-## 4. Reglage
+## 5. Reglage
 
 La grille de `config.yaml` est un point de depart, pas un reglage valide.
 Elle produira des faux positifs et des faux negatifs la premiere semaine.
@@ -175,7 +224,7 @@ Methode de calibrage : pendant une semaine, lance aussi
 `rejetees` du JSON. Chaque rejet que tu juges injustifie est un motif a
 retirer de `titre_exclu`.
 
-## 5. Compte de service Google (drive_sync.py)
+## 6. Compte de service Google (drive_sync.py)
 
 Le transfert avec Drive (etat de dedoublonnage, synthese du jour) passe
 par `drive_sync.py`, pas par un connecteur MCP dans la routine — objectif :
@@ -208,9 +257,8 @@ avec le contenu actuel de Drive.
 
 ## Limites connues
 
-- **Couverture.** France Travail et APEC ne couvrent pas tout. HelloWork
-  publie des offres en exclusivite, notamment des PME regionales — ajout en
-  cours d'evaluation, pas encore integre au script.
+- **Couverture.** Meme avec les trois sources, certaines offres (jobboards
+  de niche, sites carriere d'entreprise) restent hors radar.
 - **Le dedoublonnage inter-sources** repose sur titre + entreprise
   normalises. Une meme offre publiee sous deux intitules differents passera
   deux fois. Une offre publiee par une ESN sans nom d'entreprise ne se

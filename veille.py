@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Collecte des offres BA / PO sur Nantes depuis France Travail et l'APEC.
+Collecte des offres BA / PO sur Nantes depuis France Travail, l'APEC et
+HelloWork.
 
 Le script ne juge pas les offres : il collecte, dedoublonne, applique des
 filtres objectifs (contrat, departement, salaire plancher, titres exclus)
@@ -23,9 +24,11 @@ import time
 import unicodedata
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from urllib.parse import urlencode
 
 import requests
 import yaml
+from bs4 import BeautifulSoup
 
 BASE = Path(__file__).resolve().parent
 CONFIG_PATH = BASE / "config.yaml"
@@ -39,6 +42,14 @@ FT_SEARCH_URL = "https://api.francetravail.io/partenaire/offresdemploi/v2/offres
 # correspond a l'endpoint interne utilise par le front. Elle peut changer sans
 # preavis. Voir README, section "Adaptateur APEC".
 APEC_SEARCH_URL = "https://www.apec.fr/cms/webservices/rechercheOffre"
+
+# HelloWork non plus n'expose pas d'API publique, mais contrairement a l'APEC
+# la page de resultats est rendue cote serveur (Rails/Turbo) : les offres
+# sont directement dans le HTML, pas besoin de reverse-engineer un endpoint
+# interne. Voir README, section "Adaptateur HelloWork".
+HW_BASE = "https://www.hellowork.com"
+HW_SEARCH_URL = "https://www.hellowork.com/fr-fr/emploi/recherche.html"
+HW_MAX_PAGES = 5
 
 UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
@@ -299,6 +310,216 @@ def collecte_apec(cfg):
 
 
 # --------------------------------------------------------------------------
+# Source 3 : HelloWork (page de resultats rendue cote serveur, sans API)
+# --------------------------------------------------------------------------
+
+def hw_salaire_annuel(libelle):
+    """
+    Extrait (min, max) depuis un libelle HelloWork du type
+    '42 000 - 50 000 € / an' ou 'A partir de 45 000 € / an'.
+    Retourne (None, None) si absent, ou si l'unite n'est pas annuelle
+    (TJM en '/ jour', pas de conversion fiable sans hypothese sur le
+    nombre de jours factures par an).
+    """
+    if not libelle:
+        return (None, None)
+    low = libelle.lower()
+    if "/ an" not in low and "/an" not in low:
+        return (None, None)
+    avant_euro = libelle.split("€")[0]
+    nombres = [float(n.replace(" ", "").replace(" ", "").replace("\xa0", ""))
+               for n in re.findall(r"\d[\d\s \xa0]*", avant_euro)]
+    nombres = [n for n in nombres if n > 1000]
+    if not nombres:
+        return (None, None)
+    return (min(nombres), max(nombres))
+
+
+def hw_date_relative(texte):
+    """'il y a 14 jours' / 'il y a 13 heures' -> date ISO approximative.
+    Remplacee par la date exacte ('Publiee le JJ/MM/AAAA') au moment de
+    l'enrichissement, pour les offres qui passent les filtres durs."""
+    if not texte:
+        return None
+    m = re.search(r"il y a (\d+)\s*(heure|jour)", texte, re.IGNORECASE)
+    if not m:
+        return None
+    n, unite = int(m.group(1)), m.group(2).lower()
+    delta = timedelta(hours=n) if unite.startswith("heure") else timedelta(days=n)
+    return (datetime.now(timezone.utc) - delta).isoformat()
+
+
+def hw_parse_carte(li):
+    """Parse un <li data-id-storage-item-id=...> de la liste de resultats."""
+    oid = li.get("data-id-storage-item-id")
+    a = li.find("a", attrs={"data-cy": "offerTitle"})
+    if not oid or not a or not a.get("href"):
+        return None
+    h3 = a.find("h3")
+    ps = h3.find_all("p") if h3 else []
+    titre = ps[0].get_text(strip=True) if ps else None
+    entreprise = ps[1].get_text(strip=True) if len(ps) > 1 else None
+
+    lieu_tag = li.find(attrs={"data-cy": "localisationCard"})
+    contrat_tag = li.find(attrs={"data-cy": "contractCard"})
+    tt_tag = li.find(attrs={"data-cy": "contractTag"})
+
+    salaire_libelle = None
+    for div in li.find_all("div", class_="typo-s-bold"):
+        txt = div.get_text(strip=True)
+        if "€" in txt:
+            salaire_libelle = txt
+            break
+
+    date_tag = li.select_one("div.typo-s.text-grey-500")
+    smin, smax = hw_salaire_annuel(salaire_libelle)
+    href = a["href"]
+
+    return {
+        "source": "hellowork",
+        "id_source": oid,
+        "titre": titre,
+        "entreprise": entreprise,
+        "lieu": lieu_tag.get_text(strip=True) if lieu_tag else None,
+        "code_postal": None,
+        "date_publication": hw_date_relative(date_tag.get_text(strip=True) if date_tag else None),
+        "type_contrat": contrat_tag.get_text(strip=True) if contrat_tag else None,
+        "experience": None,
+        "qualification": None,
+        "salaire_libelle": salaire_libelle,
+        "salaire_min": smin,
+        "salaire_max": smax,
+        "teletravail": tt_tag.get_text(strip=True) if tt_tag else None,
+        "url": href if href.startswith("http") else HW_BASE + href,
+        "description": None,
+        "competences": [],
+    }
+
+
+def hw_nb_pages(soup):
+    """Nombre total de pages, lu dans le bloc de pagination ('sur N')."""
+    for nav in soup.find_all("nav"):
+        textes = [s.get_text(strip=True) for s in nav.find_all("span")]
+        if "sur" in textes:
+            idx = textes.index("sur")
+            if idx + 1 < len(textes) and textes[idx + 1].isdigit():
+                return int(textes[idx + 1])
+    return 1
+
+
+def hw_collecte_page(url):
+    """
+    Recupere et parse une page de resultats. S'arrete avant le bloc
+    'Resultats proches' : HelloWork y place lui-meme des offres hors
+    mots-cles (elargissement de recherche), qu'on ne veut pas collecter.
+    """
+    r = requests.get(url, headers={"User-Agent": UA, "Accept-Language": "fr-FR,fr;q=0.9"},
+                      timeout=30)
+    r.raise_for_status()
+    principal = r.text.split("Résultats proches")[0]
+    soup = BeautifulSoup(principal, "html.parser")
+    cartes = [hw_parse_carte(li) for li in soup.find_all("li", attrs={"data-id-storage-item-id": True})]
+    return [o for o in cartes if o], soup
+
+
+def hw_fetch_detail(url):
+    """
+    Va chercher, sur la fiche de l'offre, ce que la page de resultats ne
+    donne pas : description complete (missions + profil recherche),
+    experience exigee, indicateur cabinet de recrutement, date de
+    publication exacte.
+    """
+    r = requests.get(url, headers={"User-Agent": UA, "Accept-Language": "fr-FR,fr;q=0.9"},
+                      timeout=30)
+    r.raise_for_status()
+    soup = BeautifulSoup(r.text, "html.parser")
+
+    sections_voulues = {"Les missions du poste", "Le profil recherché"}
+    blocs = []
+    for section in soup.find_all("section"):
+        h2 = section.find("h2")
+        if h2 and h2.get_text(strip=True) in sections_voulues:
+            contenu = section.find("div", attrs={"data-truncate-text-target": "content"})
+            if contenu:
+                blocs.append(contenu.get_text("\n", strip=True))
+    for det in soup.find_all("details"):
+        summary = det.find("summary")
+        if summary and summary.get_text(strip=True) in sections_voulues:
+            corps = det.find("div", class_="typo-long-m")
+            if corps:
+                blocs.append(corps.get_text("\n", strip=True))
+
+    caracteristiques = [li.get_text(strip=True)
+                         for li in soup.select("ul.flex.flex-wrap.gap-3 > li")
+                         if li.get_text(strip=True)]
+    # Salaire et cabinet de recrutement sont deja captures dans des champs
+    # dedies (salaire_libelle, cabinet_recrutement) : ne pas les dupliquer.
+    caracteristiques = [c for c in caracteristiques
+                         if "€" not in c and c != "Cabinet de recrutement"]
+    experience = next((c for c in caracteristiques
+                        if re.search(r"Exp\.\s*\d+\s*an", c, re.IGNORECASE)), None)
+
+    date_publication = None
+    for p in soup.find_all("p"):
+        m = re.search(r"Publi\xe9e le (\d{2})/(\d{2})/(\d{4})", p.get_text())
+        if m:
+            j, mo, a = m.groups()
+            date_publication = f"{a}-{mo}-{j}"
+            break
+
+    return {
+        "description": "\n\n".join(b for b in blocs if b),
+        "caracteristiques": caracteristiques,
+        "experience": experience,
+        "cabinet_recrutement": soup.find(attrs={"data-cy": "thirdPartyButton"}) is not None,
+        "date_publication": date_publication,
+    }
+
+
+def collecte_hellowork(cfg):
+    req = cfg["requete"]
+    commune_insee = req.get("commune_insee")
+    lieu_label = req.get("hellowork_lieu_label") or "Nantes 44000"
+    types_contrat = req.get("types_contrat") or ["CDI"]
+
+    resultats, vus_ids = [], set()
+    for mot in req["mots_cles"]:
+        params = {
+            "k": mot,
+            "l": lieu_label,
+            "l_autocomplete": f"http://www.rj.com/commun/localite/commune/{commune_insee}",
+            "c": types_contrat[0],
+            "ray": req.get("rayon_km", 30),
+            "d": "all",
+            "st": "relevance",
+        }
+        page, total_pages = 1, 1
+        while page <= min(total_pages, HW_MAX_PAGES):
+            p = dict(params)
+            if page > 1:
+                p["p"] = page
+            url = f"{HW_SEARCH_URL}?{urlencode(p)}"
+            try:
+                offres_page, soup = hw_collecte_page(url)
+            except requests.RequestException as e:
+                print(f"[HelloWork] echec sur '{mot}' (page {page}) : {e}", file=sys.stderr)
+                break
+            if page == 1:
+                total_pages = hw_nb_pages(soup)
+            log(f"HelloWork '{mot}' page {page}/{total_pages} : {len(offres_page)} resultats")
+            for o in offres_page:
+                if o["id_source"] in vus_ids:
+                    continue
+                vus_ids.add(o["id_source"])
+                o["mot_cle_declencheur"] = mot
+                resultats.append(o)
+            page += 1
+            time.sleep(1.0)
+        time.sleep(1.0)
+    return resultats
+
+
+# --------------------------------------------------------------------------
 # Filtres durs
 # --------------------------------------------------------------------------
 
@@ -373,7 +594,7 @@ def filtrer(offres, cfg):
 def main():
     global VERBOSE
     ap = argparse.ArgumentParser()
-    ap.add_argument("--source", choices=["ft", "apec", "all"], default="all")
+    ap.add_argument("--source", choices=["ft", "apec", "hellowork", "all"], default="all")
     ap.add_argument("--no-state", action="store_true",
                     help="ignore l'historique et ressort toutes les offres")
     ap.add_argument("--verbose", action="store_true")
@@ -396,6 +617,13 @@ def main():
         except Exception as e:
             erreurs.append(f"apec : {e}")
             print(f"[ERREUR] APEC : {e}", file=sys.stderr)
+
+    if args.source in ("hellowork", "all"):
+        try:
+            brut += collecte_hellowork(cfg)
+        except Exception as e:
+            erreurs.append(f"hellowork : {e}")
+            print(f"[ERREUR] HelloWork : {e}", file=sys.stderr)
 
     # Dedoublonnage inter-sources : FT prime (description plus complete)
     par_cle = {}
@@ -425,6 +653,28 @@ def main():
 
     retenues, rejetees = filtrer(nouvelles, cfg)
 
+    # HelloWork : la page de resultats ne donne pas la description complete
+    # (seulement la fiche de l'offre). On ne va la chercher que pour les
+    # offres deja retenues par les filtres durs, pour limiter le nombre de
+    # requetes (une recherche large peut lister plusieurs centaines d'offres,
+    # la plupart hors sujet ou deja rejetees sur titre/lieu/salaire).
+    for o in retenues:
+        if o["source"] != "hellowork":
+            continue
+        try:
+            detail = hw_fetch_detail(o["url"])
+            o["description"] = detail["description"]
+            o["caracteristiques"] = detail["caracteristiques"]
+            if detail["experience"]:
+                o["experience"] = detail["experience"]
+            o["cabinet_recrutement"] = detail["cabinet_recrutement"]
+            if detail["date_publication"]:
+                o["date_publication"] = detail["date_publication"]
+        except Exception as e:
+            log(f"HelloWork : echec recuperation description {o['url']} : {e}")
+            o["description"] = o.get("description") or ""
+        time.sleep(0.8)
+
     sortie = {
         "genere_le": maintenant,
         "erreurs": erreurs,
@@ -442,7 +692,10 @@ def main():
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     jour = datetime.now().strftime("%Y-%m-%d")
-    chemin = DATA_DIR / f"candidats_{jour}.json"
+    # Suffixe par source : sinon un appel --source ft suivi d'un appel
+    # --source apec le meme jour ecrase le premier fichier (meme nom).
+    suffixe = f"_{args.source}" if args.source != "all" else ""
+    chemin = DATA_DIR / f"candidats_{jour}{suffixe}.json"
     chemin.write_text(json.dumps(sortie, ensure_ascii=False, indent=2),
                       encoding="utf-8")
 
@@ -452,8 +705,9 @@ def main():
     print(json.dumps(sortie["stats"], ensure_ascii=False))
     print(str(chemin))
 
-    # Echec total des deux sources : code de sortie non nul
-    if len(erreurs) >= (2 if args.source == "all" else 1):
+    # Echec total de toutes les sources demandees : code de sortie non nul
+    total_sources = 3 if args.source == "all" else 1
+    if len(erreurs) >= total_sources:
         sys.exit(1)
 
 
