@@ -1,7 +1,7 @@
 # Prompt de la routine quotidienne
 
 Coller ce texte dans le champ Instructions de la routine Cloud.
-Fréquence : jours ouvrés, 7h00. Environnement : Veille Offres d'Emploi
+Fréquence : jours ouvrés, 4h00. Environnement : Veille Offres d'Emploi
 (dépôt veille-emploi). Persistance via git : `out/` et `state/vues.json`
 sont commités et poussés par la routine elle-même à chaque exécution —
 aucun service externe (pas de Drive, pas de compte de service).
@@ -124,13 +124,28 @@ l'historique de suivi.
 
 **6. Commit et push**
 
-Committe uniquement `out/synthese_AAAA-MM-JJ.md` et `state/vues.json` —
-jamais `data/candidats_*.json`, qui sont des fichiers de travail de cette
-seule exécution, à ignorer une fois la synthèse écrite.
+`state/vues.json` doit toujours être committé s'il a changé, qu'il y ait ou
+non une offre à 50 ou plus — c'est l'état de dédoublonnage, indépendant du
+résultat du scoring. Ne pas le committer forcerait à recollecter et
+rescorer les mêmes offres le lendemain. Jamais `data/candidats_*.json`, qui
+sont des fichiers de travail de cette seule exécution, à ignorer une fois
+la synthèse écrite (ou l'absence de synthèse constatée).
+
+S'il y a au moins une offre à 50 ou plus (`out/synthese_AAAA-MM-JJ.md` a
+été écrit) :
 
 ```bash
 git add out/synthese_AAAA-MM-JJ.md state/vues.json
 git commit -m "Veille AAAA-MM-JJ : <N> offres retenues"
+git push
+```
+
+Sinon (zéro offre à 50 ou plus, pas de fichier synthèse) mais si
+`state/vues.json` a changé :
+
+```bash
+git add state/vues.json
+git commit -m "Veille AAAA-MM-JJ : aucune offre retenue"
 git push
 ```
 
@@ -144,5 +159,5 @@ reconstituer manuellement au besoin.
 Termine par un message court : nombre d'offres à traiter aujourd'hui, nombre
 de lignes ajoutées au suivi, état des trois sources, confirmation du commit/
 push (ou motif d'échec). Si zéro offre au-dessus de 50, dis-le, ne crée pas
-de fichier synthèse, ne committe rien, et n'ajoute aucune ligne au suivi
-(mais laisse le tableau existant intact).
+de fichier synthèse et n'ajoute aucune ligne au suivi (mais laisse le
+tableau existant intact) — committe quand même `state/vues.json` (étape 6).
