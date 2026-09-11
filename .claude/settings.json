@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Artifact",
+      "Write",
+      "Bash(git *)",
+      "Bash(python veille.py *)",
+      "Bash(pip install *)"
+    ]
+  }
+}
