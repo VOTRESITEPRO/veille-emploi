@@ -96,32 +96,40 @@ filtres_durs:
 
 # =============================================================
 # Grille de scoring - lue par Claude, pas par le script.
-# Score sur 100. Seuil de retenue : 50.
+# Score sur 95 (40+20+25+10). Seuil de retenue : 50.
+#
+# Revision du 2026-09-14 : le secteur d'activite (ex-proximite_metier) et
+# le statut ESN/client final ne sont plus des criteres de score - ce n'est
+# pas a la veille de presumer qu'un secteur inconnu du candidat est
+# redhibitoire, c'est a l'employeur de trancher au moment du recrutement.
+# Ces deux informations restent visibles, mais comme tags informatifs
+# (voir section `tags` plus bas), pas comme points.
+# Le salaire ne bonifie plus le score non plus (il etait trop souvent
+# absent ou annonce sur une fourchette trop large pour etre discriminant
+# a la hausse) ; il ne joue plus qu'en negatif via le filtre dur
+# `filtres_durs.salaire_min_annuel` ci-dessus, qui rejette avant meme le
+# scoring toute offre dont le salaire max annonce est en dessous du seuil.
+# Le budget libere par ces deux retraits a ete reaffecte a un nouvel axe
+# geographique, le critere qui compte reellement pour le candidat.
 # =============================================================
 scoring:
   seuil_retenue: 50
 
-  # Exclusif : retenir le premier palier qui correspond. Les paliers 35/28/22
-  # exigent que le titre de l'offre dise litteralement "Product Owner" ou
-  # "Chef de projet" (digital/IT/web/agile/fonctionnel) : un intitule
-  # "Consultant fonctionnel" ou "Analyste fonctionnel" ne s'y qualifie
-  # jamais, meme chez un client final ou avec un secteur pertinent, sauf
-  # si la description decrit explicitement des missions de backlog /
-  # user stories / pilotage de projets digitaux (alors palier 15).
-  adequation_role:            # 0 a 35
-    - [35, "Titre litteral 'Product Owner' ou 'Chef de projet' (digital/IT/web/agile/fonctionnel), sur produit web / e-commerce, chez le client final"]
-    - [28, "Titre litteral 'Product Owner' ou 'Chef de projet' (digital/IT/web/agile/fonctionnel), generaliste SI, chez le client final"]
-    - [22, "Titre litteral 'Product Owner' ou 'Chef de projet' (digital/IT/web/agile/fonctionnel), en ESN ou cabinet de conseil, mission identifiee"]
-    - [15, "AMOA, analyste fonctionnel, ou role sans titre PO/Chef de projet dont la description mentionne explicitement backlog, user stories, ou pilotage de projets digitaux"]
-    - [8,  "Chef de projet ERP/informatique generique sans autre indice (secteur, stack ou mission non precises) ; role hybride ou mal defini"]
+  # Exclusif : retenir le premier palier qui correspond.
+  adequation_role:            # 0 a 40
+    - [40, "Titre litteral 'Product Owner' ou 'Chef de projet' (digital/IT/web/agile/fonctionnel)"]
+    - [20, "AMOA, analyste fonctionnel, ou role sans titre PO/Chef de projet dont la description mentionne explicitement backlog, user stories, ou pilotage de projets digitaux"]
+    - [10, "Chef de projet ERP/informatique generique sans autre indice (stack ou mission non precises) ; role hybride ou mal defini"]
     - [0,  "Le role n'est pas un role de PO/Chef de projet : developpement, infrastructure, ou poste de direction/executif (CPO, Head of Product, directeur, VP)"]
 
-  proximite_metier:           # 0 a 25
-    - [25, "E-commerce, retail, distribution, marketplace, B2B"]
-    - [18, "Industrie, logistique, transport, tourisme"]
-    - [12, "Editeur logiciel, service public, sante"]
-    - [6,  "Banque, assurance, data pure"]
-    - [0,  "Secteur incompatible ou non identifiable"]
+  # Exclusif. Bassin de vie du candidat : Coueron. Distances routieres
+  # reelles, pas seulement l'appartenance a Nantes Metropole - le centre de
+  # Nantes est mal desservi depuis Coueron (voiture comme transports en
+  # commun), contrairement aux communes limitrophes listees ci-dessous.
+  proximite_geographique:     # 0 a 25
+    - [25, "Coueron, Saint-Herblain, Indre, Orvault, Sautron, ou Saint-Etienne-de-Monluc"]
+    - [8,  "Carquefou, La Chapelle-sur-Erdre, ou Nantes"]
+    - [0,  "Lieu non precise ou non identifiable"]
 
   socle_technique:            # 0 a 20
     - [20, "PHP, JavaScript, HTML, CSS, SQL, Python/Selenium, Jira, Google Workspace, Microsoft 365, Claude AI explicitement cites"]
@@ -129,11 +137,11 @@ scoring:
     - [8,  "Stack differente mais culture technique attendue"]
     - [0,  "Profil purement fonctionnel sans dimension technique"]
 
-  # Cumulatif, plafonne a 20.
+  # Cumulatif, plafonne a 10. Le salaire n'y figure plus (voir note en tete
+  # de section) : en dessous de 45k il est deja elimine par le filtre dur,
+  # au-dessus il n'apporte aucune information discriminante supplementaire.
   conditions:
     - [8, "Statut cadre explicite"]
-    - [6, "Fourchette annoncee compatible 45-55k"]
-    - [4, "Poste dans Nantes Metropole (pas seulement 44)"]
     - [2, "Teletravail partiel mentionne"]
 
   # Penalites cumulatives, non plafonnees.
@@ -143,15 +151,21 @@ scoring:
     - [-5,  "Annonce d'ESN sans nom de client ni mission decrite"]
     - [-5,  "Offre republiee a l'identique depuis plus de 30 jours"]
 
-  # Contexte a rappeler dans la synthese quand il s'applique
-  notes_contexte:
-    banque_assurance: >
-      Secteur dominant sur le bassin nantais mais eloigne du profil
-      retail / e-commerce B2B. Ne pas ecarter : signaler que la
-      candidature demande un travail de transposition explicite.
-    esn: >
-      Verifier si la mission est identifiee. Une annonce ESN sans
-      client nomme a une valeur d'information faible.
+  # Tags informatifs attribues a chaque offre retenue, affiches dans le
+  # pipeline (badges courts) mais qui ne modifient jamais le score. A
+  # defaut d'information suffisante dans l'offre, utiliser la valeur
+  # "Indetermine" / "Inconnu" - ne jamais deviner.
+  tags:
+    employeur:                # ESN / cabinet de conseil, ou recrutement direct
+      - "ESN"
+      - "Client final"
+      - "Indetermine"
+    secteur:                  # tel qu'identifiable dans l'offre, libelle court pour badge
+      - "E-commerce / Retail"
+      - "Industrie / Logistique"
+      - "Editeur logiciel / Public / Sante"
+      - "Banque / Assurance / Data"
+      - "Inconnu"
 
 profil:
   # Rappel factuel utilise par Claude pour le scoring.

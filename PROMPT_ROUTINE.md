@@ -32,25 +32,49 @@ message d'erreur. Ne masque jamais une source en panne.
 
 Lis `config.yaml` du dépôt, sections `scoring` et `profil`. Pour chaque
 offre présente dans les fichiers `data/candidats_*.json` de cette
-exécution, attribue un score sur 100 selon les cinq axes de la grille.
-Lis la description complète de l'offre, pas seulement le titre.
+exécution, attribue un score sur 95 selon les quatre axes de la grille,
+plus les deux tags informatifs. Lis la description complète de l'offre,
+pas seulement le titre.
 
-Règles :
-- `adequation_role`, `proximite_metier` et `socle_technique` sont exclusifs,
-  un seul palier par axe.
-- `conditions` est cumulatif, plafonné à 20.
+Règles de score :
+- `adequation_role`, `proximite_geographique` et `socle_technique` sont
+  exclusifs, un seul palier par axe.
+- `conditions` est cumulatif, plafonné à 10.
 - `signaux_negatifs` se soustrait, sans plancher.
 - N'invente pas d'information absente de l'offre. Une donnée non mentionnée
   vaut 0 sur son critère, jamais le bénéfice du doute.
 - Le champ `description` d'une offre APEC est un extrait limité à environ
   283 caractères (limite structurelle de la source, pas une anomalie) :
   score quand même sur ce texte court dès lors qu'il permet de juger le
-  rôle, le secteur et si possible la rémunération. Marque **A VÉRIFIER**
-  uniquement si l'extrait est vide ou trop court pour distinguer le rôle
-  (moins de 100 caractères).
+  rôle et si possible la rémunération. Marque **A VÉRIFIER** uniquement si
+  l'extrait est vide ou trop court pour distinguer le rôle (moins de 100
+  caractères).
 - Le champ `description` d'une offre France Travail est en général complet.
   Marque **A VÉRIFIER** si moins de 400 caractères, seuil plus exigeant que
   pour APEC car la source fournit normalement le texte intégral.
+
+Pour chaque offre atteignant le seuil de rétention, construis aussi un
+objet `detail` listant, pour chacun des quatre axes de score, les points
+obtenus et une justification d'une ligne (c'est ce qui alimente le détail
+affiché dans le pipeline, voir étape 5) :
+
+```json
+{"adequation_role": {"points": 40, "motif": "..."},
+ "proximite_geographique": {"points": 25, "motif": "..."},
+ "socle_technique": {"points": 8, "motif": "..."},
+ "conditions": {"points": 8, "motif": "..."},
+ "signaux_negatifs": {"points": -5, "motif": "..."}}
+```
+
+`signaux_negatifs` n'apparaît dans `detail` que s'il est non nul.
+
+Détermine aussi les deux tags de `scoring.tags` à partir de la même
+lecture de l'offre, sans influence sur le score :
+- `employeur` : ESN/cabinet de conseil, ou client final qui recrute en
+  direct. Marque "Indetermine" si l'offre ne permet pas de trancher.
+- `secteur` : le secteur d'activité identifiable dans l'offre, parmi les
+  catégories listées dans `config.yaml`. Marque "Inconnu" si l'offre ne le
+  précise pas — ne le déduis jamais du nom de l'entreprise seul.
 
 **4. Synthèse**
 
@@ -60,13 +84,14 @@ ainsi :
 - Ligne d'entête : date, nombre d'offres collectées par source, retenues,
   rejetées, état de chaque source (OK ou PANNE).
 - **A traiter aujourd'hui** : offres à 70 et plus, triées par score
-  décroissant. Titre, entreprise, lieu, score, URL, détail des points par
-  axe en une ligne, puis deux à quatre lignes sur l'angle de candidature.
-  Pour une offre APEC, ajoute une mention courte "score basé sur extrait,
-  vérifier la fiche complète avant de candidater". Seule section développée.
+  décroissant. Titre, entreprise, lieu, score, tags (employeur · secteur),
+  URL, détail des points par axe en une ligne, puis deux à quatre lignes
+  sur l'angle de candidature. Pour une offre APEC, ajoute une mention
+  courte "score basé sur extrait, vérifier la fiche complète avant de
+  candidater". Seule section développée.
 - **A regarder** : offres entre 50 et 69, triées par score décroissant.
-  Une ligne chacune : titre, entreprise, score, URL, motif principal de la
-  décote.
+  Une ligne chacune : titre, entreprise, score, tags (employeur · secteur),
+  URL, motif principal de la décote.
 - **A vérifier** : offres non scorables. Titre, entreprise, URL.
 - **Écartées** : uniquement le décompte par motif de rejet des filtres durs.
   Si une offre semblait pertinente et a été rejetée par un filtre titre,
@@ -101,11 +126,16 @@ Marche à suivre, dans cet ordre :
    — ne prends jamais celle-là, seulement la première.
 3. Parse ce JSON. Forme : `{"maj": "AAAA-MM-JJ", "offres": [...]}`, chaque
    offre ayant les clés `url`, `date`, `titre`, `entreprise`, `lieu`,
-   `score`, `source`, `favori`, `statut`, `notes`.
+   `score`, `source`, `favori`, `statut`, `notes`, et depuis le 2026-09-14
+   `employeur`, `secteur`, `detail` (voir étape 3 pour ces trois champs).
+   Les entrées ajoutées avant cette date n'ont pas `employeur`/`secteur`/
+   `detail` — ne les complète pas rétroactivement, laisse-les telles
+   quelles (voir règle 5 ci-dessous).
 4. Ajoute à la fin du tableau `offres` une entrée par offre de cette
-   exécution atteignant 50 points, avec `date` = date du jour, `favori`:
-   `false`, `statut`: `"À traiter"`, `notes`: `""`, `entreprise`: `""` si la
-   source ne la fournit pas. Mets `maj` à la date du jour.
+   exécution atteignant le seuil de rétention, avec `date` = date du jour,
+   `favori`: `false`, `statut`: `"À traiter"`, `notes`: `""`, `entreprise`:
+   `""` si la source ne la fournit pas, et les champs `employeur`,
+   `secteur`, `detail` calculés à l'étape 3. Mets `maj` à la date du jour.
 5. **N'altère aucune entrée existante** : ni son ordre, ni ses champs, et
    surtout pas `favori`, `statut` et `notes`. Si une offre est déjà présente
    (même `url`), ne l'ajoute pas une seconde fois.
