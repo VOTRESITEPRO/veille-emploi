@@ -87,8 +87,23 @@ around by creating a fresh one.
   never touches these sections. Don't add keyword-scoring logic to `veille.py` — that's an intentional
   non-goal (see top of this file).
 
+The scoring grid (revised 2026-09-14) is out of 95, retention threshold 50, across four scored axes —
+`adequation_role` (0-40, exclusive), `proximite_geographique` (0-25, exclusive, distances from Couëron
+rather than Nantes-Métropole membership), `socle_technique` (0-20, exclusive), `conditions` (0-10,
+cumulative) — plus uncapped cumulative `signaux_negatifs` penalties. Sector (`secteur`) and
+employer type (`employeur`: ESN vs. client final) were deliberately removed as scoring axes: the routine
+still surfaces them, but only as informational tags on retained offers, never as points — it's not the
+watcher's place to presume an unfamiliar sector is disqualifying. Salary no longer scores upward either;
+it only acts negatively, pre-scoring, via the `filtres_durs.salaire_min_annuel` hard filter.
+
 ## Persistence model
 
 No external services (no Drive, no DB). The daily routine commits and pushes `out/synthese_*.md` and
 `state/vues.json` itself after each run. `data/*.json` is gitignored working state, never committed. If
 editing files by hand, `git pull` first — the routine may have pushed that same morning.
+
+If the routine's execution environment forces it to push to a branch and open a PR rather than pushing
+directly to `main`, the routine merges (squash) that PR itself immediately, without waiting for human
+review — an unattended daily job can't depend on someone remembering to click "Merge". This only applies
+to the routine's own generated output (`out/`, `state/vues.json`, `.claude/`), never to actual code
+changes.
