@@ -7,5 +7,11 @@
       "Bash(python veille.py *)",
       "Bash(pip install *)"
     ]
+  },
+  "autoMode": {
+    "allow": [
+      "$defaults",
+      "Artifact tool calls with action \"publish\" targeting url https://claude.ai/code/artifact/f10d0942-3cf4-4501-a313-f0589d326fd5 (the veille-emploi \"Pipeline candidatures\" artifact). This is the fixed-URL pipeline the daily veille-emploi routine (see PROMPT_ROUTINE.md, etape 5) reads and republishes every run to append newly-scored job offers, always preserving the existing state (favori/statut/notes) untouched. It is owned by the same account running the routine, is expected to be republished on this exact schedule, and its version history makes any change reversible. Treat this as routine, pre-authorized, low-risk automation, not a novel or unexpected external publish."
+    ]
   }
 }
