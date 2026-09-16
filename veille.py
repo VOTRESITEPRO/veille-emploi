@@ -116,11 +116,21 @@ def ville(lieu):
 
 def _similaires(a, b, cfg):
     """
-    Deux offres sont-elles la meme offre publiee sur deux sources ?
-    Meme ville obligatoire, puis titre proche (Jaccard) et soit description
-    proche (ratio sur le prefixe commun), soit titre strictement identique
-    quand une des deux descriptions est trop courte pour etre comparee
-    fiablement (extrait APEC vide, fiche HelloWork non recuperee, etc.).
+    Deux offres sont-elles en realite le meme poste ? Rapprochement possible
+    entre sources differentes (ex. APEC + HelloWork) comme au sein d'une
+    meme source (une ESN republie parfois la meme mission sous un second
+    id_source).
+
+    Meme ville obligatoire, puis titre suffisamment proche (Jaccard) pour
+    valoir la peine de regarder la description. La description tranche
+    ensuite, et c'est elle qui a le dernier mot des que les deux sont
+    exploitables : un titre strictement identique ne suffit jamais a lui
+    seul, deux offres reellement differentes pouvant partager un intitule
+    generique ("Product Owner ERP SaaS F/H" chez deux employeurs distincts).
+    Seule exception : si l'une des deux descriptions est trop courte pour
+    etre comparee fiablement (extrait APEC vide, fiche HelloWork non
+    recuperee...), on retombe sur le titre strictement identique comme
+    seul signal disponible.
     """
     if ville(a.get("lieu")) != ville(b.get("lieu")):
         return False
@@ -131,13 +141,14 @@ def _similaires(a, b, cfg):
     jaccard_titre = len(mots_a & mots_b) / len(mots_a | mots_b)
     if jaccard_titre < cfg["seuil_titre"]:
         return False
-    if jaccard_titre >= 0.999:
-        return True
 
     desc_a, desc_b = slug(a.get("description")), slug(b.get("description"))
     if len(desc_a) < cfg["longueur_min_description"] or \
        len(desc_b) < cfg["longueur_min_description"]:
-        return False
+        # Descriptions inexploitables : le titre est le seul signal, il doit
+        # donc etre strictement identique (pas juste proche) pour rapprocher.
+        return jaccard_titre >= 0.999
+
     n = min(len(desc_a), len(desc_b), cfg["longueur_comparaison_description"])
     ratio = difflib.SequenceMatcher(None, desc_a[:n], desc_b[:n]).ratio()
     return ratio >= cfg["seuil_description"]
@@ -145,11 +156,12 @@ def _similaires(a, b, cfg):
 
 def fusionner_offres(offres, cfg):
     """
-    Regroupe les offres representant le meme poste reel publie sur plusieurs
-    sources (union-find sur _similaires). Dans chaque groupe, l'offre
-    canonique (celle qui porte le score) est celle a la description la plus
-    longue ; les autres deviennent des doublons references par source/url,
-    sans etre supprimees des fichiers par source d'origine.
+    Regroupe les offres representant le meme poste reel, publie plusieurs
+    fois (sur une seule source ou sur plusieurs) (union-find sur
+    _similaires). Dans chaque groupe, l'offre canonique (celle qui porte le
+    score) est celle a la description la plus longue ; les autres deviennent
+    des doublons references par source/url, sans etre supprimees des
+    fichiers par source d'origine.
     """
     n = len(offres)
     parent = list(range(n))
@@ -167,8 +179,6 @@ def fusionner_offres(offres, cfg):
 
     for i in range(n):
         for j in range(i + 1, n):
-            if offres[i].get("source") == offres[j].get("source"):
-                continue
             if _similaires(offres[i], offres[j], cfg):
                 union(i, j)
 
