@@ -12,10 +12,14 @@ Usage :
     python veille.py                  # collecte du jour
     python veille.py --source ft      # une seule source
     python veille.py --no-state       # ignore l'historique (retest)
+    python veille.py --fusionne       # fusionne les doublons inter-sources
+                                       # du jour (a lancer apres les 3
+                                       # collectes --source)
     python veille.py --verbose
 """
 
 import argparse
+import difflib
 import json
 import os
 import re
@@ -77,6 +81,15 @@ def slug(txt):
     return " ".join(txt.split())
 
 
+MOTS_VIDES_TITRE = {"h", "f", "hf", "cdi", "nantes", "44", "poste", "de", "du",
+                     "la", "le", "les", "un", "une", "en", "sur", "et", "pour"}
+
+
+def mots_titre(offre):
+    """Mots du titre normalise, mots vides retires (cf. cle_dedoublon)."""
+    return {m for m in slug(offre.get("titre")).split() if m not in MOTS_VIDES_TITRE}
+
+
 def cle_dedoublon(offre):
     """
     Cle de rapprochement inter-sources. Une meme offre diffusee sur FT et
@@ -84,9 +97,7 @@ def cle_dedoublon(offre):
     Les mots vides du titre sont retires pour absorber les variantes
     ("Product Owner H/F" vs "Product Owner (H/F) - Nantes").
     """
-    stop = {"h", "f", "hf", "cdi", "nantes", "44", "poste", "de", "du", "la",
-            "le", "les", "un", "une", "en", "sur", "et", "pour"}
-    mots = [m for m in slug(offre.get("titre")).split() if m not in stop]
+    mots = mots_titre(offre)
     entreprise = slug(offre.get("entreprise"))
     if not entreprise:
         # L'APEC ne renvoie pas le nom de l'entreprise dans les resultats de
@@ -94,6 +105,96 @@ def cle_dedoublon(offre):
         # intitule generique ("Product Owner F/H") fusionneraient a tort.
         entreprise = f"{offre.get('source')}:{offre.get('id_source')}"
     return f"{' '.join(sorted(mots))}|{entreprise}"
+
+
+def ville(lieu):
+    """Ville seule, normalisee, a partir d'un libelle 'Nantes - 44'."""
+    if not lieu:
+        return ""
+    return slug(str(lieu).split("-")[0])
+
+
+def _similaires(a, b, cfg):
+    """
+    Deux offres sont-elles en realite le meme poste ? Rapprochement possible
+    entre sources differentes (ex. APEC + HelloWork) comme au sein d'une
+    meme source (une ESN republie parfois la meme mission sous un second
+    id_source).
+
+    Meme ville obligatoire, puis titre suffisamment proche (Jaccard) pour
+    valoir la peine de regarder la description. La description tranche
+    ensuite, et c'est elle qui a le dernier mot des que les deux sont
+    exploitables : un titre strictement identique ne suffit jamais a lui
+    seul, deux offres reellement differentes pouvant partager un intitule
+    generique ("Product Owner ERP SaaS F/H" chez deux employeurs distincts).
+    Seule exception : si l'une des deux descriptions est trop courte pour
+    etre comparee fiablement (extrait APEC vide, fiche HelloWork non
+    recuperee...), on retombe sur le titre strictement identique comme
+    seul signal disponible.
+    """
+    if ville(a.get("lieu")) != ville(b.get("lieu")):
+        return False
+
+    mots_a, mots_b = mots_titre(a), mots_titre(b)
+    if not mots_a or not mots_b:
+        return False
+    jaccard_titre = len(mots_a & mots_b) / len(mots_a | mots_b)
+    if jaccard_titre < cfg["seuil_titre"]:
+        return False
+
+    desc_a, desc_b = slug(a.get("description")), slug(b.get("description"))
+    if len(desc_a) < cfg["longueur_min_description"] or \
+       len(desc_b) < cfg["longueur_min_description"]:
+        # Descriptions inexploitables : le titre est le seul signal, il doit
+        # donc etre strictement identique (pas juste proche) pour rapprocher.
+        return jaccard_titre >= 0.999
+
+    n = min(len(desc_a), len(desc_b), cfg["longueur_comparaison_description"])
+    ratio = difflib.SequenceMatcher(None, desc_a[:n], desc_b[:n]).ratio()
+    return ratio >= cfg["seuil_description"]
+
+
+def fusionner_offres(offres, cfg):
+    """
+    Regroupe les offres representant le meme poste reel, publie plusieurs
+    fois (sur une seule source ou sur plusieurs) (union-find sur
+    _similaires). Dans chaque groupe, l'offre canonique (celle qui porte le
+    score) est celle a la description la plus longue ; les autres deviennent
+    des doublons references par source/url, sans etre supprimees des
+    fichiers par source d'origine.
+    """
+    n = len(offres)
+    parent = list(range(n))
+
+    def find(i):
+        while parent[i] != i:
+            parent[i] = parent[parent[i]]
+            i = parent[i]
+        return i
+
+    def union(i, j):
+        ri, rj = find(i), find(j)
+        if ri != rj:
+            parent[ri] = rj
+
+    for i in range(n):
+        for j in range(i + 1, n):
+            if _similaires(offres[i], offres[j], cfg):
+                union(i, j)
+
+    groupes = {}
+    for i in range(n):
+        groupes.setdefault(find(i), []).append(offres[i])
+
+    fusionnees = []
+    for membres in groupes.values():
+        canonique = max(membres, key=lambda o: len(o.get("description") or ""))
+        doublons = [{"source": o.get("source"), "url": o.get("url")}
+                    for o in membres if o is not canonique]
+        canonique = dict(canonique)
+        canonique["doublons"] = doublons
+        fusionnees.append(canonique)
+    return fusionnees
 
 
 def charger_state(actif=True):
@@ -591,17 +692,73 @@ def filtrer(offres, cfg):
 # Orchestration
 # --------------------------------------------------------------------------
 
+def fusionner_fichiers_du_jour(cfg):
+    """
+    Mode --fusionne : relit les data/candidats_AAAA-MM-JJ_<source>.json deja
+    ecrits par les appels --source de cette execution, regroupe les doublons
+    inter-sources et ecrit data/candidats_AAAA-MM-JJ_fusionne.json. Ne
+    recollecte rien, ne touche pas aux fichiers par source (ils restent la
+    trace brute de chaque source).
+    """
+    jour = datetime.now().strftime("%Y-%m-%d")
+    fichiers = sorted(DATA_DIR.glob(f"candidats_{jour}_*.json"))
+    fichiers = [f for f in fichiers if not f.stem.endswith("_fusionne")]
+    if not fichiers:
+        print(f"[ERREUR] aucun data/candidats_{jour}_*.json a fusionner "
+              f"(lance d'abord les collectes --source)", file=sys.stderr)
+        sys.exit(1)
+
+    offres, erreurs = [], []
+    for f in fichiers:
+        d = json.loads(f.read_text(encoding="utf-8"))
+        erreurs += d.get("erreurs", [])
+        offres += d.get("offres", [])
+
+    seuils = cfg.get("dedoublonnage_inter_sources", {})
+    seuils.setdefault("seuil_titre", 0.6)
+    seuils.setdefault("seuil_description", 0.55)
+    seuils.setdefault("longueur_comparaison_description", 250)
+    seuils.setdefault("longueur_min_description", 40)
+
+    fusionnees = fusionner_offres(offres, seuils)
+    fusionnees.sort(key=lambda o: o.get("titre") or "")
+
+    sortie = {
+        "genere_le": datetime.now(timezone.utc).isoformat(),
+        "erreurs": erreurs,
+        "stats": {
+            "offres_avant_fusion": len(offres),
+            "offres_apres_fusion": len(fusionnees),
+            "groupes_avec_doublons": sum(1 for o in fusionnees if o["doublons"]),
+        },
+        "offres": fusionnees,
+    }
+    chemin = DATA_DIR / f"candidats_{jour}_fusionne.json"
+    chemin.write_text(json.dumps(sortie, ensure_ascii=False, indent=2),
+                      encoding="utf-8")
+    print(json.dumps(sortie["stats"], ensure_ascii=False))
+    print(str(chemin))
+
+
 def main():
     global VERBOSE
     ap = argparse.ArgumentParser()
     ap.add_argument("--source", choices=["ft", "apec", "hellowork", "all"], default="all")
     ap.add_argument("--no-state", action="store_true",
                     help="ignore l'historique et ressort toutes les offres")
+    ap.add_argument("--fusionne", action="store_true",
+                    help="fusionne les doublons inter-sources des fichiers du "
+                         "jour deja collectes, n'effectue aucune collecte")
     ap.add_argument("--verbose", action="store_true")
     args = ap.parse_args()
     VERBOSE = args.verbose
 
     cfg = yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
+
+    if args.fusionne:
+        fusionner_fichiers_du_jour(cfg)
+        return
+
     brut, erreurs = [], []
 
     if args.source in ("ft", "all"):

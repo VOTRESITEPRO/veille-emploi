@@ -20,6 +20,9 @@ pip install requests pyyaml beautifulsoup4    # only dependencies, no requiremen
 python veille.py                    # full collection (all 3 sources), respects state/vues.json
 python veille.py --source ft        # single source: ft | apec | hellowork | all
 python veille.py --no-state         # ignore dedup history, re-surface everything (used for tuning)
+python veille.py --fusionne         # cross-listing dedup pass over today's already-written
+                                     # data/candidats_<date>_<source>.json files (run after
+                                     # the --source calls, collects nothing itself)
 python veille.py --verbose          # log per-keyword/page counts to stderr
 ```
 
@@ -47,11 +50,15 @@ shared pipeline:
      parsing against `data-cy` attributes rather than a reverse-engineered endpoint. Full descriptions live
      on the offer's own page, not the results list, so `hw_fetch_detail` is only called for offers that
      already survive the hard filters — not for every raw result — to bound the extra request volume.
-2. **Cross-source dedup** (`cle_dedoublon` + the loop in `main()`) — offers are matched on normalized
-   title + company (`slug()` strips accents/punctuation/stopwords). APEC never returns a company name in
-   search results, so its key falls back to `source:id_source`, meaning APEC listings never dedupe against
-   other sources. When two sources report the same offer, France Travail's copy wins (more complete
-   description).
+2. **Exact-key cross-source dedup** (`cle_dedoublon` + the loop in `main()`) — offers within a single
+   `main()` invocation are matched on normalized title + company (`slug()` strips accents/punctuation/
+   stopwords). APEC never returns a company name in search results, so its key falls back to
+   `source:id_source`, meaning APEC listings never dedupe here against other sources. When two sources
+   report the same offer, France Travail's copy wins (more complete description). In practice the daily
+   routine calls `veille.py` once per source, so this loop only ever sees one source's offers at a time —
+   it's a no-op for the routine's real usage and exists mainly for a manual `--source all` run. The
+   fuzzy cross-listing pass below (step 6) is what actually catches duplicates across the routine's three
+   separate calls.
 3. **30-day history filter** (`state/vues.json`, `charger_state`/`ecrire_state`) — keyed by the same
    `cle_dedoublon()`, this is what prevents the same offer from being re-surfaced day after day (HelloWork
    and APEC have no reliable source-side "posted after date X" filter, so this is the only dedup across
@@ -59,9 +66,21 @@ shared pipeline:
 4. **Hard filters** (`filtrer`) — title regex exclusions, department/commune allowlist, salary floor,
    max required experience. A missing data point never causes rejection (absence isn't treated as a
    negative signal) — only an explicit disqualifying value does. Every rejection carries a `motif_rejet`.
-5. **Output** — `data/candidats_<date>[_<source>].json` (gitignored, per-execution working file) containing
+5. **Output** — `data/candidats_<date>_<source>.json` (gitignored, per-execution working file) containing
    stats, retained offers, and rejected-with-reason. `main()` exits non-zero only if *every* requested
    source failed.
+6. **Fuzzy cross-listing dedup** (`--fusionne`, `fusionner_offres`/`_similaires`) — a separate pass, run by
+   the routine after the three `--source` calls, over the day's already-written per-source files. Two
+   listings (same source or different sources) are grouped as the same real posting when they're in the
+   same `ville()` and either the title is a near match (Jaccard on `mots_titre()`) *and* the descriptions
+   are similar enough (`difflib.SequenceMatcher` ratio on the shared prefix), or — only when a description
+   is too short to compare reliably — the titles are exactly identical. An identical title alone is
+   deliberately **not** sufficient when both descriptions are usable: two unrelated postings can share a
+   generic title (e.g. two different employers both titled "Product Owner ERP SaaS F/H"), so the
+   description is what actually decides. Thresholds live in `config.yaml`'s
+   `dedoublonnage_inter_sources`. Output is `data/candidats_<date>_fusionne.json`: one entry per group
+   (the member with the longest description, carrying the others as a `doublons: [{source, url}, ...]`
+   list), which is what the routine scores from. The per-source files are untouched.
 
 **Everything past this JSON file is out of `veille.py`'s scope** and lives in the daily routine
 (`PROMPT_ROUTINE.md`, run by a separate Claude Code process, not by this script): scoring against

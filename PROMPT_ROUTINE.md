@@ -28,13 +28,25 @@ JSON n'est pas vide : continue quand même avec les autres sources, et place
 en tête de la synthèse un bloc **PANNE** nommant la source en échec et le
 message d'erreur. Ne masque jamais une source en panne.
 
+Une fois les trois collectes terminées (même si une source est en panne),
+lance `python veille.py --fusionne`. Cette commande ne recollecte rien :
+elle relit les `data/candidats_AAAA-MM-JJ_<source>.json` déjà écrits,
+regroupe les offres qui sont en réalité le même poste publié sur plusieurs
+sources (rapprochement sur ville + titre + description, cf.
+`dedoublonnage_inter_sources` dans `config.yaml`), et écrit
+`data/candidats_AAAA-MM-JJ_fusionne.json`. Chaque offre y porte un champ
+`doublons` (liste de `{"source", "url"}`, vide si l'offre n'a été vue que
+sur une seule source) référençant les autres sources qui publient la même
+offre, sans les supprimer des fichiers par source d'origine.
+
 **3. Scoring**
 
 Lis `config.yaml` du dépôt, sections `scoring` et `profil`. Pour chaque
-offre présente dans les fichiers `data/candidats_*.json` de cette
-exécution, attribue un score sur 95 selon les quatre axes de la grille,
-plus les deux tags informatifs. Lis la description complète de l'offre,
-pas seulement le titre.
+offre présente dans `data/candidats_AAAA-MM-JJ_fusionne.json` de cette
+exécution (une entrée par poste réel : les doublons inter-sources y sont
+déjà regroupés), attribue un score sur 95 selon les quatre axes de la
+grille, plus les deux tags informatifs. Lis la description complète de
+l'offre, pas seulement le titre.
 
 Règles de score :
 - `adequation_role`, `proximite_geographique` et `socle_technique` sont
@@ -97,6 +109,14 @@ ainsi :
   Si une offre semblait pertinente et a été rejetée par un filtre titre,
   signale-la à part pour ajustement de `config.yaml`.
 
+Doublons inter-sources : une offre dont le champ `doublons` (fichier
+fusionné, étape 2) n'est pas vide reste une seule ligne/bloc dans la
+synthèse — jamais une entrée par source. Ajoute les liens des sources
+secondaires en fin de ligne (ou en fin de bloc pour "A traiter
+aujourd'hui"), après l'URL principale : `(également sur <source> : <url>,
+...)`. Le libellé `<source>` est celui du champ `source` du doublon
+(`apec`, `france_travail`, `hellowork`).
+
 Contraintes de rédaction : direct, factuel, pas d'introduction ni de
 conclusion, tirets simples uniquement. Si aucune offre n'atteint 50, dis-le
 en une ligne courte plutôt que de remplir la synthèse avec du bruit.
@@ -127,18 +147,27 @@ Marche à suivre, dans cet ordre :
 3. Parse ce JSON. Forme : `{"maj": "AAAA-MM-JJ", "offres": [...]}`, chaque
    offre ayant les clés `url`, `date`, `titre`, `entreprise`, `lieu`,
    `score`, `source`, `favori`, `statut`, `notes`, et depuis le 2026-09-14
-   `employeur`, `secteur`, `detail` (voir étape 3 pour ces trois champs).
-   Les entrées ajoutées avant cette date n'ont pas `employeur`/`secteur`/
-   `detail` — ne les complète pas rétroactivement, laisse-les telles
-   quelles (voir règle 5 ci-dessous).
+   `employeur`, `secteur`, `detail` (voir étape 3 pour ces trois champs),
+   et depuis le 2026-09-16 `doublons` (liste de `{"source", "url"}`,
+   éventuellement vide — voir étape 2). Les entrées ajoutées avant ces
+   dates n'ont pas ces champs — ne les complète pas rétroactivement,
+   laisse-les telles quelles (voir règle 5 ci-dessous).
 4. Ajoute à la fin du tableau `offres` une entrée par offre de cette
    exécution atteignant le seuil de rétention, avec `date` = date du jour,
    `favori`: `false`, `statut`: `"À traiter"`, `notes`: `""`, `entreprise`:
    `""` si la source ne la fournit pas, et les champs `employeur`,
-   `secteur`, `detail` calculés à l'étape 3. Mets `maj` à la date du jour.
+   `secteur`, `detail`, `doublons` calculés aux étapes 2 et 3. `url` est
+   celle de l'offre canonique (voir étape 2) — les URLs des doublons ne
+   deviennent pas des entrées séparées, elles restent uniquement dans le
+   champ `doublons` de cette entrée. Mets `maj` à la date du jour.
 5. **N'altère aucune entrée existante** : ni son ordre, ni ses champs, et
    surtout pas `favori`, `statut` et `notes`. Si une offre est déjà présente
-   (même `url`), ne l'ajoute pas une seconde fois.
+   (même `url`), ne l'ajoute pas une seconde fois. Vérifie aussi bien l'`url`
+   canonique que chacune des `url` de son champ `doublons` : si l'une
+   d'elles correspond à une entrée déjà présente (par exemple ajoutée un
+   jour précédent avant que le rapprochement inter-sources n'existe, ou
+   sous un autre intitulé), n'ajoute pas l'offre du tout — elle est déjà
+   suivie.
 6. Écris dans un fichier local le HTML lu à l'étape 1, en ayant remplacé le
    seul contenu de cet îlot JSON par le nouvel état sérialisé, avec les `</`
    échappés en `<\/`. Tout le reste du document doit rester identique au

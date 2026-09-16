@@ -95,6 +95,35 @@ filtres_durs:
   experience_max_exigee: 12
 
 # =============================================================
+# Regroupement des doublons inter-sources (mode --fusionne de veille.py).
+# Une meme offre publiee sur deux sources (ex. APEC + HelloWork) n'a ni le
+# meme identifiant ni forcement le meme nom d'entreprise (l'APEC ne le
+# fournit pas) : le rapprochement se fait sur ville + titre + description.
+# =============================================================
+dedoublonnage_inter_sources:
+  # Similarite de Jaccard minimale entre les mots du titre (hors mots vides)
+  # pour considerer deux offres de meme ville comme potentiellement le meme
+  # poste. A 1.0 (titre strictement identique), le rapprochement est valide
+  # sans meme regarder la description.
+  seuil_titre: 0.6
+
+  # Similarite (difflib.SequenceMatcher.ratio) minimale entre les debuts de
+  # description, en plus du seuil_titre, pour confirmer le rapprochement
+  # quand le titre n'est pas strictement identique.
+  seuil_description: 0.55
+
+  # Nombre de caracteres compares au debut de chaque description (la plus
+  # courte des deux fixe la fenetre reelle, pour rester equitable face aux
+  # extraits APEC tronques a ~283 caracteres).
+  longueur_comparaison_description: 250
+
+  # En dessous de cette longueur, une description est jugee trop courte pour
+  # etre comparee de facon fiable : le rapprochement retombe alors sur le
+  # titre strictement identique uniquement (pas de rapprochement possible
+  # sinon, meme si les titres sont proches sans etre identiques).
+  longueur_min_description: 40
+
+# =============================================================
 # Grille de scoring - lue par Claude, pas par le script.
 # Score sur 95 (40+20+25+10). Seuil de retenue : 50.
 #
