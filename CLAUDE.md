@@ -44,7 +44,7 @@ shared pipeline:
    in `main()`, recorded in `erreurs`, and the other sources still run.
    - **France Travail**: official API, OAuth2 client-credentials. Fairly stable.
    - **APEC**: undocumented internal endpoint (`POST /cms/webservices/rechercheOffre`) reverse-engineered
-     from the front end — a known fragility point, expected to break ~1-2x/year. On failure it logs and
+     from the front end — a known fragility point, expected to break ~1-2x/year. Depuis 2026-10-23 l'endpoint est protégé par DataDome (anti-bot, 403 + captcha dès la page d'accueil) : la source est en panne durable depuis l'infrastructure de la routine, et contourner cette protection est exclu. Le bloc PANNE de la synthèse la signale tant que ça dure. On failure it logs and
      returns an empty list rather than raising, so `main()`'s per-source error handling still records it.
    - **HelloWork**: no API either, but results are server-rendered HTML (Rails/Turbo), so it's BeautifulSoup
      parsing against `data-cy` attributes rather than a reverse-engineered endpoint. Full descriptions live
