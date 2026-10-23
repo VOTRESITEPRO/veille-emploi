@@ -53,6 +53,14 @@ Règles de score :
   exclusifs, un seul palier par axe.
 - `conditions` est cumulatif, plafonné à 10.
 - `signaux_negatifs` se soustrait, sans plancher.
+- Le secteur d'activité ne modifie jamais le score : un domaine que le
+  candidat ne connaît pas n'est pas une raison de décoter.
+- La proximité pèse davantage que l'adéquation au rôle (35 contre 30) : une
+  offre proche de Saint-Herblain peut passer devant une offre mieux alignée
+  mais éloignée. Pour une ESN, un cabinet ou une société de portage dont
+  l'annonce ne nomme pas le site de mission, mets `proximite_geographique`
+  à 0, même si l'agence est à Saint-Herblain : la mission sera
+  probablement dans Nantes ou sa couronne.
 - N'invente pas d'information absente de l'offre. Une donnée non mentionnée
   vaut 0 sur son critère, jamais le bénéfice du doute.
 - Le champ `description` d'une offre APEC est un extrait limité à environ
@@ -71,8 +79,8 @@ obtenus et une justification d'une ligne (c'est ce qui alimente le détail
 affiché dans le pipeline, voir étape 5) :
 
 ```json
-{"adequation_role": {"points": 40, "motif": "..."},
- "proximite_geographique": {"points": 25, "motif": "..."},
+{"adequation_role": {"points": 30, "motif": "..."},
+ "proximite_geographique": {"points": 35, "motif": "..."},
  "socle_technique": {"points": 8, "motif": "..."},
  "conditions": {"points": 8, "motif": "..."},
  "signaux_negatifs": {"points": -5, "motif": "..."}}
@@ -151,7 +159,11 @@ Marche à suivre, dans cet ordre :
    et depuis le 2026-09-16 `doublons` (liste de `{"source", "url"}`,
    éventuellement vide — voir étape 2). Les entrées ajoutées avant ces
    dates n'ont pas ces champs — ne les complète pas rétroactivement,
-   laisse-les telles quelles (voir règle 5 ci-dessous).
+   laisse-les telles quelles (voir règle 5 ci-dessous). Une entrée peut
+   aussi porter `esn_force` (`true` ou `false`) : c'est la correction
+   manuelle de l'utilisateur sur la détection ESN, que le pipeline utilise
+   pour masquer ou afficher l'offre. Ne l'ajoute jamais et ne le modifie
+   jamais.
 4. Ajoute à la fin du tableau `offres` une entrée par offre de cette
    exécution atteignant le seuil de rétention, avec `date` = date du jour,
    `favori`: `false`, `statut`: `"À traiter"`, `notes`: `""`, `entreprise`:

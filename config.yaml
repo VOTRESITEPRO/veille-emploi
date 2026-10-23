@@ -145,20 +145,28 @@ scoring:
   seuil_retenue: 50
 
   # Exclusif : retenir le premier palier qui correspond.
-  adequation_role:            # 0 a 40
-    - [40, "Titre litteral 'Product Owner' ou 'Chef de projet' (digital/IT/web/agile/fonctionnel)"]
-    - [20, "AMOA, analyste fonctionnel, ou role sans titre PO/Chef de projet dont la description mentionne explicitement backlog, user stories, ou pilotage de projets digitaux"]
-    - [10, "Chef de projet ERP/informatique generique sans autre indice (stack ou mission non precises) ; role hybride ou mal defini"]
+  # Le secteur d'activite n'intervient JAMAIS dans le score, sur aucun axe :
+  # un domaine inconnu du candidat n'est pas une raison de decoter une offre.
+  adequation_role:            # 0 a 30
+    - [30, "Titre litteral 'Product Owner' ou 'Chef de projet' (digital/IT/web/agile/fonctionnel)"]
+    - [15, "AMOA, analyste fonctionnel, ou role sans titre PO/Chef de projet dont la description mentionne explicitement backlog, user stories, ou pilotage de projets digitaux"]
+    - [8,  "Chef de projet ERP/informatique generique sans autre indice (stack ou mission non precises) ; role hybride ou mal defini"]
     - [0,  "Le role n'est pas un role de PO/Chef de projet : developpement, infrastructure, ou poste de direction/executif (CPO, Head of Product, directeur, VP)"]
 
   # Exclusif. Bassin de vie du candidat : Coueron. Distances routieres
   # reelles, pas seulement l'appartenance a Nantes Metropole - le centre de
   # Nantes est mal desservi depuis Coueron (voiture comme transports en
   # commun), contrairement aux communes limitrophes listees ci-dessous.
-  proximite_geographique:     # 0 a 25
-    - [25, "Coueron, Saint-Herblain, Indre, Orvault, Sautron, ou Saint-Etienne-de-Monluc"]
+  # Critere prioritaire : le candidat prefere un poste proche de Saint-Herblain
+  # a un poste mieux aligne sur son profil mais eloigne, d'ou un poids superieur
+  # a celui du role. Nantes et sa couronne (dont le sud Loire) ne lui conviennent pas.
+  # Annonce d'ESN, de cabinet ou de societe de portage dont le site de mission
+  # n'est pas nomme (l'agence ou le siege ne comptent pas) : le lieu reel est
+  # inconnu et probablement dans Nantes ou sa couronne, donc palier 0.
+  proximite_geographique:     # 0 a 35
+    - [35, "Coueron, Saint-Herblain, Indre, Orvault, Sautron, ou Saint-Etienne-de-Monluc"]
     - [8,  "Carquefou, La Chapelle-sur-Erdre, ou Nantes"]
-    - [0,  "Lieu non precise ou non identifiable"]
+    - [0,  "Lieu non precise ou non identifiable ; ESN dont le site de mission n'est pas nomme"]
 
   socle_technique:            # 0 a 20
     - [20, "PHP, JavaScript, HTML, CSS, SQL, Python/Selenium, Jira, Google Workspace, Microsoft 365, Claude AI explicitement cites"]
