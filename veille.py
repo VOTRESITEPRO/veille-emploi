@@ -220,10 +220,22 @@ def ecrire_state(state):
 # Source 1 : France Travail (API officielle)
 # --------------------------------------------------------------------------
 
+def ft_requete(methode, url, essais=4, **kw):
+    """Appel HTTP FT avec nouvel essai sur coupure reseau (reset de connexion intermittent)."""
+    for n in range(essais):
+        try:
+            return requests.request(methode, url, **kw)
+        except (requests.ConnectionError, requests.Timeout):
+            if n == essais - 1:
+                raise
+            log(f"FT : connexion coupee, nouvel essai {n + 2}/{essais}")
+            time.sleep(2 ** (n + 1))
+
+
 def ft_token(client_id, client_secret):
     scope = f"api_offresdemploiv2 o2dsoffre application_{client_id}"
-    r = requests.post(
-        FT_TOKEN_URL,
+    r = ft_requete(
+        "POST", FT_TOKEN_URL,
         params={"realm": "/partenaire"},
         headers={"Content-Type": "application/x-www-form-urlencoded"},
         data={
@@ -237,8 +249,8 @@ def ft_token(client_id, client_secret):
     if r.status_code == 400:
         # Certaines applications n'acceptent pas le scope application_{id}
         log("scope complet refuse, nouvel essai en scope court")
-        r = requests.post(
-            FT_TOKEN_URL,
+        r = ft_requete(
+            "POST", FT_TOKEN_URL,
             params={"realm": "/partenaire"},
             headers={"Content-Type": "application/x-www-form-urlencoded"},
             data={
@@ -299,8 +311,8 @@ def collecte_ft(cfg):
         if req.get("codes_rome"):
             params["codeROME"] = ",".join(req["codes_rome"])
 
-        r = requests.get(
-            FT_SEARCH_URL,
+        r = ft_requete(
+            "GET", FT_SEARCH_URL,
             headers={"Authorization": f"Bearer {token}", "Accept": "application/json"},
             params={k: v for k, v in params.items() if v is not None},
             timeout=30,
@@ -457,7 +469,8 @@ def hw_parse_carte(li):
     if not oid or not a or not a.get("href"):
         return None
     h3 = a.find("h3")
-    ps = h3.find_all("p") if h3 else []
+    # Le titre et l'entreprise sont des <span> (auparavant des <p>) dans le <h3>.
+    ps = h3.find_all(["span", "p"]) if h3 else []
     titre = ps[0].get_text(strip=True) if ps else None
     entreprise = ps[1].get_text(strip=True) if len(ps) > 1 else None
 
