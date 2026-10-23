@@ -106,14 +106,18 @@ around by creating a fresh one.
   never touches these sections. Don't add keyword-scoring logic to `veille.py` — that's an intentional
   non-goal (see top of this file).
 
-The scoring grid (revised 2026-09-14) is out of 95, retention threshold 50, across four scored axes —
-`adequation_role` (0-40, exclusive), `proximite_geographique` (0-25, exclusive, distances from Couëron
-rather than Nantes-Métropole membership), `socle_technique` (0-20, exclusive), `conditions` (0-10,
-cumulative) — plus uncapped cumulative `signaux_negatifs` penalties. Sector (`secteur`) and
+The scoring grid (revised 2026-10-23) is out of 95, retention threshold 50, across four scored axes —
+`adequation_role` (0-30, exclusive), `proximite_geographique` (0-35, exclusive, distances from Couëron
+rather than Nantes-Métropole membership; deliberately weighted above the role, since the candidate
+prefers a nearby posting to a better-matched distant one, and 0 for ESN postings that don't name the
+mission site), `socle_technique` (0-20, exclusive), `conditions` (0-10, cumulative) — plus uncapped cumulative `signaux_negatifs` penalties. Sector (`secteur`) and
 employer type (`employeur`: ESN vs. client final) were deliberately removed as scoring axes: the routine
 still surfaces them, but only as informational tags on retained offers, never as points — it's not the
 watcher's place to presume an unfamiliar sector is disqualifying. Salary no longer scores upward either;
 it only acts negatively, pre-scoring, via the `filtres_durs.salaire_min_annuel` hard filter.
+The pipeline Artifact hides ESN offers by default (unless favorited, `Postulée` or `Contacts en cours`)
+and lets the user override the ESN detection per offer through an `esn_force` field on the entry,
+which the routine must never write or alter.
 
 ## Persistence model
 
