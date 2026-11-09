@@ -1,58 +1,4 @@
 {
- "expertise ia owner product|geser best": {
-  "vu_le": "2026-10-08T02:10:30.509530+00:00",
-  "titre": "Product Owner - Expertise IA H/F",
-  "entreprise": "Geser Best",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84186395.html"
- },
- "2027 asap chef cobol debut projet|mosica": {
-  "vu_le": "2026-10-08T02:10:30.509530+00:00",
-  "titre": "Chef de Projet COBOL - Asap - Début 2027 - Nantes H/F",
-  "entreprise": "Mosica",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84170402.html"
- },
- "charge d etudes si|inetum": {
-  "vu_le": "2026-10-08T02:10:30.509530+00:00",
-  "titre": "Chargé d'Études Si H/F",
-  "entreprise": "Inetum",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84193945.html"
- },
- "chef data flux projet|dcs easyware": {
-  "vu_le": "2026-10-08T02:10:30.509530+00:00",
-  "titre": "Chef de Projet Data - Flux H/F",
-  "entreprise": "DCS Easyware",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84172787.html"
- },
- "epm projet responsable|vyv 3": {
-  "vu_le": "2026-10-08T02:10:30.509530+00:00",
-  "titre": "Responsable de Projet Epm H/F",
-  "entreprise": "VYV 3",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84170253.html"
- },
- "charge e electrique genie htb ng projet|keran sce": {
-  "vu_le": "2026-10-08T02:10:30.509530+00:00",
-  "titre": "Chargé·e de Projet Génie Électrique Htb - NG H/F",
-  "entreprise": "Keran - SCE",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84173202.html"
- },
- "agile chef confirme owner po product produit|extia": {
-  "vu_le": "2026-10-09T02:10:48.056806+00:00",
-  "titre": "Product Owner Po - Chef de Produit Agile Confirmé H/F",
-  "entreprise": "Extia",
-  "url": "https://www.hellowork.com/fr-fr/emplois/63971765.html"
- },
- "agile chef owner po product produit senior|extia": {
-  "vu_le": "2026-10-09T02:10:48.056806+00:00",
-  "titre": "Product Owner Sénior - Po Sénior - Chef de Produit Agile Sénior H/F",
-  "entreprise": "Extia",
-  "url": "https://www.hellowork.com/fr-fr/emplois/63972052.html"
- },
- "chef it moe projet|cgi": {
-  "vu_le": "2026-10-09T02:10:48.056806+00:00",
-  "titre": "Chef de Projet IT MOE H/F",
-  "entreprise": "CGI",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84237003.html"
- },
  "agile consultant owner product|new net 3d": {
   "vu_le": "2026-10-20T10:31:18.059789+00:00",
   "titre": "Consultant Agile Product Owner (H/F)",
@@ -1510,5 +1456,137 @@
   "titre": "Gestionnaire Applicatif Si Montoir de Bretagne ou Nantes H/F",
   "entreprise": "Randstad professional",
   "url": "https://www.hellowork.com/fr-fr/emplois/85221503.html"
+ },
+ "owner product publics services|france_travail:8642149": {
+  "vu_le": "2026-11-09T09:18:57.338703+00:00",
+  "titre": "Product Owner - Services Publics - Nantes H/F",
+  "entreprise": null,
+  "url": "https://candidat.francetravail.fr/offres/recherche/detail/8642149"
+ },
+ "owner product publics services|sopra steria group": {
+  "vu_le": "2026-11-09T09:18:57.338703+00:00",
+  "titre": "Product Owner - Services Publics - Nantes (H/F)",
+  "entreprise": "SOPRA STERIA GROUP",
+  "url": "https://candidat.francetravail.fr/offres/recherche/detail/8632270"
+ },
+ "adjoint chef it projet publics services|sopra steria group": {
+  "vu_le": "2026-11-09T09:18:57.338703+00:00",
+  "titre": "Chef de projet IT  Adjoint - Services Publics - Nantes (H/F)",
+  "entreprise": "SOPRA STERIA GROUP",
+  "url": "https://candidat.francetravail.fr/offres/recherche/detail/8632384"
+ },
+ "it manager project publics services transformation|sopra steria group": {
+  "vu_le": "2026-11-09T09:18:57.338703+00:00",
+  "titre": "Project Manager - Transformation IT - Services Publics - Nantes (H/F)",
+  "entreprise": "SOPRA STERIA GROUP",
+  "url": "https://candidat.francetravail.fr/offres/recherche/detail/8632407"
+ },
+ "digital e ingenieur netops platform services|sopra steria group": {
+  "vu_le": "2026-11-09T09:18:57.338703+00:00",
+  "titre": "Ingénieur(e) NetOps - Digital Platform Services - Nantes (H/F)",
+  "entreprise": "SOPRA STERIA GROUP",
+  "url": "https://candidat.francetravail.fr/offres/recherche/detail/8632381"
+ },
+ "digital e ingenieur netdevops platform services|sopra steria group": {
+  "vu_le": "2026-11-09T09:18:57.338703+00:00",
+  "titre": "Ingénieur(e) NetDevOps - Digital Platform Services - Nantes (H/F)",
+  "entreprise": "SOPRA STERIA GROUP",
+  "url": "https://candidat.francetravail.fr/offres/recherche/detail/8632259"
+ },
+ "applications industrielles mes referent|france_travail:8632439": {
+  "vu_le": "2026-11-09T09:18:57.338703+00:00",
+  "titre": "Référent Applications Industrielles - MES (F/H)",
+  "entreprise": null,
+  "url": "https://candidat.francetravail.fr/offres/recherche/detail/8632439"
+ },
+ "applicatif charge e missions|nantes metropole gestion equipements": {
+  "vu_le": "2026-11-09T09:18:57.338703+00:00",
+  "titre": "Chargé.e de missions applicatif (H/F)",
+  "entreprise": "NANTES METROPOLE GESTION EQUIPEMENTS",
+  "url": "https://candidat.francetravail.fr/offres/recherche/detail/216DTKC"
+ },
+ "data owner product|s quaar rennes": {
+  "vu_le": "2026-11-09T09:19:45.138831+00:00",
+  "titre": "Product Owner Data H/F",
+  "entreprise": "S-quaar Rennes",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85151484.html"
+ },
+ "chain owner product supply|syd digital care": {
+  "vu_le": "2026-11-09T09:19:45.138831+00:00",
+  "titre": "Product Owner Supply Chain H/F",
+  "entreprise": "SYD Digital Care",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85232081.html"
+ },
+ "owner product publics services|sopra steria": {
+  "vu_le": "2026-11-09T09:19:45.138831+00:00",
+  "titre": "Product Owner - Services Publics - Nantes H/F",
+  "entreprise": "Sopra Steria",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85237137.html"
+ },
+ "data ia lead owner product|maisons du monde": {
+  "vu_le": "2026-11-09T09:19:45.138831+00:00",
+  "titre": "Lead Data - Product Owner Data & IA H/F",
+  "entreprise": "Maisons du Monde",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85253735.html"
+ },
+ "contre fraude lutte manager paiement produit|bpce solutions informatiques": {
+  "vu_le": "2026-11-09T09:19:45.138831+00:00",
+  "titre": "Manager du Produit Lutte Contre la Fraude Paiement H/F",
+  "entreprise": "BPCE Solutions informatiques",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85260841.html"
+ },
+ "agile chef confirme owner po product produit|extia": {
+  "vu_le": "2026-11-09T09:19:45.138831+00:00",
+  "titre": "Product Owner Po - Chef de Produit Agile Confirmé H/F",
+  "entreprise": "Extia",
+  "url": "https://www.hellowork.com/fr-fr/emplois/63971765.html"
+ },
+ "agile chef owner po product produit senior|extia": {
+  "vu_le": "2026-11-09T09:19:45.138831+00:00",
+  "titre": "Product Owner Sénior - Po Sénior - Chef de Produit Agile Sénior H/F",
+  "entreprise": "Extia",
+  "url": "https://www.hellowork.com/fr-fr/emplois/63972052.html"
+ },
+ "it manager project publics services transformation|sopra steria": {
+  "vu_le": "2026-11-09T09:19:45.138831+00:00",
+  "titre": "Project Manager - Transformation IT - Services Publics - Nantes H/F",
+  "entreprise": "Sopra Steria",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85229588.html"
+ },
+ "applications d k277 linux responsable unix|kaiman services": {
+  "vu_le": "2026-11-09T09:19:45.138831+00:00",
+  "titre": "Responsable d'Applications Unix - Linux K277 H/F",
+  "entreprise": "Kaiman Services",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85274118.html"
+ },
+ "2027 asap chef cobol debut projet|mosica": {
+  "vu_le": "2026-11-09T09:19:45.138831+00:00",
+  "titre": "Chef de Projet COBOL - Asap - Début 2027 - Nantes H/F",
+  "entreprise": "Mosica",
+  "url": "https://www.hellowork.com/fr-fr/emplois/84170402.html"
+ },
+ "charge d etudes si|inetum": {
+  "vu_le": "2026-11-09T09:19:45.138831+00:00",
+  "titre": "Chargé d'Études Si H/F",
+  "entreprise": "Inetum",
+  "url": "https://www.hellowork.com/fr-fr/emplois/84193945.html"
+ },
+ "chef data flux projet|dcs easyware": {
+  "vu_le": "2026-11-09T09:19:45.138831+00:00",
+  "titre": "Chef de Projet Data - Flux H/F",
+  "entreprise": "DCS Easyware",
+  "url": "https://www.hellowork.com/fr-fr/emplois/84172787.html"
+ },
+ "epm projet responsable|vyv 3": {
+  "vu_le": "2026-11-09T09:19:45.138831+00:00",
+  "titre": "Responsable de Projet Epm H/F",
+  "entreprise": "VYV 3",
+  "url": "https://www.hellowork.com/fr-fr/emplois/84170253.html"
+ },
+ "charge e electrique genie htb ng projet|keran sce": {
+  "vu_le": "2026-11-09T09:19:45.138831+00:00",
+  "titre": "Chargé·e de Projet Génie Électrique Htb - NG H/F",
+  "entreprise": "Keran - SCE",
+  "url": "https://www.hellowork.com/fr-fr/emplois/84173202.html"
  }
 }
