@@ -1,958 +1,4 @@
 {
- "agile consultant owner product|new net 3d": {
-  "vu_le": "2026-10-20T10:31:18.059789+00:00",
-  "titre": "Consultant Agile Product Owner (H/F)",
-  "entreprise": "NEW NET 3D",
-  "url": "https://candidat.francetravail.fr/offres/recherche/detail/8035838"
- },
- "assurance fonctionnel owner product|new net 3d": {
-  "vu_le": "2026-10-20T10:31:18.059789+00:00",
-  "titre": "Product Owner Fonctionnel Assurance (H/F)",
-  "entreprise": "NEW NET 3D",
-  "url": "https://candidat.francetravail.fr/offres/recherche/detail/8035586"
- },
- "chef d informatique maitrise oeuvre projet|france_travail:8074241": {
-  "vu_le": "2026-10-20T10:31:18.059789+00:00",
-  "titre": "Chef de projet maîtrise d'oeuvre informatique (H/F)",
-  "entreprise": null,
-  "url": "https://candidat.francetravail.fr/offres/recherche/detail/8074241"
- },
- "owner product|capgemini": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Product Owner H/F",
-  "entreprise": "Capgemini",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84571751.html"
- },
- "owner product|astek": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Product Owner H/F",
-  "entreprise": "Astek",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84458842.html"
- },
- "owner product|talan": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Product Owner H/F",
-  "entreprise": "Talan",
-  "url": "https://www.hellowork.com/fr-fr/emplois/77840255.html"
- },
- "owner product|neosoft": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Product Owner H/F",
-  "entreprise": "néosoft",
-  "url": "https://www.hellowork.com/fr-fr/emplois/76686093.html"
- },
- "owner product|hardis group": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Product Owner H/F",
-  "entreprise": "Hardis Group",
-  "url": "https://www.hellowork.com/fr-fr/emplois/79926948.html"
- },
- "owner product|scalian": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Product Owner H/F",
-  "entreprise": "Scalian",
-  "url": "https://www.hellowork.com/fr-fr/emplois/83098015.html"
- },
- "owner product|infotel": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Product Owner H/F",
-  "entreprise": "Infotel",
-  "url": "https://www.hellowork.com/fr-fr/emplois/83986702.html"
- },
- "owner product|groupe sii": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Product Owner H/F",
-  "entreprise": "Groupe SII",
-  "url": "https://www.hellowork.com/fr-fr/emplois/81889836.html"
- },
- "owner po product|onepoint": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Po - Product Owner H/F",
-  "entreprise": "Onepoint",
-  "url": "https://www.hellowork.com/fr-fr/emplois/80888865.html"
- },
- "data owner product|onepoint": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Data Product Owner H/F",
-  "entreprise": "Onepoint",
-  "url": "https://www.hellowork.com/fr-fr/emplois/79692715.html"
- },
- "erp owner product saas|externatic": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Product Owner ERP Saas H/F",
-  "entreprise": "Externatic",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84107934.html"
- },
- "analyst business owner product|consort group": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Product Owner - Business Analyst H/F",
-  "entreprise": "Consort Group",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84001143.html"
- },
- "agile analyst business owner product|atos": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Product Owner - Business Analyst Agile H/F",
-  "entreprise": "Atos",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84254126.html"
- },
- "banque confirme owner product senior|asi": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Product Owner Confirmé - Senior - Banque H/F",
-  "entreprise": "ASI",
-  "url": "https://www.hellowork.com/fr-fr/emplois/75499255.html"
- },
- "assurance confirme owner product senior|asi": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Product Owner Confirmé - Senior - Assurance H/F",
-  "entreprise": "ASI",
-  "url": "https://www.hellowork.com/fr-fr/emplois/75508588.html"
- },
- "analyst business it owner product proxy|scalian": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Proxy Product Owner - Business Analyst IT H/F",
-  "entreprise": "Scalian",
-  "url": "https://www.hellowork.com/fr-fr/emplois/79858455.html"
- },
- "confirme ferroviaire owner product senior transport|asi": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Product Owner Confirmé - Senior - Transport Ferroviaire H/F",
-  "entreprise": "ASI",
-  "url": "https://www.hellowork.com/fr-fr/emplois/75499259.html"
- },
- "consultant owner product technique|asi": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Consultant Product Owner Technique H/F",
-  "entreprise": "ASI",
-  "url": "https://www.hellowork.com/fr-fr/emplois/77348023.html"
- },
- "owner product|paprec": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Product Owner H/F",
-  "entreprise": "Paprec",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84170635.html"
- },
- "owner product technique|inetum": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Product Owner Technique H/F",
-  "entreprise": "Inetum",
-  "url": "https://www.hellowork.com/fr-fr/emplois/83493305.html"
- },
- "a chez data franchis ia owner pas product produit valeuriad vision|valeuriad": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Product Owner Data IA - de la Data à la Vision Produit Franchis le pas chez Valeuriad H/F",
-  "entreprise": "VALEURIAD",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84520812.html"
- },
- "mobile owner product web|davidson consulting": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Product Owner Web - Mobile H/F",
-  "entreprise": "Davidson consulting",
-  "url": "https://www.hellowork.com/fr-fr/emplois/81559139.html"
- },
- "owner product|groupe creative": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Product Owner H/F",
-  "entreprise": "Groupe Créative",
-  "url": "https://www.hellowork.com/fr-fr/emplois/79485069.html"
- },
- "analyst banque business finance owner product proxy risques|scalian": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Business Analyst - Proxy Product Owner - Risques & Finance - Banque H/F",
-  "entreprise": "Scalian",
-  "url": "https://www.hellowork.com/fr-fr/emplois/70240803.html"
- },
- "head of products|externatic": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Head Of Products H/F",
-  "entreprise": "Externatic",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84538123.html"
- },
- "owner product|randstad professional": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Product Owner H/F",
-  "entreprise": "Randstad professional",
-  "url": "https://www.hellowork.com/fr-fr/emplois/81226884.html"
- },
- "owner product|catamania": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Product Owner H/F",
-  "entreprise": "Catamania",
-  "url": "https://www.hellowork.com/fr-fr/emplois/83467585.html"
- },
- "consultant owner product|mc2i": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Consultant Product Owner - Nantes H/F",
-  "entreprise": "MC2I",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84165722.html"
- },
- "chef it projet|scalian": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet IT H/F",
-  "entreprise": "Scalian",
-  "url": "https://www.hellowork.com/fr-fr/emplois/80260934.html"
- },
- "chef it projet|amiltone": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet IT H/F",
-  "entreprise": "Amiltone",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84488979.html"
- },
- "banque chef it projet|talan": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet IT Banque H/F",
-  "entreprise": "Talan",
-  "url": "https://www.hellowork.com/fr-fr/emplois/78018410.html"
- },
- "chef it projet wms|syd digital care": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet IT Wms H/F",
-  "entreprise": "SYD Digital Care",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84179650.html"
- },
- "chef it projet|umake": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet IT H/F",
-  "entreprise": "Umake",
-  "url": "https://www.hellowork.com/fr-fr/emplois/77195140.html"
- },
- "chef energie it projet|sopra steria": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet IT - Energie - Nantes H/F",
-  "entreprise": "Sopra Steria",
-  "url": "https://www.hellowork.com/fr-fr/emplois/82915817.html"
- },
- "adjoint chef it projet publics services|sopra steria": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet IT Adjoint - Services Publics - Nantes H/F",
-  "entreprise": "Sopra Steria",
-  "url": "https://www.hellowork.com/fr-fr/emplois/75507598.html"
- },
- "chef it projet|econocom": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet IT H/F",
-  "entreprise": "Econocom",
-  "url": "https://www.hellowork.com/fr-fr/emplois/73779883.html"
- },
- "chef it projet|devoteam france": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet IT H/F",
-  "entreprise": "Devoteam France",
-  "url": "https://www.hellowork.com/fr-fr/emplois/81534635.html"
- },
- "chef it ou pmo projet|scalian": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet IT ou Pmo IT H/F",
-  "entreprise": "Scalian",
-  "url": "https://www.hellowork.com/fr-fr/emplois/69509360.html"
- },
- "chef informatique projet|kaptys": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Informatique H/F",
-  "entreprise": "Kaptys",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84608678.html"
- },
- "chef informatique projet|neosoft": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Informatique H/F",
-  "entreprise": "néosoft",
-  "url": "https://www.hellowork.com/fr-fr/emplois/82187461.html"
- },
- "chef informatique projet transport|sopra steria": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Informatique - Transport - Nantes H/F",
-  "entreprise": "Sopra Steria",
-  "url": "https://www.hellowork.com/fr-fr/emplois/76908610.html"
- },
- "it pmo senior|scalian": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Pmo IT Sénior H/F",
-  "entreprise": "Scalian",
-  "url": "https://www.hellowork.com/fr-fr/emplois/71028299.html"
- },
- "cabinet comptable d expertise informatiques projets responsable|club comptable": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Responsable Projets Informatiques - Cabinet d'Expertise Comptable H/F",
-  "entreprise": "Club Comptable",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84319898.html"
- },
- "chef informatique projet|cnp assurances iard": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Informatique H/F",
-  "entreprise": "CNP Assurances IARD",
-  "url": "https://www.hellowork.com/fr-fr/emplois/83008957.html"
- },
- "chef cheffe credits des digital informatique instruction particuliers projet reseau|euro information": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Cheffe - Chef de Projet Informatique - Instruction des Crédits Particuliers Réseau et Digital H/F",
-  "entreprise": "EURO INFORMATION",
-  "url": "https://www.hellowork.com/fr-fr/emplois/82140044.html"
- },
- "chef projet technique|pulse": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Technique H/F",
-  "entreprise": "Pulse",
-  "url": "https://www.hellowork.com/fr-fr/emplois/81987273.html"
- },
- "coordinateur desk it service|econocom": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Coordinateur IT Service Desk H/F",
-  "entreprise": "Econocom",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84134174.html"
- },
- "applicatif d equipe it logistique responsable|adexcel consulting": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Responsable d'Équipe IT - Responsable Applicatif - Logistique H/F",
-  "entreprise": "Adexcel Consulting",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84416830.html"
- },
- "chef cheffe d entreprise informatique portails projet|euro information": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Cheffe - Chef de Projet Informatique - Portails d'Entreprise H/F",
-  "entreprise": "EURO INFORMATION",
-  "url": "https://www.hellowork.com/fr-fr/emplois/80472345.html"
- },
- "chef embarques informatique machines projet speciales systemes|adhoc talents": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Informatique & Systèmes Embarqués - Machines Spéciales H/F",
-  "entreprise": "Adhoc Talents",
-  "url": "https://www.hellowork.com/fr-fr/emplois/82644631.html"
- },
- "chef cheffe data domaine engineering informatique projet|euro information": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Cheffe - Chef de Projet Informatique - Domaine Data Engineering H/F",
-  "entreprise": "EURO INFORMATION",
-  "url": "https://www.hellowork.com/fr-fr/emplois/71724082.html"
- },
- "flux lead tech|besse": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Tech Lead Flux H/F",
-  "entreprise": "Bessé",
-  "url": "https://www.hellowork.com/fr-fr/emplois/83433249.html"
- },
- "architecte data engineer lead tech|onepoint": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Tech Lead Data Engineer - Architecte H/F",
-  "entreprise": "Onepoint",
-  "url": "https://www.hellowork.com/fr-fr/emplois/76926975.html"
- },
- "data ia lead tech|s quaar rennes": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Tech Lead Data & IA H/F",
-  "entreprise": "S-quaar Rennes",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84395215.html"
- },
- "chef infrastructures projet|econocom": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Infrastructures H/F",
-  "entreprise": "Econocom",
-  "url": "https://www.hellowork.com/fr-fr/emplois/73779465.html"
- },
- "chef infrastructure projets|devoteam france": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projets Infrastructure H/F",
-  "entreprise": "Devoteam France",
-  "url": "https://www.hellowork.com/fr-fr/emplois/81534857.html"
- },
- "devops lead tech|atos": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Tech Lead DevOps H/F",
-  "entreprise": "Atos",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84254128.html"
- },
- "lead tech|capgemini": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Tech Lead H/F",
-  "entreprise": "Capgemini",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84254071.html"
- },
- "chef cheffe projet technique|capgemini": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Cheffe de Projet - Chef de Projet Technique H/F",
-  "entreprise": "Capgemini",
-  "url": "https://www.hellowork.com/fr-fr/emplois/83988370.html"
- },
- "lead tech|studec": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Tech Lead H/F",
-  "entreprise": "STUDEC",
-  "url": "https://www.hellowork.com/fr-fr/emplois/76001251.html"
- },
- "chef projet|proxiad": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet H/F",
-  "entreprise": "Proxiad",
-  "url": "https://www.hellowork.com/fr-fr/emplois/62827666.html"
- },
- "lead servicenow tech|devoteam france": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Tech Lead Servicenow H/F",
-  "entreprise": "Devoteam France",
-  "url": "https://www.hellowork.com/fr-fr/emplois/81534933.html"
- },
- "embedded lead tech|living packets france": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Tech Lead Embedded H/F",
-  "entreprise": "Living Packets France",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84376456.html"
- },
- "chef moa projet|amg it": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet MOA H/F",
-  "entreprise": "AMG-IT",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84579955.html"
- },
- "chef projet|fortil group": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet H/F",
-  "entreprise": "fortil group",
-  "url": "https://www.hellowork.com/fr-fr/emplois/79923094.html"
- },
- "build chef projet|hunteo": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Build H/F",
-  "entreprise": "Hunteo",
-  "url": "https://www.hellowork.com/fr-fr/emplois/77678361.html"
- },
- "chef developpement esn it projet|randstad professional": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Développement IT - ESN H/F",
-  "entreprise": "Randstad professional",
-  "url": "https://www.hellowork.com/fr-fr/emplois/81175446.html"
- },
- "it responsable|winsearch": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Responsable IT H/F",
-  "entreprise": "Winsearch",
-  "url": "https://www.hellowork.com/fr-fr/emplois/80074617.html"
- },
- "embarque lead tech|groupagora": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Tech Lead Embarqué H/F",
-  "entreprise": "Groupagora",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84564891.html"
- },
- "assurance banque bordeaux chefs it projet secteur toulouse|inpulse": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chefs de Projet IT - Secteur Banque & Assurance - CDI Toulouse Bordeaux Nantes H/F",
-  "entreprise": "Inpulse",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84375891.html"
- },
- "ai lead n tech|ovhcloud": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Tech Lead ai - N H/F",
-  "entreprise": "OVHCloud",
-  "url": "https://www.hellowork.com/fr-fr/emplois/81491162.html"
- },
- "chef it projet|devoteam": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet IT H/F",
-  "entreprise": "Devoteam",
-  "url": "https://www.hellowork.com/fr-fr/emplois/76886254.html"
- },
- "chef infrastructure projets|devoteam": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projets Infrastructure H/F",
-  "entreprise": "Devoteam",
-  "url": "https://www.hellowork.com/fr-fr/emplois/76491744.html"
- },
- "lead servicenow tech|devoteam": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Tech Lead Servicenow H/F",
-  "entreprise": "Devoteam",
-  "url": "https://www.hellowork.com/fr-fr/emplois/76491718.html"
- },
- "c embarque lead qml qt tech|smile group": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Tech Lead C++Embarqué Qt - Qml H/F",
-  "entreprise": "Smile Group",
-  "url": "https://www.hellowork.com/fr-fr/emplois/82671779.html"
- },
- "administration bo chef cheffe data domaine informatique projet sap|euro information": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Cheffe - Chef de Projet Informatique - Domaine Data Administration SAP BO H/F",
-  "entreprise": "EURO INFORMATION",
-  "url": "https://www.hellowork.com/fr-fr/emplois/71724190.html"
- },
- "chef cybersecurite projet|inside": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Cybersécurité H/F",
-  "entreprise": "Inside",
-  "url": "https://www.hellowork.com/fr-fr/emplois/63894562.html"
- },
- "chef cybersecurite projet|digitemis": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Cybersécurité H/F",
-  "entreprise": "DIGITEMIS",
-  "url": "https://www.hellowork.com/fr-fr/emplois/82994783.html"
- },
- "chef delivery projet|onepoint": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Delivery H/F",
-  "entreprise": "Onepoint",
-  "url": "https://www.hellowork.com/fr-fr/emplois/76925596.html"
- },
- "chef erp projet|open prod": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet ERP H/F",
-  "entreprise": "OPEN-PROD",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84560231.html"
- },
- "chef projet|asi": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet H/F",
-  "entreprise": "ASI",
-  "url": "https://www.hellowork.com/fr-fr/emplois/83002123.html"
- },
- "chef projet reseaux securite|ais": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Réseaux et Sécurité H/F",
-  "entreprise": "AIS",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84455590.html"
- },
- "chef fonctionnel moa projet|onepoint": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Fonctionnel - MOA H/F",
-  "entreprise": "Onepoint",
-  "url": "https://www.hellowork.com/fr-fr/emplois/76954081.html"
- },
- "chef master projet scrum|talan": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Scrum Master H/F",
-  "entreprise": "Talan",
-  "url": "https://www.hellowork.com/fr-fr/emplois/77820461.html"
- },
- "chef deploiement mobile projet|astek": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Déploiement Mobile H/F",
-  "entreprise": "Astek",
-  "url": "https://www.hellowork.com/fr-fr/emplois/83190652.html"
- },
- "expert proxmox virtualisation vmware|set way": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Expert Virtualisation Proxmox - Vmware H/F",
-  "entreprise": "SET-WAY",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84581069.html"
- },
- "applicatif responsable|aubay": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Responsable Applicatif - Nantes H/F",
-  "entreprise": "Aubay",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84330435.html"
- },
- "business delivery manager|holenek ingenierie": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Business Delivery Manager H/F",
-  "entreprise": "Holenek Ingénierie",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84611495.html"
- },
- "chef projet si|celad": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Si H/F",
-  "entreprise": "Celad",
-  "url": "https://www.hellowork.com/fr-fr/emplois/82893169.html"
- },
- "chef delivery projet|groupe sii": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Delivery H/F",
-  "entreprise": "Groupe SII",
-  "url": "https://www.hellowork.com/fr-fr/emplois/83860344.html"
- },
- "delivery manager|akkodis": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Delivery Manager H/F",
-  "entreprise": "Akkodis",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84126763.html"
- },
- "chef moa projet|proxiad": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet MOA H/F",
-  "entreprise": "Proxiad",
-  "url": "https://www.hellowork.com/fr-fr/emplois/82736266.html"
- },
- "banque chef projet si|exalt company": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Si Banque H/F",
-  "entreprise": "eXalt Company",
-  "url": "https://www.hellowork.com/fr-fr/emplois/80782857.html"
- },
- "chef epm projet|talan": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Epm H/F",
-  "entreprise": "Talan",
-  "url": "https://www.hellowork.com/fr-fr/emplois/80582052.html"
- },
- "chef projet wms|ds restauration": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Wms H/F",
-  "entreprise": "DS Restauration",
-  "url": "https://www.hellowork.com/fr-fr/emplois/83336387.html"
- },
- "chef ia projets|onepoint": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projets IA H/F",
-  "entreprise": "Onepoint",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84612158.html"
- },
- "chef data gouvernance projet si|bpce solutions informatiques": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Si Gouvernance Data H/F",
-  "entreprise": "BPCE Solutions informatiques",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84592924.html"
- },
- "chef crm projet|maisons du monde": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet CRM H/F",
-  "entreprise": "Maisons du Monde",
-  "url": "https://www.hellowork.com/fr-fr/emplois/83173813.html"
- },
- "amo chef ferroviaire projet|systra": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Amo - Ferroviaire H/F",
-  "entreprise": "SYSTRA",
-  "url": "https://www.hellowork.com/fr-fr/emplois/73540885.html"
- },
- "chef projet technique|atos": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Technique H/F",
-  "entreprise": "Atos",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84266629.html"
- },
- "chef projet reflex wms|externatic": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Wms Reflex H/F",
-  "entreprise": "Externatic",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84399574.html"
- },
- "application d data responsable|step up": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Responsable d'Application Data H/F",
-  "entreprise": "Step Up",
-  "url": "https://www.hellowork.com/fr-fr/emplois/82728797.html"
- },
- "application d erp finance jde responsable|eurial": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Responsable d'Application Finance ERP Jde H/F",
-  "entreprise": "Eurial",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84479222.html"
- },
- "chef erp projet|kanope rh": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet ERP H/F",
-  "entreprise": "Kanopé RH",
-  "url": "https://www.hellowork.com/fr-fr/emplois/83028609.html"
- },
- "amoa chef projet|scalian": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet AMOA H/F",
-  "entreprise": "Scalian",
-  "url": "https://www.hellowork.com/fr-fr/emplois/78950902.html"
- },
- "chef erp projet sage x3|kanope rh": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet ERP Sage X3 H/F",
-  "entreprise": "Kanopé RH",
-  "url": "https://www.hellowork.com/fr-fr/emplois/82358181.html"
- },
- "amo chef cyclables pistes projet projets urbains|systra": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Amo - Projets Urbains et Pistes Cyclables H/F",
-  "entreprise": "SYSTRA",
-  "url": "https://www.hellowork.com/fr-fr/emplois/83104223.html"
- },
- "analyst applications business d responsable|consort group": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Responsable d'Applications - Business Analyst H/F",
-  "entreprise": "Consort Group",
-  "url": "https://www.hellowork.com/fr-fr/emplois/83285738.html"
- },
- "amoe chef projet|inetum": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef Projet AMOE H/F",
-  "entreprise": "Inetum",
-  "url": "https://www.hellowork.com/fr-fr/emplois/77916611.html"
- },
- "animation automobile deploiement responsable secteur|camden conseil": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Responsable Déploiement et Animation - Secteur Automobile H/F",
-  "entreprise": "Camden Conseil",
-  "url": "https://www.hellowork.com/fr-fr/emplois/81200236.html"
- },
- "environnement referent systemes technique travail|besse": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Référent Technique Systèmes - Environnement de Travail H/F",
-  "entreprise": "Bessé",
-  "url": "https://www.hellowork.com/fr-fr/emplois/74619514.html"
- },
- "referent reseaux systemes technique|seyos": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Référent Technique Systèmes et Réseaux H/F",
-  "entreprise": "Seyos",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84538077.html"
- },
- "amo chef portuaire projet|systra": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Amo - Portuaire H/F",
-  "entreprise": "SYSTRA",
-  "url": "https://www.hellowork.com/fr-fr/emplois/77407680.html"
- },
- "reseaux responsable telecommunications|armee de l air et de l espace": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Responsable Réseaux et Télécommunications H/F",
-  "entreprise": "ARMEE DE L'AIR ET DE L'ESPACE",
-  "url": "https://www.hellowork.com/fr-fr/emplois/76398299.html"
- },
- "chef projet|talan": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet H/F",
-  "entreprise": "Talan",
-  "url": "https://www.hellowork.com/fr-fr/emplois/55893063.html"
- },
- "digitale industries manager ou senior service transformation|sopra steria": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Manager ou Senior Manager - Transformation Digitale - Industries & Service - Nantes H/F",
-  "entreprise": "Sopra Steria",
-  "url": "https://www.hellowork.com/fr-fr/emplois/65230506.html"
- },
- "citrix ingenieur ingenieure virtualisation|capgemini": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Ingénieure - Ingénieur Virtualisation Citrix H/F",
-  "entreprise": "Capgemini",
-  "url": "https://www.hellowork.com/fr-fr/emplois/83988449.html"
- },
- "chef ia projet|talan": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet IA H/F",
-  "entreprise": "Talan",
-  "url": "https://www.hellowork.com/fr-fr/emplois/78387074.html"
- },
- "electriques htb reseaux responsable|atlantic ingenierie": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Responsable en Réseaux Électriques Htb H/F",
-  "entreprise": "AtlantiC Ingénierie",
-  "url": "https://www.hellowork.com/fr-fr/emplois/80731977.html"
- },
- "chef developpement electronique produit projet|fortil group": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Développement Produit Électronique H/F",
-  "entreprise": "fortil group",
-  "url": "https://www.hellowork.com/fr-fr/emplois/82782930.html"
- },
- "chef integration projet servicenow|devoteam france": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Intégration Servicenow H/F",
-  "entreprise": "Devoteam France",
-  "url": "https://www.hellowork.com/fr-fr/emplois/81534603.html"
- },
- "amoe chef infrastructure projet senior|inetum": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet AMOE Infrastructure Senior H/F",
-  "entreprise": "Inetum",
-  "url": "https://www.hellowork.com/fr-fr/emplois/81852784.html"
- },
- "amoa chef crm projet|externatic": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet CRM - AMOA H/F",
-  "entreprise": "Externatic",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84150343.html"
- },
- "chef energie projets|sdel controle commande": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projets Energie H/F",
-  "entreprise": "SDEL Contrôle Commande",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84574663.html"
- },
- "chef produit|groupe ima": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Produit H/F",
-  "entreprise": "Groupe IMA",
-  "url": "https://www.hellowork.com/fr-fr/emplois/83425011.html"
- },
- "chef industrialisation projet|fortil group": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Industrialisation H/F",
-  "entreprise": "fortil group",
-  "url": "https://www.hellowork.com/fr-fr/emplois/80395033.html"
- },
- "chef industriels projets|neo2": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projets Industriels H/F",
-  "entreprise": "NEO2",
-  "url": "https://www.hellowork.com/fr-fr/emplois/76812262.html"
- },
- "d delivery equipe performance responsable|groupe sigma": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Responsable d'Equipe Delivery Performance - CDI - 44 H/F",
-  "entreprise": "Groupe Sigma",
-  "url": "https://www.hellowork.com/fr-fr/emplois/83129807.html"
- },
- "amoa chef erp internes outils projet|externatic": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet AMOA Outils Internes - ERP H/F",
-  "entreprise": "Externatic",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84201676.html"
- },
- "chef moe projet|alteca": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet MOE H/F",
-  "entreprise": "Alteca",
-  "url": "https://www.hellowork.com/fr-fr/emplois/77695926.html"
- },
- "charge htb projets reseaux|atlantic ingenierie": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chargé de Projets en Réseaux Htb H/F",
-  "entreprise": "AtlantiC Ingénierie",
-  "url": "https://www.hellowork.com/fr-fr/emplois/81098542.html"
- },
- "calcul chef projet|ingeliance technologies": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Calcul H/F",
-  "entreprise": "Ingeliance Technologies",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84097849.html"
- },
- "chef neufs projet travaux|azaleo": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Travaux Neufs H/F",
-  "entreprise": "AZALEO",
-  "url": "https://www.hellowork.com/fr-fr/emplois/49663886.html"
- },
- "batiment directeur industriel projets|cap ingelec": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Directeur de Projets - Bâtiment Industriel H/F",
-  "entreprise": "CAP INGELEC",
-  "url": "https://www.hellowork.com/fr-fr/emplois/78069235.html"
- },
- "cfa cfo chef projet|altam h r": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet CFO - CFA H/F",
-  "entreprise": "Altam H&R",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84210961.html"
- },
- "dechets process projets responsable|elcimai": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Responsable Projets Process Déchets H/F",
-  "entreprise": "Elcimaï",
-  "url": "https://www.hellowork.com/fr-fr/emplois/65207810.html"
- },
- "industriel ingenieur projet|neo2": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Ingénieur Projet Industriel H/F",
-  "entreprise": "NEO2",
-  "url": "https://www.hellowork.com/fr-fr/emplois/76554371.html"
- },
- "aeronautique chef hse projet secteur|alten": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet HSE - Secteur Aéronautique H/F",
-  "entreprise": "ALTEN",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84421545.html"
- },
- "chef client projets|open": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projets Client H/F",
-  "entreprise": "Open",
-  "url": "https://www.hellowork.com/fr-fr/emplois/80405098.html"
- },
- "directeur hydraulique ng pompage projets|keran sce": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Directeur de Projets Pompage Hydraulique - NG H/F",
-  "entreprise": "Keran - SCE",
-  "url": "https://www.hellowork.com/fr-fr/emplois/79159114.html"
- },
- "chef etudes ng projets ssp|keran sce": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projets Etudes Ssp - NG H/F",
-  "entreprise": "Keran - SCE",
-  "url": "https://www.hellowork.com/fr-fr/emplois/73593512.html"
- },
- "chef confirme projet|docaposte": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Confirmé H/F",
-  "entreprise": "Docaposte",
-  "url": "https://www.hellowork.com/fr-fr/emplois/74889996.html"
- },
- "chef marimes ng ouvrages projets|keran sce": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projets en Ouvrages Marimes - NG H/F",
-  "entreprise": "Keran - SCE",
-  "url": "https://www.hellowork.com/fr-fr/emplois/80239895.html"
- },
- "chef d hydraulique maitrise ng projets urbaine uvre|keran sce": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projets Maitrise d'Œuvre Hydraulique Urbaine - NG H/F",
-  "entreprise": "Keran - SCE",
-  "url": "https://www.hellowork.com/fr-fr/emplois/72301888.html"
- },
- "chef industriel ingenieur projet|alten": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Ingénieur Chef de Projet Industriel H/F",
-  "entreprise": "ALTEN",
-  "url": "https://www.hellowork.com/fr-fr/emplois/75023970.html"
- },
- "directeur etudes hydraulique ng projets urbaine|keran sce": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Directeur de Projets Etudes Hydraulique Urbaine - NG H/F",
-  "entreprise": "Keran - SCE",
-  "url": "https://www.hellowork.com/fr-fr/emplois/80890761.html"
- },
- "chef documentaire projet|davidson consulting": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Documentaire H/F",
-  "entreprise": "Davidson consulting",
-  "url": "https://www.hellowork.com/fr-fr/emplois/80591681.html"
- },
- "chef directeur projet|proxiad": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Directeur de Projet Chef de Projet H/F",
-  "entreprise": "Proxiad",
-  "url": "https://www.hellowork.com/fr-fr/emplois/77902335.html"
- },
- "aeronautique chef manufacturing projets|alten": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projets Manufacturing Aéronautique H/F",
-  "entreprise": "ALTEN",
-  "url": "https://www.hellowork.com/fr-fr/emplois/71828106.html"
- },
- "chef credit customer fintech manager projet run success|hunteo": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Run - Customer Success Manager - Fintech - Crédit H/F",
-  "entreprise": "Hunteo",
-  "url": "https://www.hellowork.com/fr-fr/emplois/83899186.html"
- },
- "chef ng projet regulation slt trafic|keran sce": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Slt Régulation de Trafic - NG H/F",
-  "entreprise": "Keran - SCE",
-  "url": "https://www.hellowork.com/fr-fr/emplois/77327283.html"
- },
- "chef moe projet|groupe creative": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet MOE H/F",
-  "entreprise": "Groupe Créative",
-  "url": "https://www.hellowork.com/fr-fr/emplois/79484893.html"
- },
- "agile master|helpline": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Agile Master H/F",
-  "entreprise": "HELPLINE",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84475152.html"
- },
- "agile master|groupe creative": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Agile Master H/F",
-  "entreprise": "Groupe Créative",
-  "url": "https://www.hellowork.com/fr-fr/emplois/84211906.html"
- },
- "agence chef digital marketing projet sante|altaide": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Digital - Agence Marketing Santé H/F",
-  "entreprise": "Altaide",
-  "url": "https://www.hellowork.com/fr-fr/emplois/82849095.html"
- },
- "appel chef d offres ouest projet secteur|veolia eau": {
-  "vu_le": "2026-10-20T10:32:11.236508+00:00",
-  "titre": "Chef de Projet Appel d'Offres - Secteur Ouest H/F",
-  "entreprise": "Veolia Eau",
-  "url": "https://www.hellowork.com/fr-fr/emplois/83399123.html"
- },
  "owner product technique|holenek ingenierie": {
   "vu_le": "2026-10-29T17:10:17.700433+00:00",
   "titre": "Product Owner Technique (H/F)",
@@ -1702,5 +748,701 @@
   "titre": "Application Manager - Responsable de Pilotage Applicatif H/F",
   "entreprise": "HELPLINE",
   "url": "https://www.hellowork.com/fr-fr/emplois/85445460.html"
+ },
+ "owner product|astek": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Product Owner H/F",
+  "entreprise": "Astek",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85476411.html"
+ },
+ "owner product|talan": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Product Owner H/F",
+  "entreprise": "Talan",
+  "url": "https://www.hellowork.com/fr-fr/emplois/77840255.html"
+ },
+ "owner product|neosoft": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Product Owner H/F",
+  "entreprise": "néosoft",
+  "url": "https://www.hellowork.com/fr-fr/emplois/76686093.html"
+ },
+ "owner product|infotel": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Product Owner H/F",
+  "entreprise": "Infotel",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85098731.html"
+ },
+ "owner product|groupe sii": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Product Owner H/F",
+  "entreprise": "Groupe SII",
+  "url": "https://www.hellowork.com/fr-fr/emplois/81889836.html"
+ },
+ "erp owner product saas|externatic": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Product Owner ERP Saas H/F",
+  "entreprise": "Externatic",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85404915.html"
+ },
+ "data owner product|onepoint": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Data Product Owner H/F",
+  "entreprise": "Onepoint",
+  "url": "https://www.hellowork.com/fr-fr/emplois/79692715.html"
+ },
+ "owner po product|onepoint": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Po - Product Owner H/F",
+  "entreprise": "Onepoint",
+  "url": "https://www.hellowork.com/fr-fr/emplois/80888865.html"
+ },
+ "owner product|capgemini": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Product Owner H/F",
+  "entreprise": "Capgemini",
+  "url": "https://www.hellowork.com/fr-fr/emplois/84847953.html"
+ },
+ "agile analyst business owner product|atos": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Product Owner - Business Analyst Agile H/F",
+  "entreprise": "Atos",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85290591.html"
+ },
+ "assurance confirme owner product senior|asi": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Product Owner Confirmé - Senior - Assurance H/F",
+  "entreprise": "ASI",
+  "url": "https://www.hellowork.com/fr-fr/emplois/75508588.html"
+ },
+ "banque confirme owner product senior|asi": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Product Owner Confirmé - Senior - Banque H/F",
+  "entreprise": "ASI",
+  "url": "https://www.hellowork.com/fr-fr/emplois/75499255.html"
+ },
+ "analyst business owner product|consort group": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Product Owner - Business Analyst H/F",
+  "entreprise": "Consort Group",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85001979.html"
+ },
+ "analyst business it owner product proxy|scalian": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Proxy Product Owner - Business Analyst IT H/F",
+  "entreprise": "Scalian",
+  "url": "https://www.hellowork.com/fr-fr/emplois/79858455.html"
+ },
+ "confirme ferroviaire owner product senior transport|asi": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Product Owner Confirmé - Senior - Transport Ferroviaire H/F",
+  "entreprise": "ASI",
+  "url": "https://www.hellowork.com/fr-fr/emplois/75499259.html"
+ },
+ "consultant owner product technique|asi": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Consultant Product Owner Technique H/F",
+  "entreprise": "ASI",
+  "url": "https://www.hellowork.com/fr-fr/emplois/77348023.html"
+ },
+ "a chez data franchis ia owner pas product produit valeuriad vision|valeuriad": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Product Owner Data IA - de la Data à la Vision Produit Franchis le pas chez Valeuriad H/F",
+  "entreprise": "VALEURIAD",
+  "url": "https://www.hellowork.com/fr-fr/emplois/84520812.html"
+ },
+ "mobile owner product web|davidson consulting": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Product Owner Web - Mobile H/F",
+  "entreprise": "Davidson consulting",
+  "url": "https://www.hellowork.com/fr-fr/emplois/81559139.html"
+ },
+ "owner product|groupe creative": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Product Owner H/F",
+  "entreprise": "Groupe Créative",
+  "url": "https://www.hellowork.com/fr-fr/emplois/79485069.html"
+ },
+ "analyst banque business finance owner product proxy risques|scalian": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Business Analyst - Proxy Product Owner - Risques & Finance - Banque H/F",
+  "entreprise": "Scalian",
+  "url": "https://www.hellowork.com/fr-fr/emplois/70240803.html"
+ },
+ "head of products|externatic": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Head Of Products H/F",
+  "entreprise": "Externatic",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85523511.html"
+ },
+ "owner product|catamania": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Product Owner H/F",
+  "entreprise": "Catamania",
+  "url": "https://www.hellowork.com/fr-fr/emplois/83467585.html"
+ },
+ "consultant owner product|mc2i": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Consultant Product Owner - Nantes H/F",
+  "entreprise": "MC2I",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85215888.html"
+ },
+ "chef it projet|amiltone": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet IT H/F",
+  "entreprise": "Amiltone",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85715735.html"
+ },
+ "chef it projet|scalian": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet IT H/F",
+  "entreprise": "Scalian",
+  "url": "https://www.hellowork.com/fr-fr/emplois/80260934.html"
+ },
+ "banque chef it projet|talan": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet IT Banque H/F",
+  "entreprise": "Talan",
+  "url": "https://www.hellowork.com/fr-fr/emplois/78018410.html"
+ },
+ "chef it projet wms|syd digital care": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet IT Wms H/F",
+  "entreprise": "SYD Digital Care",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85423154.html"
+ },
+ "chef energie it projet|sopra steria": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet IT - Energie - Nantes H/F",
+  "entreprise": "Sopra Steria",
+  "url": "https://www.hellowork.com/fr-fr/emplois/82915817.html"
+ },
+ "chef it projet|econocom": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet IT H/F",
+  "entreprise": "Econocom",
+  "url": "https://www.hellowork.com/fr-fr/emplois/73779883.html"
+ },
+ "chef it projet|devoteam france": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet IT H/F",
+  "entreprise": "Devoteam France",
+  "url": "https://www.hellowork.com/fr-fr/emplois/81534635.html"
+ },
+ "chef it ou pmo projet|scalian": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet IT ou Pmo IT H/F",
+  "entreprise": "Scalian",
+  "url": "https://www.hellowork.com/fr-fr/emplois/69509360.html"
+ },
+ "chef informatique projet|neosoft": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Informatique H/F",
+  "entreprise": "néosoft",
+  "url": "https://www.hellowork.com/fr-fr/emplois/82187461.html"
+ },
+ "chef informatique projet transport|sopra steria": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Informatique - Transport - Nantes H/F",
+  "entreprise": "Sopra Steria",
+  "url": "https://www.hellowork.com/fr-fr/emplois/76908610.html"
+ },
+ "it pmo senior|scalian": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Pmo IT Sénior H/F",
+  "entreprise": "Scalian",
+  "url": "https://www.hellowork.com/fr-fr/emplois/71028299.html"
+ },
+ "cabinet comptable d expertise informatiques projets responsable|club comptable": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Responsable Projets Informatiques - Cabinet d'Expertise Comptable H/F",
+  "entreprise": "Club Comptable",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85350341.html"
+ },
+ "chef projet technique|pulse": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Technique H/F",
+  "entreprise": "Pulse",
+  "url": "https://www.hellowork.com/fr-fr/emplois/81987273.html"
+ },
+ "applicatif d equipe it logistique responsable|adexcel consulting": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Responsable d'Équipe IT - Responsable Applicatif - Logistique H/F",
+  "entreprise": "Adexcel Consulting",
+  "url": "https://www.hellowork.com/fr-fr/emplois/84416830.html"
+ },
+ "chef cheffe d entreprise informatique portails projet|euro information": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Cheffe - Chef de Projet Informatique - Portails d'Entreprise H/F",
+  "entreprise": "EURO INFORMATION",
+  "url": "https://www.hellowork.com/fr-fr/emplois/80472345.html"
+ },
+ "chef embarques informatique machines projet speciales systemes|adhoc talents": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Informatique & Systèmes Embarqués - Machines Spéciales H/F",
+  "entreprise": "Adhoc Talents",
+  "url": "https://www.hellowork.com/fr-fr/emplois/82644631.html"
+ },
+ "chef cheffe data domaine engineering informatique projet|euro information": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Cheffe - Chef de Projet Informatique - Domaine Data Engineering H/F",
+  "entreprise": "EURO INFORMATION",
+  "url": "https://www.hellowork.com/fr-fr/emplois/71724082.html"
+ },
+ "flux lead tech|besse": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Tech Lead Flux H/F",
+  "entreprise": "Bessé",
+  "url": "https://www.hellowork.com/fr-fr/emplois/83433249.html"
+ },
+ "administration bo chef cheffe data domaine informatique projet sap|euro information": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Cheffe - Chef de Projet Informatique - Domaine Data Administration SAP BO H/F",
+  "entreprise": "EURO INFORMATION",
+  "url": "https://www.hellowork.com/fr-fr/emplois/71724190.html"
+ },
+ "architecte data engineer lead tech|onepoint": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Tech Lead Data Engineer - Architecte H/F",
+  "entreprise": "Onepoint",
+  "url": "https://www.hellowork.com/fr-fr/emplois/76926975.html"
+ },
+ "data ia lead tech|s quaar rennes": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Tech Lead Data & IA H/F",
+  "entreprise": "S-quaar Rennes",
+  "url": "https://www.hellowork.com/fr-fr/emplois/84395215.html"
+ },
+ "devops lead tech|atos": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Tech Lead DevOps H/F",
+  "entreprise": "Atos",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85290609.html"
+ },
+ "chef infrastructures projet|econocom": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Infrastructures H/F",
+  "entreprise": "Econocom",
+  "url": "https://www.hellowork.com/fr-fr/emplois/73779465.html"
+ },
+ "chef infrastructure projets|devoteam france": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projets Infrastructure H/F",
+  "entreprise": "Devoteam France",
+  "url": "https://www.hellowork.com/fr-fr/emplois/81534857.html"
+ },
+ "chef cheffe projet technique|capgemini": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Cheffe de Projet - Chef de Projet Technique H/F",
+  "entreprise": "Capgemini",
+  "url": "https://www.hellowork.com/fr-fr/emplois/84999688.html"
+ },
+ "lead servicenow tech|devoteam france": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Tech Lead Servicenow H/F",
+  "entreprise": "Devoteam France",
+  "url": "https://www.hellowork.com/fr-fr/emplois/81534933.html"
+ },
+ "chef projet|proxiad": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet H/F",
+  "entreprise": "Proxiad",
+  "url": "https://www.hellowork.com/fr-fr/emplois/62827666.html"
+ },
+ "chef projet si|it link": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Si H/F",
+  "entreprise": "IT Link",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85696762.html"
+ },
+ "build chef projet|hunteo": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Build H/F",
+  "entreprise": "Hunteo",
+  "url": "https://www.hellowork.com/fr-fr/emplois/77678361.html"
+ },
+ "it responsable|winsearch": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Responsable IT H/F",
+  "entreprise": "Winsearch",
+  "url": "https://www.hellowork.com/fr-fr/emplois/80074617.html"
+ },
+ "ai lead n tech|ovhcloud": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Tech Lead ai - N H/F",
+  "entreprise": "OVHCloud",
+  "url": "https://www.hellowork.com/fr-fr/emplois/81491162.html"
+ },
+ "chef it projet|devoteam": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet IT H/F",
+  "entreprise": "Devoteam",
+  "url": "https://www.hellowork.com/fr-fr/emplois/76886254.html"
+ },
+ "chef infrastructure projets|devoteam": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projets Infrastructure H/F",
+  "entreprise": "Devoteam",
+  "url": "https://www.hellowork.com/fr-fr/emplois/76491744.html"
+ },
+ "lead servicenow tech|devoteam": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Tech Lead Servicenow H/F",
+  "entreprise": "Devoteam",
+  "url": "https://www.hellowork.com/fr-fr/emplois/76491718.html"
+ },
+ "c embarque lead qml qt tech|smile group": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Tech Lead C++Embarqué Qt - Qml H/F",
+  "entreprise": "Smile Group",
+  "url": "https://www.hellowork.com/fr-fr/emplois/82671779.html"
+ },
+ "chef delivery projet|onepoint": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Delivery H/F",
+  "entreprise": "Onepoint",
+  "url": "https://www.hellowork.com/fr-fr/emplois/76925596.html"
+ },
+ "chef erp projet|open prod": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet ERP H/F",
+  "entreprise": "OPEN-PROD",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85525312.html"
+ },
+ "chef projet|asi": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet H/F",
+  "entreprise": "ASI",
+  "url": "https://www.hellowork.com/fr-fr/emplois/83002123.html"
+ },
+ "chef erp finance projet|syd digital care": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet ERP Finance H/F",
+  "entreprise": "SYD Digital Care",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85629908.html"
+ },
+ "chef deploiement projet reseau|proxiad": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Déploiement Réseau H/F",
+  "entreprise": "Proxiad",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85695682.html"
+ },
+ "chef projet reseaux securite|ais": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Réseaux et Sécurité H/F",
+  "entreprise": "AIS",
+  "url": "https://www.hellowork.com/fr-fr/emplois/84455590.html"
+ },
+ "chef master projet scrum|talan": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Scrum Master H/F",
+  "entreprise": "Talan",
+  "url": "https://www.hellowork.com/fr-fr/emplois/77820461.html"
+ },
+ "chef deploiement mobile projet|astek": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Déploiement Mobile H/F",
+  "entreprise": "Astek",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85476449.html"
+ },
+ "business delivery manager|holenek ingenierie": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Business Delivery Manager H/F",
+  "entreprise": "Holenek Ingénierie",
+  "url": "https://www.hellowork.com/fr-fr/emplois/84611495.html"
+ },
+ "chef delivery projet|groupe sii": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Delivery H/F",
+  "entreprise": "Groupe SII",
+  "url": "https://www.hellowork.com/fr-fr/emplois/83860344.html"
+ },
+ "chef moa projet|proxiad": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet MOA H/F",
+  "entreprise": "Proxiad",
+  "url": "https://www.hellowork.com/fr-fr/emplois/82736266.html"
+ },
+ "banque chef projet si|exalt company": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Si Banque H/F",
+  "entreprise": "eXalt Company",
+  "url": "https://www.hellowork.com/fr-fr/emplois/80782857.html"
+ },
+ "chef epm projet|talan": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Epm H/F",
+  "entreprise": "Talan",
+  "url": "https://www.hellowork.com/fr-fr/emplois/80582052.html"
+ },
+ "chef ia projets|onepoint": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projets IA H/F",
+  "entreprise": "Onepoint",
+  "url": "https://www.hellowork.com/fr-fr/emplois/84612158.html"
+ },
+ "chef data gouvernance projet si|bpce solutions informatiques": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Si Gouvernance Data H/F",
+  "entreprise": "BPCE Solutions informatiques",
+  "url": "https://www.hellowork.com/fr-fr/emplois/84592924.html"
+ },
+ "amo chef ferroviaire projet|systra": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Amo - Ferroviaire H/F",
+  "entreprise": "SYSTRA",
+  "url": "https://www.hellowork.com/fr-fr/emplois/73540885.html"
+ },
+ "chef projet reflex wms|externatic": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Wms Reflex H/F",
+  "entreprise": "Externatic",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85460345.html"
+ },
+ "electriques htb reseaux responsable|atlantic ingenierie": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Responsable en Réseaux Électriques Htb H/F",
+  "entreprise": "AtlantiC Ingénierie",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85682632.html"
+ },
+ "application d erp finance jde responsable|eurial": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Responsable d'Application Finance ERP Jde H/F",
+  "entreprise": "Eurial",
+  "url": "https://www.hellowork.com/fr-fr/emplois/84479222.html"
+ },
+ "amoa chef projet|scalian": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet AMOA H/F",
+  "entreprise": "Scalian",
+  "url": "https://www.hellowork.com/fr-fr/emplois/78950902.html"
+ },
+ "amo chef cyclables pistes projet projets urbains|systra": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Amo - Projets Urbains et Pistes Cyclables H/F",
+  "entreprise": "SYSTRA",
+  "url": "https://www.hellowork.com/fr-fr/emplois/83104223.html"
+ },
+ "chef financiere projet securite si|bpce solutions informatiques": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Si - - Sécurité Financière H/F",
+  "entreprise": "BPCE Solutions informatiques",
+  "url": "https://www.hellowork.com/fr-fr/emplois/79750697.html"
+ },
+ "amoe chef projet|inetum": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef Projet AMOE H/F",
+  "entreprise": "Inetum",
+  "url": "https://www.hellowork.com/fr-fr/emplois/77916611.html"
+ },
+ "chef confirme projet si|inetum": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Si Confirmé H/F",
+  "entreprise": "Inetum",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85718890.html"
+ },
+ "automatisation ingenieur ingenieure tests|capgemini": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Ingénieure - Ingénieur Automatisation de Tests H/F",
+  "entreprise": "Capgemini",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85664233.html"
+ },
+ "animation automobile deploiement responsable secteur|camden conseil": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Responsable Déploiement et Animation - Secteur Automobile H/F",
+  "entreprise": "Camden Conseil",
+  "url": "https://www.hellowork.com/fr-fr/emplois/81200236.html"
+ },
+ "environnement referent systemes technique travail|besse": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Référent Technique Systèmes - Environnement de Travail H/F",
+  "entreprise": "Bessé",
+  "url": "https://www.hellowork.com/fr-fr/emplois/74619514.html"
+ },
+ "referent reseaux systemes technique|seyos": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Référent Technique Systèmes et Réseaux H/F",
+  "entreprise": "Seyos",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85676877.html"
+ },
+ "reseaux responsable telecommunications|armee de l air et de l espace": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Responsable Réseaux et Télécommunications H/F",
+  "entreprise": "ARMEE DE L'AIR ET DE L'ESPACE",
+  "url": "https://www.hellowork.com/fr-fr/emplois/76398299.html"
+ },
+ "chef manager navals package projet sirehna systemes work|naval group": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "CDI - Chef de Projet - Work Package Manager - Systèmes Navals - Sirehna H/F",
+  "entreprise": "Naval Group",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85159935.html"
+ },
+ "amo chef portuaire projet|systra": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Amo - Portuaire H/F",
+  "entreprise": "SYSTRA",
+  "url": "https://www.hellowork.com/fr-fr/emplois/77407680.html"
+ },
+ "chef projet|talan": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet H/F",
+  "entreprise": "Talan",
+  "url": "https://www.hellowork.com/fr-fr/emplois/55893063.html"
+ },
+ "digitale industries manager ou senior service transformation|sopra steria": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Manager ou Senior Manager - Transformation Digitale - Industries & Service - Nantes H/F",
+  "entreprise": "Sopra Steria",
+  "url": "https://www.hellowork.com/fr-fr/emplois/65230506.html"
+ },
+ "chef ia projet|talan": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet IA H/F",
+  "entreprise": "Talan",
+  "url": "https://www.hellowork.com/fr-fr/emplois/78387074.html"
+ },
+ "citrix ingenieur ingenieure virtualisation|capgemini": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Ingénieure - Ingénieur Virtualisation Citrix H/F",
+  "entreprise": "Capgemini",
+  "url": "https://www.hellowork.com/fr-fr/emplois/84999743.html"
+ },
+ "chef developpement electronique produit projet|fortil group": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Développement Produit Électronique H/F",
+  "entreprise": "fortil group",
+  "url": "https://www.hellowork.com/fr-fr/emplois/82782930.html"
+ },
+ "amoe chef infrastructure projet senior|inetum": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet AMOE Infrastructure Senior H/F",
+  "entreprise": "Inetum",
+  "url": "https://www.hellowork.com/fr-fr/emplois/81852784.html"
+ },
+ "chef integration projet servicenow|devoteam france": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Intégration Servicenow H/F",
+  "entreprise": "Devoteam France",
+  "url": "https://www.hellowork.com/fr-fr/emplois/81534603.html"
+ },
+ "chef industrialisation projet|fortil group": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Industrialisation H/F",
+  "entreprise": "fortil group",
+  "url": "https://www.hellowork.com/fr-fr/emplois/80395033.html"
+ },
+ "chef energie projets|sdel controle commande": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projets Energie H/F",
+  "entreprise": "SDEL Contrôle Commande",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85627345.html"
+ },
+ "chef industriels projets|neo2": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projets Industriels H/F",
+  "entreprise": "NEO2",
+  "url": "https://www.hellowork.com/fr-fr/emplois/76812262.html"
+ },
+ "calcul chef projet|ingeliance technologies": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Calcul H/F",
+  "entreprise": "Ingeliance Technologies",
+  "url": "https://www.hellowork.com/fr-fr/emplois/85321335.html"
+ },
+ "chef moe projet|alteca": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet MOE H/F",
+  "entreprise": "Alteca",
+  "url": "https://www.hellowork.com/fr-fr/emplois/77695926.html"
+ },
+ "charge htb projets reseaux|atlantic ingenierie": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chargé de Projets en Réseaux Htb H/F",
+  "entreprise": "AtlantiC Ingénierie",
+  "url": "https://www.hellowork.com/fr-fr/emplois/81098542.html"
+ },
+ "chef client projets|open": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projets Client H/F",
+  "entreprise": "Open",
+  "url": "https://www.hellowork.com/fr-fr/emplois/80405098.html"
+ },
+ "chef neufs projet travaux|azaleo": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Travaux Neufs H/F",
+  "entreprise": "AZALEO",
+  "url": "https://www.hellowork.com/fr-fr/emplois/49663886.html"
+ },
+ "batiment directeur industriel projets|cap ingelec": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Directeur de Projets - Bâtiment Industriel H/F",
+  "entreprise": "CAP INGELEC",
+  "url": "https://www.hellowork.com/fr-fr/emplois/78069235.html"
+ },
+ "industriel ingenieur projet|neo2": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Ingénieur Projet Industriel H/F",
+  "entreprise": "NEO2",
+  "url": "https://www.hellowork.com/fr-fr/emplois/76554371.html"
+ },
+ "dechets process projets responsable|elcimai": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Responsable Projets Process Déchets H/F",
+  "entreprise": "Elcimaï",
+  "url": "https://www.hellowork.com/fr-fr/emplois/65207810.html"
+ },
+ "chef marimes ng ouvrages projets|keran sce": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projets en Ouvrages Marimes - NG H/F",
+  "entreprise": "Keran - SCE",
+  "url": "https://www.hellowork.com/fr-fr/emplois/80239895.html"
+ },
+ "chef confirme projet|docaposte": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Confirmé H/F",
+  "entreprise": "Docaposte",
+  "url": "https://www.hellowork.com/fr-fr/emplois/74889996.html"
+ },
+ "directeur hydraulique ng pompage projets|keran sce": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Directeur de Projets Pompage Hydraulique - NG H/F",
+  "entreprise": "Keran - SCE",
+  "url": "https://www.hellowork.com/fr-fr/emplois/79159114.html"
+ },
+ "chef etudes ng projets ssp|keran sce": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projets Etudes Ssp - NG H/F",
+  "entreprise": "Keran - SCE",
+  "url": "https://www.hellowork.com/fr-fr/emplois/73593512.html"
+ },
+ "chef d hydraulique maitrise ng projets urbaine uvre|keran sce": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projets Maitrise d'Œuvre Hydraulique Urbaine - NG H/F",
+  "entreprise": "Keran - SCE",
+  "url": "https://www.hellowork.com/fr-fr/emplois/72301888.html"
+ },
+ "directeur etudes hydraulique ng projets urbaine|keran sce": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Directeur de Projets Etudes Hydraulique Urbaine - NG H/F",
+  "entreprise": "Keran - SCE",
+  "url": "https://www.hellowork.com/fr-fr/emplois/80890761.html"
+ },
+ "chef credit customer fintech manager projet run success|hunteo": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet Run - Customer Success Manager - Fintech - Crédit H/F",
+  "entreprise": "Hunteo",
+  "url": "https://www.hellowork.com/fr-fr/emplois/83899186.html"
+ },
+ "cfa cfo chef projet|altam h r": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Chef de Projet CFO - CFA H/F",
+  "entreprise": "Altam H&R",
+  "url": "https://www.hellowork.com/fr-fr/emplois/84749141.html"
+ },
+ "agile master|groupe creative": {
+  "vu_le": "2026-11-20T09:30:19.246032+00:00",
+  "titre": "Agile Master H/F",
+  "entreprise": "Groupe Créative",
+  "url": "https://www.hellowork.com/fr-fr/emplois/84211906.html"
  }
 }
